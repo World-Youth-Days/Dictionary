@@ -1,0 +1,27 @@
+Notes:
+
+	 * Space can't be used as delimiter, because columns might employ multi-word strings. Semicolon (;) is prefered, coma would do the trick unless used in some definitions...
+ 
+	 * You may not use comma as delimiter if there are sentences in the table wchich include commas
+	 * Finally all kinds of data for each word must be given to the following functions, including:
+			base, mono, trans, level, author, tags
+
+Functions:
+ 
+	def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
+
+		You may pass data to this function in several ways:
+	
+		In **kwargs:
+	
+		* fields which are the same value for all words in given file might be passed in kwargs like author="Name", level=2
+		* tags which are common for all words in file may be passed in kwargs like: tags="tag1,tag2,tag3" excluding hashes (#), separated by commas, favourably without spaces
+	
+		In text file:
+	
+		* file must contain fixed number of columns separated with delimiter passed to function as an argument
+		* first line in the file must be header line which consists of column names separated with given delimiter. Headers might be: base, mono, trans, level, author (and time, which will be ignored). Last column should be occupied by tags (with header "tags")
+		* tags may be passed only in the last column, comma separated, favourably without spaces and hashes
+		
+		*if you overrride some kwargs value in column, data from column has higher priority
+

@@ -1,0 +1,131 @@
+		
+#--------------------------------------------------------------------#
+#------------------         Class DbAdapter        ------------------#
+#--------------------------------------------------------------------#
+
+Gets a database connection and performs queries/ table management in World Youth Day's dictionary SQLite local db
+
+		
+#--------------------------------------------------------------------#
+#-----------------------      Initial notes   -----------------------#
+#--------------------------------------------------------------------#
+
+By 'word' I mean word id by default
+By 'tag' I mean tag name without # (<=> name of table in db) by default
+	
+		
+#--------------------------------------------------------------------#
+#------------------ Manage database, get reference ------------------#
+#--------------------------------------------------------------------#
+
+
+
+def _init_(self, path_file):
+	opens database connection
+	creates schema for word record under self.new_word
+	grabs 'words' and 'tags' tables
+	path must be formated like:
+	(Linux)
+		sqlite:////home/hubert/Documents/db/factbook.db - absolute path, four slashes in total after sqlite
+		sqlite:///factbook.db - path relative to current directory
+	(Windows)
+		'sqlite:///C:\\path\\to\\foo.db' - need to escape backlsashes dx
+	or
+		r'sqlite:///C:\path\to\foo.db' - using a raw strnig
+		
+	
+def get_table(self, name = None):
+	returns pointer to table by name or list of names of all tables if 		None passed as argument. Creates new table if asked for non-existing 		name.
+	
+def unify(self):
+	- updates tags table
+	- checks id contained in tag's tables for integrity with words table
+	- removes words with no tags attached
+	
+self.tags
+	Reference to tags table in db
+	
+self.words
+	Reference to words table in db
+	
+
+#--------------------------------------------------------------------#
+#---------------------------- Manage tags ---------------------------#
+#--------------------------------------------------------------------#
+
+
+
+def join(self, word_list, tag_list):
+	Adds words from the word_list (or a single word) to all tags (possibly 		just one) from the tag_list
+	Then automatically updates tags.
+	
+def disjoin(self, word_list, tag_list):
+	Opposite to join. Removes all tag-word connections
+	Removes empty tag-tables
+	
+def update_tags(self):
+	Updates tags table in db. Pointer under self.tags is still valid
+
+
+
+#--------------------------------------------------------------------#
+#------------------------- Manage words -----------------------------#
+#--------------------------------------------------------------------#
+
+
+
+def def add_words(self, records):
+	Add records to words table in db. 'records' should be *dict* or list 		of dicts. Identical words will be updated (time may differ only)
+	
+def remove_by_id(self, words):
+	Remove words by given id. Argument should be list or single id. Be 		careful!
+	
+def remove_by_tag(self, tag):
+	Removes all id joined with given tag. Be careful!
+	
+def remove_without_tag(self):
+	Remove words with no tags joined
+
+			
+			
+#--------------------------------------------------------------------#
+#---------------------------- Search --------------------------------#
+#--------------------------------------------------------------------#
+
+
+def find(self, dic):
+	Returns table of id's which match given parameters
+
+def query_from_dict(self, dic, table="words", operator="AND"):
+	Generates SQL query (string) which following structure:
+		SELECT * FROM table
+		WHERE key1=val1
+		operator key2=val2;
+	etc. Returns string which may be used in find(), but makes na actual query to the db.
+
+def get_id_list(self):
+	Get id of every word in self.words in a list
+	
+def get(self, _id):
+	Quickly get word with given id	
+	
+def search_with_tags(self, tags):
+	Returns list of word's ids which match all tags given in the list
+	OR operator should be added
+
+#--------------------------------------------------------------------#
+#--------------------------    See also     -------------------------#
+#--------------------------------------------------------------------#
+
+
+https://dataset.readthedocs.org/en/latest/quickstart.html
+	Dataset quick quide
+	
+https://dataset.readthedocs.org/en/latest/api.html
+	Dataset API
+	
+http://www.w3schools.com/sql/
+	Great SQL tutorial
+	
+http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls
+	About proper paths to db file

@@ -1,0 +1,31 @@
+Words:
+Fields: id,  base, mono, trans, level,  time, autor
+Types : int*, str*, str,   str,	  int,  time*,   str
+
+	* - pole musi zostać wypełnione
+
+	base - słowo określane w pozostałych polach, najczęściej angielskie. 	To tego wyrazu chce się najczęściej nauczyć korzystający z fiszek
+
+	mono - definicja monolingualna, ułatwia wejście w język bardziej 		zaawansowanym użytkownikom
+	
+	trans - tłumaczenie na język użytkownika (określony w tagu #to_<lang>)
+	
+	level - numer szacunkowego poziomu trudności
+	
+	time - czas umieszczenia rekordu w bazie (automatyczny)
+	
+	autor - identyfikator autora wpisów
+
+Tag:
+Fields: id, word_id, base
+Types: int*,	int*, str (auto filled)
+
+	word_id - id słowa, które należy do tagu
+	
+	base - kopia pola base tego słowa, w celu szybszej orientacji dla ludzi
+	
+Tags: (auto-generated)
+Fields: id, tag_name
+Types: int*, str
+	
+	tag_name - lista nazw wszystkich istniejących tagów

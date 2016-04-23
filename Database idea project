@@ -1,0 +1,71 @@
+Projekt bazy danych:
+
+* tabela na słowa (rekordy)
+
+* tabela dla każdego utworzonego tagu
+
+* spis wszystkich tagów
+
+Tagi obejmują:
+
+* przynależność do pewnej specyficznej grupy, np.:
+ - słów związanych z sakramentami
+ - elementów list, np. przykazań
+ - dłuższych tekstów, np. modlitw w całości
+
+* bliżej niezidentyfikowane elementy identyfikacji wewnętrznej
+
+* metadane (np. oznaczenia braków)
+
+###
+
+Funkcje do napisania:
+
+* kopia bazy
+* znajdź po tagach
+* 
+
+OK
+* dodaj słowo do tagu -> połącz słowo i tag
+* wyświetl tagi słowa (brutalne wyszukiwanie po wszystkich tabelach)
+* usuń tag ze słowa -> rozłącz
+OK
+* dodaj słowo do tagu -> połącz
+* wyświetl słowa z danym tagiem
+* usuń tag ze słowa -> rozłącz słowo i tag
+OK
+połącz: join(word_list, tag_list):
+	for tag in tag_list:
+		for word in word_list:
+			tag.add(word)
+OK
+rozłącz: disjoin(word_list, tag_list):
+	for tag in tag_list:
+		for word in word_list:
+			if tag.has(word):
+				tag.remove(word)
+OK				
+napraw: unify(): #bunch of db operations
+	- sprawdza powtarzające się tagi
+	- sprawdza puste tagi
+	- update tablicy tagów
+	- sprawdza, czy ID z tagów istnieją
+	
+###
+
+poziom trudności:
+ - podstawowa komunikacja - 1
+ - zaawansowana komunikacja - 4
+ - nazwy formalne (np. przykazania, nazwy sakramentów, ksiąg, kościołów) -3
+ - podstawowe nieformalne zwroty religijne - 2
+ - zaawanoswane zwroty dot. religii - 5
+ - inny - 0
+ 
+ tagi:
+  - język eng inny niż angielski (np. dla germanistów) #from_<lang>
+  - język trans		#to_<lang>
+  - quizy			#quiz
+  - długie teksty (?) #long
+  - możliwe wady 	#broken
+  - inne 			#sacrament
+  
