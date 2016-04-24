@@ -1,4 +1,0 @@
-trans,base,tags
-mushroom,grzyb,live_tag1
-spinach,szpinak,
-to cook,gotować,live_tag_2,live_tag1

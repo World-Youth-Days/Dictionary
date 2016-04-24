@@ -1,3 +1,0 @@
-SELECT * FROM words
-WHERE base=dic['base']
-AND trans=dic['trans'];
