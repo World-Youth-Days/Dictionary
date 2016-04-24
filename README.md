@@ -1,3 +1,3 @@
 # Dictionary
 Multi-language dictionary database including words useful in comunication and describing religion, quizez and many more...
-Change 1
+Change 2
