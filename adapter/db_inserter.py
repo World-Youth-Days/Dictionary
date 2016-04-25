@@ -136,15 +136,15 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	
 	f.seek(0)	#start new reading, skip header
 	f.readline()
-	r = 0
+	i = 0
 	
 	if tags_pos is not None:
 		for line in f:		#add tags form tags_pos
 			line = line.strip().split(delimiter)
 			if len(line[tags_pos:]) > 0:	#do sth about empty u''
-				db.join( db.find(records[r]), line[tags_pos:] )
-				print "Joined "+ str(db.find(records[r])) + "with tags "+str(line[tags_pos:])
-		r += 1
+				db.join( db.find(records[i]), line[tags_pos:] )
+				print "Joined "+ str(db.find(records[i])) + "with tags "+str(line[tags_pos:])
+			i += 1
 	
 	print "Closing..."	
 	f.close()
