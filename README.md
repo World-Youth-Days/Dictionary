@@ -1,2 +1,3 @@
 # Dictionary
 Multi-language dictionary database including words useful in comunication and describing religion, quizez and many more...
+Now with a web interface!!!
