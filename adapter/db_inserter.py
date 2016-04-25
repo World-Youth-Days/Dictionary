@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
+import os, sys
 import codecs
 from Db_adapter import DbAdapter
 
@@ -11,6 +11,7 @@ from Db_adapter import DbAdapter
 
 def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	records = []
+	tags_pos = None, 
 	
 	try:
 		f = codecs.open(path_name, "r", 'utf-8')
@@ -37,7 +38,9 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		if col in kwargs:
 			const[col] = kwargs[col]
 			print "OK: Const " + col + " found"
-						
+	
+		
+				
 		try:
 			pos[col] = header.index(col)
 			print "OK: " + col + " at column " + str(pos[col])
@@ -50,11 +53,12 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	else:
 		const_tags = None
 	if 'tags' in header:
-		pos['tags'] = header.index('tags')
+		tags_pos = header.index('tags')
 	
 	print "pos: " + str(pos)
 	print "const: " + str(const)
 	print "const_tags: " + str(const_tags)
+	print "tags_pos: " + str(tags_pos)
 	
 
 #--------------------------------------------------------------------#
@@ -74,7 +78,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		print "Error: Neither monolingual nor translation defined, error!"
 		return 1
 		
-	if ('tags' not in pos) and len(const_tags) == 0:
+	if (tags_pos == None) and const_tags == None:
 		print "Error: No tags provided!"
 		return 3
 	
@@ -87,10 +91,10 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	for line in f:
 		d = dict()
 		line = line.strip().split(delimiter)
-		for val in const:
-			d[val] = const[val]
-		for val in pos:		#constant values CAN be overrriden by those 									taken directly from table (^-^)
-			d[val] = line[pos[val]]
+		for key in const:
+			d[key] = const[key]
+		for key in pos:		#constant values CAN be overrriden by those 									taken directly from table (^-^)
+			d[key] = line[pos[key]]
 			
 		records.append(d)
 		
@@ -125,22 +129,22 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		ids.append(db.find(r)[0])
 		#I'm pretty sure to find one record here...
 		
-	if const_tags != None:
+	if const_tags is not None:
 		db.join(ids, const_tags)
 		print "Joined all with tags: "+str(const_tags)
 	
 	
 	f.seek(0)	#start new reading, skip header
 	f.readline()
-	i = 0
+	r = 0
 	
-	if 'tags' in pos:
-		for line in f:		#add tags form pos
+	if tags_pos is not None:
+		for line in f:		#add tags form tags_pos
 			line = line.strip().split(delimiter)
-			if len(line[pos['tags']]) > 0:
-				db.join( db.find(records[i]), line[pos['tags']:] )
-				print "Joined "+ str(db.find(records[i])) + "with tags "+str(line[pos['tags']:])
-			i += 1
+			if len(line[tags_pos:]) > 0:	#do sth about empty u''
+				db.join( db.find(records[r]), line[tags_pos:] )
+				print "Joined "+ str(db.find(records[r])) + "with tags "+str(line[tags_pos:])
+		r += 1
 	
 	print "Closing..."	
 	f.close()
@@ -153,9 +157,11 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 #li.index("example")	
 	
-insert_from_file_line_is_record("test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=True)
-insert_from_file_line_is_record("test2.txt", author="angielski", level=4, force_yes=True)
-insert_from_file_line_is_record("test3.txt", author=u"śmieszek", force_yes=False)
+insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=False)
+
+insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
+
+insert_from_file_line_is_record("../data/test3.txt", author=u"śmieszek", force_yes=False)
 
 
 

@@ -12,7 +12,7 @@ class DbAdapter:
 
 	def __init__(self, path_file=None):
 		if path_file == None:
-			self.db = dataset.connect('sqlite:////home/hubert/Documents/Projects/Dict_WYD/db/factbook.db')
+			self.db = dataset.connect('sqlite:///../factbook.db')
 			print "Base oppended!"
 		else:
 			self.self.db = dataset.connect('sqlite:'+path_file)
@@ -58,7 +58,9 @@ class DbAdapter:
 			if type(item) != list:
 				item = [item]	#make sure they're both iterable
 			
-		for tag in tag_list:	
+		for tag in tag_list:
+			if tag is u'':
+				continue
 			for word in word_list:
 			
 				if self.get(word) == None: #check for existence...
