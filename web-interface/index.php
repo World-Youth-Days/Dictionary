@@ -25,12 +25,11 @@
     if(!$db){
        echo $db->lastErrorMsg();
     } else {
-       echo "Opened database successfully\n";
+       #echo "Opened database successfully\n";
     }
     ?>
     <body>
-        <div id="header" class="mdl-shadow--2dp">
-            
+        <div id="header" class="mdl-shadow--2dp">          
         </div>
         <div id="content">
             <div class="mdl-grid">
