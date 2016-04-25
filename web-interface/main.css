@@ -1,0 +1,20 @@
+body {
+    background-color: #e6e6e6;
+}
+#header {
+    background-color: #2196F3;
+    height: 150px;
+}
+#content {
+    max-width: 1154px;
+    margin: 0 auto;
+}
+#filters {
+    background-color: #FFD740;
+}
+#word-container {
+    margin-top: -100px;
+}
+.card-content {
+    padding: 8px;
+}
