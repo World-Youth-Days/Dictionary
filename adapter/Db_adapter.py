@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import dataset
 import sqlalchemy
+import datetime
 
 class DbAdapter:
 
@@ -21,9 +22,12 @@ class DbAdapter:
 		self.new_word = dict(base=None, mono="", trans="",
 		level=0, author=None, time=0)
 		
-		self.words = self.db.get_table("words")
-		self.words.create_column('time', sqlalchemy.DateTime)
 		self.tags = self.db.get_table("tags")
+		self.words = self.db.get_table("words")
+		
+		#initialize columns with non-tpical value types
+		self.words.create_column('time', sqlalchemy.DateTime)
+		self.words.create_column('level', sqlalchemy.Integer)
 		
 	def backup(self):
 		print "No backup utility so far..."
@@ -108,6 +112,8 @@ class DbAdapter:
 			records = [records]
 	
 		for r in records:
+			r['time'] = datetime.datetime.today().replace(second=0, microsecond=0)
+			print "Time: " + str(r['time'])
 			self.words.upsert(r, ['base', 'author', 'trans', 'mono'])
 		#adding level to this list causes strange crash...
 		
@@ -224,11 +230,11 @@ class DbAdapter:
 #--------------------------------------------------------------------#
 
 
-def additional():
-	return None
-	#remove element from list:
-	while el in lst:
-		lst.remove(el)
-		
-	# Insert a new record.
-	table.insert(dict(name='John Doe', age=46, country='China'))
+#def additional():
+#	return None
+#	#remove element from list:
+#	while el in lst:
+#		lst.remove(el)
+#		
+#	# Insert a new record.
+#	table.insert(dict(name='John Doe', age=46, country='China'))

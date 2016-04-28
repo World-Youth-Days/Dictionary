@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os, sys
 import codecs
 from Db_adapter import DbAdapter
 
@@ -115,7 +114,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		return 5
 		
 	db = DbAdapter(None)					#define db connection
-	db.add_words(records)
+	db.add_words(records)					#add words to db
 	
 
 #--------------------------------------------------------------------#
@@ -126,11 +125,15 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	
 	ids = []
 	for r in records:	#add const_tags
+		del r['time']
+		print str(r)
 		ids.append(db.find(r)[0])
+		print str(r)
 		#I'm pretty sure to find one record here...
 		
 	if const_tags is not None:
 		db.join(ids, const_tags)
+		
 		print "Joined all with tags: "+str(const_tags)
 	
 	
@@ -157,15 +160,8 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 #li.index("example")	
 	
-insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=False)
+insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=True)
 
 insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
 
 insert_from_file_line_is_record("../data/test3.txt", author=u"śmieszek", force_yes=False)
-
-
-
-
-
-
-
