@@ -16,7 +16,7 @@
     {
        function __construct()
        {
-          $this->open('factbook.db');
+          $this->open('dictionary.db');
        }
     }
     
