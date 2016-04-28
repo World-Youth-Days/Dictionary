@@ -10,10 +10,15 @@ class DbAdapter:
 #--------------------------------------------------------------------#
 
 
-	def __init__(self, path_file=None):
-		if path_file == None:
+	def __init__(self, path_file=None, os="Linux"):
+		if path_file == None and os="Windows":
+			self.db = dataset.connect('sqlite:\\..\\factbook.db')
+			print "Base oppened!"
+		elif path_file == None:
 			self.db = dataset.connect('sqlite:///../factbook.db')
 			print "Base oppended!"
+			if os is not "Linux":
+				print 'Warning, used linux-like path but os is not "Linux"!'
 		else:
 			self.self.db = dataset.connect('sqlite:'+path_file)
 		#ought to add try-catch here

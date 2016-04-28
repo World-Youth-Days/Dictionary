@@ -156,16 +156,19 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 #--------------------------------------------------------------------#
 
 #li.index("example")	
-	
-insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=False)
+def insert_test_linux():	
+	insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=False)
 
-insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
+	insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
 
-insert_from_file_line_is_record("../data/test3.txt", author=u"śmieszek", force_yes=False)
+	insert_from_file_line_is_record("../data/test3.txt", author=u"śmieszek", force_yes=False)
+
+def insert_test_windows():	
+	insert_from_file_line_is_record("..\\data\\test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=False)
+
+	insert_from_file_line_is_record("..\\data\\test2.txt", author="angielski", level=4, force_yes=True)
+
+	insert_from_file_line_is_record("..\\data\\test3.txt", author=u"śmieszek", force_yes=False)
 
 
-
-
-
-
-
+insert_test_linux()
