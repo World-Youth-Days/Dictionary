@@ -13,7 +13,7 @@ class DbAdapter:
 
 	def __init__(self, path_file=None):
 		if path_file == None:
-			self.db = dataset.connect('sqlite:///../factbook.db')
+			self.db = dataset.connect('sqlite:///../dictionary.db')
 			print "Base oppended!"
 		else:
 			self.self.db = dataset.connect('sqlite:'+path_file)
