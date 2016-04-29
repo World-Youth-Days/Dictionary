@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import codecs
 from Db_adapter import DbAdapter
+from dict_display import *
 
 
 #--------------------------------------------------------------------#
@@ -14,7 +15,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	
 	try:
 		f = codecs.open(path_name, "r", 'utf-8')
-	except:
+	except SystemError:
 		print "Error while opening file!"
 		return 4
 	print "\nFile: " + path_name + "\n"
@@ -69,7 +70,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		print "Error: Insufficient information provided to fill all columns."
 		return 2
 		
-	if pos['base'] == None:
+	if pos['base'] is None:
 		print "Warning: No base-word, assuming 0-th column as base"
 		pos['base'] = 0
 		
@@ -77,7 +78,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		print "Error: Neither monolingual nor translation defined, error!"
 		return 1
 		
-	if (tags_pos == None) and const_tags == None:
+	if (tags_pos is None) and const_tags is None:
 		print "Error: No tags provided!"
 		return 3
 	
@@ -98,9 +99,10 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		records.append(d)
 		
 	#need to print records in purpose of confirmation by human...
-	for r in records:
-		print r
+	#for r in records:
+	#	print r
 
+	display_dict(records, rows)		#display using new method form dict_display.py
 
 #--------------------------------------------------------------------#
 #----------------------    Human check ;)   -------------------------#
@@ -109,7 +111,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 	if "force_yes" in kwargs and kwargs["force_yes"] == True:
 		print "Automatic yes choosen..."
-	elif raw_input("Are those OK? (don't care about special chars) [y/n]") is not 'y':
+	elif raw_input("Are those OK?[y/n]") not in ['y', 'yes', 'Y', 'Yes']:
 		print "Aborting..."
 		return 5
 		
@@ -158,9 +160,8 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 #----------------------    Call the function-------------------------#
 #--------------------------------------------------------------------#
 
-#li.index("example")	
-	
-insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1", level=10, force_yes=True)
+insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1",
+								level=10, force_yes=True)
 
 insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
 
