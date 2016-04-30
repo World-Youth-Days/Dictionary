@@ -16,9 +16,9 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	try:
 		f = codecs.open(path_name, "r", 'utf-8')
 	except SystemError:
-		print "Error while opening file!"
+		print( "Error while opening file!")
 		return 4
-	print "\nFile: " + path_name + "\n"
+	print( "\nFile: " + path_name + "\n")
 	
 	rows = ['base', 'mono', 'trans', 'author', 'level']
 	pos = dict(base=None, mono=None, trans=None, author=None, level=None)		#sorry, I avoid understanding deep/shalow copy specs ;)
@@ -31,21 +31,21 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 
 	header = f.readline().strip().split(delimiter)
-	print "Header: " + unicode(header)
-	print "Kwargs: " + unicode(kwargs)
+	print( "Header: " + unicode(header))
+	print( "Kwargs: " + unicode(kwargs))
 	
 	for col in rows:
 		if col in kwargs:
 			const[col] = kwargs[col]
-			print "OK: Const " + col + " found"
+			print( "OK: Const " + col + " found")
 	
 		
 				
 		try:
 			pos[col] = header.index(col)
-			print "OK: " + col + " at column " + unicode(pos[col])
+			print( "OK: " + col + " at column " + unicode(pos[col]))
 		except ValueError:
-			print "Info: No "+ unicode(col) +" header found"
+			print( "Info: No "+ unicode(col) +" header found")
 			del pos[col]
 			
 	if 'tags' in kwargs:	#find sources of tags
@@ -55,10 +55,10 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	if 'tags' in header:
 		tags_pos = header.index('tags')
 	
-	print "pos: " + unicode(pos)
-	print "const: " + unicode(const)
-	print "const_tags: " + unicode(const_tags)
-	print "tags_pos: " + unicode(tags_pos)
+	print( "pos: " + unicode(pos))
+	print( "const: " + unicode(const))
+	print( "const_tags: " + unicode(const_tags))
+	print( "tags_pos: " + unicode(tags_pos))
 	
 
 #--------------------------------------------------------------------#
@@ -67,19 +67,19 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 
 	if len(pos) + len(const) < 4:
-		print "Error: Insufficient information provided to fill all columns."
+		print( "Error: Insufficient information provided to fill all columns.")
 		return 2
 		
 	if pos['base'] is None:
-		print "Warning: No base-word, assuming 0-th column as base"
+		print("Warning: No base-word, assuming 0-th column as base")
 		pos['base'] = 0
 		
 	if 'trans' not in pos and 'mono' not in pos:
-		print "Error: Neither monolingual nor translation defined, error!"
+		print("Error: Neither monolingual nor translation defined, error!")
 		return 1
 		
 	if (tags_pos is None) and const_tags is None:
-		print "Error: No tags provided!"
+		print("Error: No tags provided!")
 		return 3
 	
 
@@ -93,7 +93,8 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 		line = line.strip().split(delimiter)
 		for key in const:
 			d[key] = const[key]
-		for key in pos:		#constant values CAN be overrriden by those 									taken directly from table (^-^)
+		for key in pos:		#constant values CAN be overrriden by those
+								# taken directly from table (^-^)
 			d[key] = line[pos[key]]
 			
 		records.append(d)
@@ -110,9 +111,9 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 
 	if "force_yes" in kwargs and kwargs["force_yes"] == True:
-		print "Automatic yes choosen..."
+		print( "Automatic yes choosen...")
 	elif raw_input("Are those OK?[y/n]") not in ['y', 'yes', 'Y', 'Yes']:
-		print "Aborting..."
+		print("Aborting...")
 		return 5
 		
 	db = DbAdapter(None)					#define db connection
@@ -128,16 +129,15 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	ids = []
 	for r in records:	#add const_tags
 		del r['time']
-		print unicode(r)
+		print(unicode(r))
 		ids.append(db.find(r)[0])
-		print unicode(r)
-		#I'm pretty sure to find one record here...
+		print(unicode(r))
+	#I'm pretty sure to find one record here...
 		
 	if const_tags is not None:
 		db.join(ids, const_tags)
 		
-		print "Joined all with tags: "+unicode(const_tags)
-	
+		print("Joined all with tags: " + unicode(const_tags))
 	
 	f.seek(0)	#start new reading, skip header
 	f.readline()
@@ -148,10 +148,11 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 			line = line.strip().split(delimiter)
 			if len(line[tags_pos:]) > 0:	#do sth about empty u''
 				db.join( db.find(records[i]), line[tags_pos:] )
-				print "Joined "+ unicode(db.find(records[i])) + "with tags "+unicode(line[tags_pos:])
+				print( "Joined "+ unicode(db.find(records[i])) + "with tags "+unicode(line[
+				                                                                     tags_pos:]))
 			i += 1
 	
-	print "Closing..."	
+	print( "Closing..."	)
 	f.close()
 	
 	

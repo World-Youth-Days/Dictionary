@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import cStringIO, operator
+import operator
+from io import StringIO
 
 def display_dict(dicts, columns = ('id', 'base'), header=True):
 	'''
@@ -11,7 +12,7 @@ def display_dict(dicts, columns = ('id', 'base'), header=True):
 	:return: string to be displayed or error number
 	'''
 	if isinstance(dicts, list):
-		print 'ok'
+		print( 'ok')
 	elif isinstance(dicts, dict):
 		dicts = [dicts]
 	else:
@@ -23,7 +24,7 @@ def display_dict(dicts, columns = ('id', 'base'), header=True):
 			dicts[0][row]
 		except KeyError:
 			columns.remove(row)
-			print "No " + row + " found in given dict!"
+			print( "No " + row + " found in given dict!")
 
 
 	if header == False:
@@ -40,7 +41,7 @@ def display_dict(dicts, columns = ('id', 'base'), header=True):
 			h[col] = col
 		dicts = h + dicts
 	else:
-		print "Unknown header value: " + str(header)
+		print("Unknown header value: " + str(header))
 		pass
 
 	# make 2D table from dicts
@@ -70,16 +71,17 @@ def indent(rows, hasHeader=False, headerChar='-', delim=' | ', justify='left',
 		 the table is first wrapped by this function."""
 
 	# closure for breaking logical rows to physical, using wrapfunc
-	def rowWrapper(row):
+	'''def rowWrapper(row):
 		newRows = [wrapfunc(item).split('\n') for item in row]
 		return [[substr or '' for substr in item] for item in map(None, *newRows)]
+	'''
 
 	# break each logical row into one or more physical ones
-	logicalRows = [rowWrapper(row) for row in rows]
+	logicalRows = [row for row in rows]
 	# columns of physical rows
 	columns = map(None, *reduce(operator.add, logicalRows))
 	# get the maximum of each column by the string length of its items
-	maxWidths = [max([len(unicode(item)) for item in column]) for column in columns]
+	maxWidths = [max([len(item) for item in column]) for column in columns]
 	rowSeparator = headerChar * (len(prefix) + len(postfix) + sum(maxWidths) + \
 	                             len(delim) * (len(maxWidths) - 1))
 	# select the appropriate justify method
@@ -121,7 +123,7 @@ import re
 def wrap_onspace_strict(text, width):
 	"""Similar to wrap_onspace, but enforces the width constraint:
 	   words longer than width are split."""
-	wordregex = re.compile(r'\S{' + unicode(width) + r',}')
+	wordregex = re.compile(r'\S{' + width + r',}')
 	return wrap_onspace(wordregex.sub(lambda m: wrap_always(m.group(), width), text), width)
 
 
@@ -143,12 +145,12 @@ if __name__ == '__main__':
 		   Aristidis,Papageorgopoulos,28,Senior Reseacher'''
 	rows = [row.strip().split(',') for row in data.splitlines()]
 
-	print 'Without wrapping function\n'
-	print indent([labels] + rows, hasHeader=True)
+	print('Without wrapping function\n')
+	print(indent([labels] + rows, hasHeader=True))
 	# test indent with different wrapping functions
 	width = 10
 	for wrapper in (wrap_always, wrap_onspace, wrap_onspace_strict):
-		print 'Wrapping function: %s(x,width=%d)\n' % (wrapper.__name__, width)
-		print indent([labels] + rows, hasHeader=True, separateRows=True,
+		print( 'Wrapping function: %s(x,width=%d)\n' % (wrapper.__name__, width))
+		print( indent([labels] + rows, hasHeader=True, separateRows=True,
 		             prefix='| ', postfix=' |',
-		             wrapfunc=lambda x: wrapper(x, width))
+		             wrapfunc=lambda x: wrapper(x, width)))

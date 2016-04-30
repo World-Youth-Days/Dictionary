@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import dataset
-import sqlalchemy
+from dataset import *
+from sqlalchemy import Integer, DateTime
 import datetime
 
 class DbAdapter:
@@ -13,11 +13,11 @@ class DbAdapter:
 
 	def __init__(self, path_file=None, os="Linux"):
 		if path_file == None and os == "Windows":
-			self.db = dataset.connect(r'sqlite:///\..\dictionary.db')
-			print "Base oppened!"
+			self.db = connect(r'sqlite:///\..\dictionary.db')
+			print( "Base oppened!")
 		elif path_file == None:
-			self.db = dataset.connect('sqlite:///../dictionary.db')
-			print "Base oppended!"
+			self.db = connect('sqlite:///../dictionary.db')
+			print( "Base oppended!")
 		else:
 			self.self.db = dataset.connect('sqlite:'+path_file)
 		#ought to add try-catch here
@@ -29,11 +29,11 @@ class DbAdapter:
 		self.words = self.db.get_table("words")
 		
 		#initialize columns with non-tpical value types
-		self.words.create_column('time', sqlalchemy.DateTime)
-		self.words.create_column('level', sqlalchemy.Integer)
+		self.words.create_column('time', DateTime)
+		self.words.create_column('level', Integer)
 		
 	def backup(self):
-		print "No backup utility so far..."
+		print( "No backup utility so far...")
 		return 1
 		
 	def get_table(self, name = None):
@@ -48,7 +48,7 @@ class DbAdapter:
 		for tag in self.tags:
 			for word in tag:
 				if len(self.words.find(id=word)) == 0:
-					print "No word found: "+word
+					print( "No word found: "+word)
 					self.db[tag].delete(word_id=word)
 		
 		self.update_tags()
@@ -71,7 +71,7 @@ class DbAdapter:
 			for word in word_list:
 			
 				if self.get(word) == None: #check for existence...
-					print 'Warning: no word with such id!!! '+unicode(word)
+					print( 'Warning: no word with such id!!! '+word)
 					continue
 				else:
 					r = dict(word_id=word, base=self.get(word)['base'])
@@ -116,14 +116,14 @@ class DbAdapter:
 	
 		for r in records:
 			r['time'] = datetime.datetime.today().replace(second=0, microsecond=0)
-			print "Time: " + unicode(r['time'])
+			print( "Time: " + r['time'])
 			self.words.upsert(r, ['base', 'author', 'trans', 'mono'])
 		#adding level to this list causes strange crash...
 		
 		#have some statistic idea about what's happened ;)
 		delta = len(self.words) - count
-		print ("Added "+unicode(delta)+" new words; updated "
-		+unicode(len(self.words) - delta)+".")
+		print ("Added "+delta+" new words; updated "
+		+len(self.words) - delta +".")
 		
 	def remove_without_tag(self):
 	#get complete list of words, then remove every with tag
@@ -138,7 +138,7 @@ class DbAdapter:
 		#remove words which haven't been removed
 		for word_id in id_list:
 			self.words.delete(id=word_id)
-			print ("Removed "+unicode(len(id_list)) +
+			print ("Removed "+len(id_list) +
 			" words without any tag.")
 		
 		self.unify()
@@ -151,13 +151,13 @@ class DbAdapter:
 			self.words.delete(id=word)
 			#check for length change to get detailed info?
 		delta = count - len(self.words)
-		print("Removed "+unicode(delta)+" words; failed or duplicate "
-		+unicode(len(self.words) - delta)+".")
+		print("Removed " +delta+ " words; failed or duplicate "+ (len(self.words) - delta)+".")
 		
 		#try to find recently deleted words to give list of errors?
 		self.unify()
 			
 	def remove_by_tag(self, tag):
+
 		#count = len(self.words)
 		for Id in self.tags[tag]:
 			self.words.delete(id=Id)
@@ -174,7 +174,7 @@ class DbAdapter:
 		c = operator.strip() + " "
 		q = u"SELECT * FROM " + table + u"\nWHERE "
 		for key in dic:
-			q += unicode(key) + u"='" + unicode(dic[key]) + u"'\n" + c
+			q += key + u"='" + dic[key] + u"'\n" + c
 	
 		return q[0:-len(c)-1] + u";" #remove last conjunction
 	
@@ -187,7 +187,7 @@ class DbAdapter:
 		else:
 			return [row['id'] for row in self.db.query(q)].sort()
 
-		#for r in self.words.find([unicode(key)=dic[key] for key in dic]):
+		#for r in self.words.find([key=dic[key] for key in dic]):
 			#base=dic['base']
 			#	lis = r['id']
 			#return lis
