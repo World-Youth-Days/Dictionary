@@ -31,8 +31,8 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 
 	header = f.readline().strip().split(delimiter)
-	print "Header: " + str(header)
-	print "Kwargs: " + str(kwargs)
+	print "Header: " + unicode(header)
+	print "Kwargs: " + unicode(kwargs)
 	
 	for col in rows:
 		if col in kwargs:
@@ -43,9 +43,9 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 				
 		try:
 			pos[col] = header.index(col)
-			print "OK: " + col + " at column " + str(pos[col])
+			print "OK: " + col + " at column " + unicode(pos[col])
 		except ValueError:
-			print "Info: No "+ str(col) +" header found"
+			print "Info: No "+ unicode(col) +" header found"
 			del pos[col]
 			
 	if 'tags' in kwargs:	#find sources of tags
@@ -55,10 +55,10 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	if 'tags' in header:
 		tags_pos = header.index('tags')
 	
-	print "pos: " + str(pos)
-	print "const: " + str(const)
-	print "const_tags: " + str(const_tags)
-	print "tags_pos: " + str(tags_pos)
+	print "pos: " + unicode(pos)
+	print "const: " + unicode(const)
+	print "const_tags: " + unicode(const_tags)
+	print "tags_pos: " + unicode(tags_pos)
 	
 
 #--------------------------------------------------------------------#
@@ -128,15 +128,15 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	ids = []
 	for r in records:	#add const_tags
 		del r['time']
-		print str(r)
+		print unicode(r)
 		ids.append(db.find(r)[0])
-		print str(r)
+		print unicode(r)
 		#I'm pretty sure to find one record here...
 		
 	if const_tags is not None:
 		db.join(ids, const_tags)
 		
-		print "Joined all with tags: "+str(const_tags)
+		print "Joined all with tags: "+unicode(const_tags)
 	
 	
 	f.seek(0)	#start new reading, skip header
@@ -148,7 +148,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 			line = line.strip().split(delimiter)
 			if len(line[tags_pos:]) > 0:	#do sth about empty u''
 				db.join( db.find(records[i]), line[tags_pos:] )
-				print "Joined "+ str(db.find(records[i])) + "with tags "+str(line[tags_pos:])
+				print "Joined "+ unicode(db.find(records[i])) + "with tags "+unicode(line[tags_pos:])
 			i += 1
 	
 	print "Closing..."	

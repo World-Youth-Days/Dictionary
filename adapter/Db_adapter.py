@@ -71,7 +71,7 @@ class DbAdapter:
 			for word in word_list:
 			
 				if self.get(word) == None: #check for existence...
-					print 'Warning: no word with such id!!! '+str(word)
+					print 'Warning: no word with such id!!! '+unicode(word)
 					continue
 				else:
 					r = dict(word_id=word, base=self.get(word)['base'])
@@ -116,14 +116,14 @@ class DbAdapter:
 	
 		for r in records:
 			r['time'] = datetime.datetime.today().replace(second=0, microsecond=0)
-			print "Time: " + str(r['time'])
+			print "Time: " + unicode(r['time'])
 			self.words.upsert(r, ['base', 'author', 'trans', 'mono'])
 		#adding level to this list causes strange crash...
 		
 		#have some statistic idea about what's happened ;)
 		delta = len(self.words) - count
-		print ("Added "+str(delta)+" new words; updated "
-		+str(len(self.words) - delta)+".")
+		print ("Added "+unicode(delta)+" new words; updated "
+		+unicode(len(self.words) - delta)+".")
 		
 	def remove_without_tag(self):
 	#get complete list of words, then remove every with tag
@@ -138,7 +138,7 @@ class DbAdapter:
 		#remove words which haven't been removed
 		for word_id in id_list:
 			self.words.delete(id=word_id)
-			print ("Removed "+str(len(id_list)) +
+			print ("Removed "+unicode(len(id_list)) +
 			" words without any tag.")
 		
 		self.unify()
@@ -151,8 +151,8 @@ class DbAdapter:
 			self.words.delete(id=word)
 			#check for length change to get detailed info?
 		delta = count - len(self.words)
-		print("Removed "+str(delta)+" words; failed or duplicate "
-		+str(len(self.words) - delta)+".")
+		print("Removed "+unicode(delta)+" words; failed or duplicate "
+		+unicode(len(self.words) - delta)+".")
 		
 		#try to find recently deleted words to give list of errors?
 		self.unify()
@@ -174,21 +174,23 @@ class DbAdapter:
 		c = operator.strip() + " "
 		q = u"SELECT * FROM " + table + u"\nWHERE "
 		for key in dic:
-			q += str(key) + u"='" + unicode(dic[key]) + u"'\n" + c
+			q += unicode(key) + u"='" + unicode(dic[key]) + u"'\n" + c
 	
 		return q[0:-len(c)-1] + u";" #remove last conjunction
 	
-	def find(self, dic):
+	def find(self, dic, raw="False"):
 	
 		lis = []
 		q = self.query_from_dict(dic)
-		return [row['id'] for row in self.db.query(q)]
-		
-		
-		#for r in self.words.find([str(key)=dic[key] for key in dic]):
-		#base=dic['base']
-		#	lis = r['id']
-		return lis
+		if raw is True:
+			return self.db.query(q)
+		else:
+			return [row['id'] for row in self.db.query(q)].sort()
+
+		#for r in self.words.find([unicode(key)=dic[key] for key in dic]):
+			#base=dic['base']
+			#	lis = r['id']
+			#return lis
 		
 	def get(self, _id):
 		res = self.words.find(id=_id)
