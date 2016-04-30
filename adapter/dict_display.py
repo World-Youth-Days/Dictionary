@@ -10,7 +10,6 @@ def display_dict(dicts, columns = ('id', 'base'), header=True):
 	:param header: if True - print header, if "Only" - print only header
 	:return: string to be displayed or error number
 	'''
-
 	if isinstance(dicts, list):
 		print 'ok'
 	elif isinstance(dicts, dict):
@@ -18,20 +17,39 @@ def display_dict(dicts, columns = ('id', 'base'), header=True):
 	else:
 		return "1: Unrecognised type of dict! " + str(type(dicts))
 
-
-
 	for row in columns:
+		#make sure columns contain no surprises ;)
 		try:
 			dicts[0][row]
 		except KeyError:
-			del columns[row]
+			columns.remove(row)
 			print "No " + row + " found in given dict!"
 
 
-	#make 2D table from dicts
-	tab = [[ word[val] for val in columns] for word in dicts]
+	if header == False:
+		pass
+	elif header == "Only":
+		header = True
+		dicts = dict()
+		for col in columns:
+			dicts[col] = col
+		pass
+	elif header == True:
+		h = dict()
+		for col in columns:
+			h[col] = col
+		dicts = h + dicts
+	else:
+		print "Unknown header value: " + str(header)
+		pass
 
-	return indent(dicts, hasHeader=True)
+	# make 2D table from dicts
+	#tab = [[ word[val] for val in columns] for word in dicts]
+	tab = []
+	for word in dicts:
+		tab.append([word[val] for val in columns])
+
+	return indent(dicts, hasHeader=header, justify='center')
 
 
 def indent(rows, hasHeader=False, headerChar='-', delim=' | ', justify='left',
@@ -73,7 +91,7 @@ def indent(rows, hasHeader=False, headerChar='-', delim=' | ', justify='left',
 			print >> output, \
 				prefix \
 				+ delim.join(
-					[justify(unicode(item), width) for (item, width) in zip(row, maxWidths)]) \
+					[item.justify(width) for (item, width) in zip(row, maxWidths)]) \
 				+ postfix
 		if separateRows or hasHeader: print >> output, rowSeparator; hasHeader = False
 	return output.getvalue()
