@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import codecs
-from Db_adapter import DbAdapter
-from dict_display import *
+from DbAdapter import DbAdapter
+from display_dict import display_dict
 
 
 #--------------------------------------------------------------------#
@@ -31,8 +31,8 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 
 	header = f.readline().strip().split(delimiter)
-	print( "Header: " + unicode(header))
-	print( "Kwargs: " + unicode(kwargs))
+	print( "Header: " + str(header))
+	print( "Kwargs: " + str(kwargs))
 	
 	for col in rows:
 		if col in kwargs:
@@ -43,9 +43,9 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 				
 		try:
 			pos[col] = header.index(col)
-			print( "OK: " + col + " at column " + unicode(pos[col]))
+			print( "OK: " + col + " at column " + str(pos[col]))
 		except ValueError:
-			print( "Info: No "+ unicode(col) +" header found")
+			print( "Info: No "+ col +" header found")
 			del pos[col]
 			
 	if 'tags' in kwargs:	#find sources of tags
@@ -55,10 +55,10 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	if 'tags' in header:
 		tags_pos = header.index('tags')
 	
-	print( "pos: " + unicode(pos))
-	print( "const: " + unicode(const))
-	print( "const_tags: " + unicode(const_tags))
-	print( "tags_pos: " + unicode(tags_pos))
+	print( "pos: " + str(pos))
+	print( "const: " + str(const))
+	print( "const_tags: " + str(const_tags))
+	print( "tags_pos: " + str(tags_pos))
 	
 
 #--------------------------------------------------------------------#
@@ -103,7 +103,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	#for r in records:
 	#	print r
 
-	display_dict(records, rows)		#display using new method form dict_display.py
+	display_dict(records, rows)		#display using new method form display_dict.py
 
 #--------------------------------------------------------------------#
 #----------------------    Human check ;)   -------------------------#
@@ -112,7 +112,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 
 	if "force_yes" in kwargs and kwargs["force_yes"] == True:
 		print( "Automatic yes choosen...")
-	elif raw_input("Are those OK?[y/n]") not in ['y', 'yes', 'Y', 'Yes']:
+	elif input("Are those OK?[y/n]") not in ['y', 'yes', 'Y', 'Yes']:
 		print("Aborting...")
 		return 5
 		
@@ -129,27 +129,26 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	ids = []
 	for r in records:	#add const_tags
 		del r['time']
-		print(unicode(r))
-		ids.append(db.find(r)[0])
-		print(unicode(r))
+		print(r)
+		print(str(db.find_id(r)))
+		ids.append((db.find_id(r))[0])
 	#I'm pretty sure to find one record here...
 		
 	if const_tags is not None:
 		db.join(ids, const_tags)
 		
-		print("Joined all with tags: " + unicode(const_tags))
+		print("Joined all with tags: " + str(const_tags))
 	
 	f.seek(0)	#start new reading, skip header
 	f.readline()
+
 	i = 0
-	
 	if tags_pos is not None:
 		for line in f:		#add tags form tags_pos
 			line = line.strip().split(delimiter)
-			if len(line[tags_pos:]) > 0:	#do sth about empty ''
-				db.join( db.find(records[i]), line[tags_pos:] )
-				print( "Joined "+ unicode(db.find(records[i])) + "with tags "+unicode(line[
-				                                                                     tags_pos:]))
+			word = db.find_id(records[i])
+			db.join(word , line[tags_pos:] )
+			print( "Joined "+ str(word) + "with tags "+str(line[tags_pos:]))
 			i += 1
 	
 	print( "Closing..."	)

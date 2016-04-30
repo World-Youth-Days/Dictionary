@@ -10,12 +10,8 @@ def display_dict(dicts, columns = ('id', 'base'), header=True):
 	:return: string to be displayed or error number
 	"""
 
-	if isinstance(dicts, list):
-		pass
-	elif isinstance(dicts, dict):
+	if isinstance(dicts, dict):
 		dicts = [dicts]
-	else:
-		pass
 		#return "1: Unrecognised type of dict! " + str(type(dicts))
 
 	for row in columns:

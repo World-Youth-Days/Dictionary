@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from dataset import *
+import dataset
 from sqlalchemy import Integer, DateTime
 import datetime
 
@@ -13,11 +13,11 @@ class DbAdapter:
 
 	def __init__(self, path_file=None, os="Linux"):
 		if path_file == None and os == "Windows":
-			self.db = connect(r'sqlite:///\..\dictionary.db')
-			print( "Base oppened!")
+			self.db = dataset.connect(r'sqlite:///\..\dictionary.db')
+			print( "Base opened!")
 		elif path_file == None:
-			self.db = connect('sqlite:///../dictionary.db')
-			print( "Base oppended!")
+			self.db = dataset.connect('sqlite:///../dictionary.db')
+			print( "Base opened!")
 		else:
 			self.self.db = dataset.connect('sqlite:'+path_file)
 		#ought to add try-catch here
@@ -28,7 +28,7 @@ class DbAdapter:
 		self.tags = self.db.get_table("tags")
 		self.words = self.db.get_table("words")
 		
-		#initialize columns with non-tpical value types
+		#initialize columns with non typical value types
 		self.words.create_column('time', DateTime)
 		self.words.create_column('level', Integer)
 		
@@ -70,11 +70,11 @@ class DbAdapter:
 				continue
 			for word in word_list:
 			
-				if self.get(word) == None: #check for existence...
+				if self.get_dic(word) == None: #check for existence...
 					print( 'Warning: no word with such id!!! '+word)
 					continue
 				else:
-					r = dict(word_id=word, base=self.get(word)['base'])
+					r = dict(word_id=word, base=self.get_dic(word)['base'])
 					
 				self.get_table(tag).insert(r)
 				
@@ -109,59 +109,62 @@ class DbAdapter:
 
 
 	def add_words(self, records):
+		""":argument records list"""
 		count = len(self.words)
+
 		#make sure it's iterable
-		if type(records) != list:
+		if not isinstance(records, list):
 			records = [records]
 	
 		for r in records:
+			#add current time, with accuracy to 1 minute
 			r['time'] = datetime.datetime.today().replace(second=0, microsecond=0)
-			print( "Time: " + r['time'])
-			self.words.upsert(r, ['base', 'author', 'trans', 'mono'])
+			#print( "Time: " + str(r['time']))
+			self.words.upsert(r, ['base', 'author', 'trans', 'mono', 'level'])
 		#adding level to this list causes strange crash...
 		
 		#have some statistic idea about what's happened ;)
 		delta = len(self.words) - count
-		print ("Added "+delta+" new words; updated "
-		+len(self.words) - delta +".")
+		print ("Added "+ str(delta) + " new words; updated " + str(len(records) - delta) + ".")
 		
 	def remove_without_tag(self):
 	#get complete list of words, then remove every with tag
 		id_list = self.get_id_list()
 		for tag in self.tags:
-			for word in tag:
-				try:
-					id_list.remove(word['word_id'])
-				except ValueError:
-					continue	#no word with such id, normal state
-		
-		#remove words which haven't been removed
+				for word in tag:
+					try:
+						id_list.remove(word['word_id'])
+					except ValueError:
+						continue	#no word with such id, normal case
+
+			#remove words which stayed on list
 		for word_id in id_list:
 			self.words.delete(id=word_id)
-			print ("Removed "+len(id_list) +
-			" words without any tag.")
-		
+
+		print ('Removed ' +len(id_list)+ ' words without any tag.')
 		self.unify()
 		
 	def remove_by_id(self, id_list):
-		if type(id_list) != list:
+		if  not isisinstance(id_list, (list, tuple)):
 			id_list = [id_list]
-			count = len(self.words)
+
+		count = len(self.words)
 		for word in id_list:
 			self.words.delete(id=word)
-			#check for length change to get detailed info?
+
 		delta = count - len(self.words)
-		print("Removed " +delta+ " words; failed or duplicate "+ (len(self.words) - delta)+".")
+		print('Removed ' + delta + ' words.')
 		
 		#try to find recently deleted words to give list of errors?
 		self.unify()
 			
 	def remove_by_tag(self, tag):
 
-		#count = len(self.words)
+		count = len(self.words)
 		for Id in self.tags[tag]:
-			self.words.delete(id=Id)
-			
+				self.words.delete(id=Id)
+
+		print( 'Removed ' + str(count -len(self.words)) + 'words')
 				
 #--------------------------------------------------------------------#
 #---------------------------- Search --------------------------------#
@@ -170,37 +173,46 @@ class DbAdapter:
 #need to adapt db.query() in self.find()
 
 	def query_from_dict(self, dic, table="words", operator="AND"):
-	
+
+		"""
+
+		:param dic: dict: FIND query arguments
+		:param table: str: table to search in
+		:param operator: str: AND/OR to put between dic elements
+		:return: str: string with SQL query
+		"""
 		c = operator.strip() + " "
 		q = "SELECT * FROM " + table + "\nWHERE "
 		for key in dic:
-			q += key + "='" + dic[key] + "'\n" + c
+			q += key + "='" + str(dic[key]) + "'\n" + c
 	
-		return q[0:-len(c)-1] + ";" #remove last conjunction
+		return q[0:-len(c)-1] + ";" #remove last conjuncton
 	
-	def find(self, dic, raw="False"):
-	
-		lis = []
+	def find_dic(self, dic):
+		""":return : list[OrderedDict]"""
 		q = self.query_from_dict(dic)
-		if raw is True:
-			return self.db.query(q)
-		else:
-			return [row['id'] for row in self.db.query(q)].sort()
+		return [d for d in self.db.query(q)]
 
-		#for r in self.words.find([key=dic[key] for key in dic]):
-			#base=dic['base']
-			#	lis = r['id']
-			#return lis
+	def find_id(self, dic):
+		""":rtype: list"""
+		q = self.query_from_dict(dic)
+		return sorted([row['id'] for row in (self.db.query(q))])
+
 		
-	def get(self, _id):
+	def get_dic(self, _id):
+		""":rtype OrderedDict"""
 		res = self.words.find(id=_id)
 		for r in res:
 			return r
+
 		return None
 
+
 	def get_id_list(self):
+		""":rtype: list"""
 	
 		id_list = []
+		#@type : list
 		for word in self.words:
 			id_list.appednd(word['id'])
 		return id_list
