@@ -146,7 +146,7 @@ def insert_from_file_line_is_record(path_name, delimiter = ',', **kwargs):
 	if tags_pos is not None:
 		for line in f:		#add tags form tags_pos
 			line = line.strip().split(delimiter)
-			if len(line[tags_pos:]) > 0:	#do sth about empty u''
+			if len(line[tags_pos:]) > 0:	#do sth about empty ''
 				db.join( db.find(records[i]), line[tags_pos:] )
 				print( "Joined "+ unicode(db.find(records[i])) + "with tags "+unicode(line[
 				                                                                     tags_pos:]))
@@ -166,4 +166,4 @@ insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="c
 
 insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
 
-insert_from_file_line_is_record("../data/test3.txt", author=u"śmieszek", force_yes=False)
+insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", force_yes=False)

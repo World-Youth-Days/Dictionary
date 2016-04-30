@@ -66,7 +66,7 @@ class DbAdapter:
 				item = [item]	#make sure they're both iterable
 			
 		for tag in tag_list:
-			if tag is u'':
+			if tag is '':
 				continue
 			for word in word_list:
 			
@@ -172,11 +172,11 @@ class DbAdapter:
 	def query_from_dict(self, dic, table="words", operator="AND"):
 	
 		c = operator.strip() + " "
-		q = u"SELECT * FROM " + table + u"\nWHERE "
+		q = "SELECT * FROM " + table + "\nWHERE "
 		for key in dic:
-			q += key + u"='" + dic[key] + u"'\n" + c
+			q += key + "='" + dic[key] + "'\n" + c
 	
-		return q[0:-len(c)-1] + u";" #remove last conjunction
+		return q[0:-len(c)-1] + ";" #remove last conjunction
 	
 	def find(self, dic, raw="False"):
 	
