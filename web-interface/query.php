@@ -26,7 +26,7 @@
             $ids .= "id=".$row['word_id']." OR ";
         }
     }
-    $ids = substr($ids, 0, -4);
+    $ids = substr($ids, 0, -4)." ORDER BY base";
     #echo $ids;
     
     $result = $db->query($ids);

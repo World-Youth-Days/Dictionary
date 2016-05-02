@@ -11,10 +11,14 @@ body {
 }
 #filters {
     background-color: #FFD740;
+    width: 100%;
 }
 #word-container {
     margin-top: -100px;
 }
 .card-content {
     padding: 8px;
+}
+#words-table {
+    width: 100%;
 }

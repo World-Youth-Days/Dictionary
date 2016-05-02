@@ -33,28 +33,40 @@
         </div>
         <div id="content">
             <div class="mdl-grid">
-                <div id="filters" class="mdl-cell mdl-cell--4-col mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__title">
-                        <h2 class="mdl-card__title-text">Filtry</h2>
-                    </div>
-                    <div class="card-content">
-                        Wybierz obszary słownika, które chcesz wyświetlić w oknie po prawej:
-                    </div>
-                    <div class="card-content">
-                        <?php
-                        $sql = "SELECT * FROM 'tags'";
-                        $ret = $db->query($sql);
-                        while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
-                        ?>
-                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row["id"] ?>">
-                            <input type="checkbox" id="checkbox-<?php echo $row["id"] ?>" class="mdl-checkbox__input">
-                            <span class="mdl-checkbox__label"><?php echo $row["tag_name"] ?></span>
-                        </label>
-                        <?php } ?>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <div id="filters" class="mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Filtry</h2>
+                        </div>
+                        <div class="card-content">
+                            Wybierz obszary słownika, które chcesz wyświetlić w oknie po prawej:
+                        </div>
+                        <div class="card-content">
+                            <?php
+                            $sql = "SELECT * FROM 'tags'";
+                            $ret = $db->query($sql);
+                            while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
+                            ?>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['id'] ?>">
+                                <input type="checkbox" id="checkbox-<?php echo $row['id'] ?>" class="mdl-checkbox__input tag-checkbox">
+                                <span class="mdl-checkbox__label"><?php echo $row['tag_name'] ?></span>
+                            </label>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
                 <div id="word-container" class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--2dp">
-                    
+                    <table class="mdl-data-table mdl-js-data-table" id="words-table">
+                        <thead>
+                            <td class="mdl-data-table__cell--non-numeric">Słowo</td>
+                            <td class="mdl-data-table__cell--non-numeric">Tłumaczenie</td>
+                            <td class="mdl-data-table__cell--non-numeric">Opis</td>
+                            <td class="mdl-data-table__cell--non-numeric">Autor</td>
+                        </thead>
+                        <tbody id="words-table-body">
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
