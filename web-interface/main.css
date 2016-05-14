@@ -47,6 +47,12 @@ body {
 .card-content {
     padding: 8px;
 }
+#loading {
+    width: 100%;
+    display: none;
+    margin-bottom: -4px;
+    z-index: 1;
+}
 #words-table {
     width: 100%;
 }

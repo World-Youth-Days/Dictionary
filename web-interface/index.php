@@ -72,7 +72,7 @@
                         <div class="hardness-container">
                             <div class="hardness-des" id="hardness-des-min">Min</div>
                             <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="10" value="0" id="hardness-min">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="10" value="1" id="hardness-min">
                             </div>
                             <div class="hardness-val" id="hardness-val-min">0</div>
                         </div>
@@ -86,6 +86,7 @@
                     </div>
                 </div>
                 <div id="word-container" class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--2dp">
+                    <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                     <table class="mdl-data-table mdl-js-data-table" id="words-table">
                         <thead>
                             <td class="mdl-data-table__cell--non-numeric">Słowo</td>

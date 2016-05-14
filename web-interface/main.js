@@ -13,19 +13,11 @@ $(document).ready(function() {
         location.hash = $("#hardness-min").val()+";"+$("#hardness-max").val()+";"+"tags;"+tags;
     });
     $("#search_button_click").click(function() {
-        $(".tag-checkbox").each(function() {
-            $(this).parent().removeClass("is-checked");
-            $(this).prop('checked', false);
-        });
         query = $("#search_input_value").val();
         location.hash = $("#hardness-min").val()+";"+$("#hardness-max").val()+";"+"search;"+query;
     });
     $("#search_input_value").keyup(function(e){
         if(e.keyCode == 13) {
-            $(".tag-checkbox").each(function() {
-                $(this).parent().removeClass("is-checked");
-                $(this).prop('checked', false);
-            });
             query = $("#search_input_value").val();
             location.hash = $("#hardness-min").val()+";"+$("#hardness-max").val()+";"+"search;"+query;
         }
@@ -54,6 +46,8 @@ $(document).ready(function() {
     });
     
     function update() {
+        $("#loading").stop();
+        $("#loading").fadeIn("slow")
         data = location.hash.split(";");
         mode = data[2];
         data[0] = data[0].substring(1, data[0].length);
@@ -80,9 +74,15 @@ $(document).ready(function() {
                 } else {
                     $("#words-table-body").html(data);
                 }
+                $("#loading").stop();
+                $("#loading").fadeOut("slow");
             });
         } else if (mode=="search") {
             hideAll();
+            $(".tag-checkbox").each(function() {
+                $(this).parent().removeClass("is-checked");
+                $(this).prop('checked', false);
+            });
             $.get("search.php?search="+data[3]+"&lmin="+data[0]+"&lmax="+data[1], function(data) {
                 if (data == "//ABC//") {
                     $("#words-table-body").html("");
@@ -90,6 +90,8 @@ $(document).ready(function() {
                 } else {
                     $("#words-table-body").html(data);
                 }
+                $("#loading").stop();
+                $("#loading").fadeOut("slow");
             });
         }
     }
