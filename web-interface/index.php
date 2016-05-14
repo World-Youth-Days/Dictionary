@@ -36,10 +36,23 @@
                 <div class="mdl-cell mdl-cell--4-col">
                     <div id="filters" class="mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Filtry</h2>
+                            <h2 class="mdl-card__title-text">Szukaj</h2>
                         </div>
-                        <div class="card-content">
-                            Wybierz obszary słownika, które chcesz wyświetlić w oknie po prawej:
+                        <div id="search_box">
+                            <div id="search_input">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="search_input_value">
+                                    <label class="mdl-textfield__label" for="sample3">Szukaj słowa, definicji, autora...</label>
+                                </div>
+                            </div>
+                            <div id="search_button">
+                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect" id="search_button_click">
+                                    <i class="material-icons">search</i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Słowniki</h2>
                         </div>
                         <div class="card-content">
                             <?php
@@ -52,6 +65,23 @@
                                 <span class="mdl-checkbox__label"><?php echo $row['tag_name'] ?></span>
                             </label>
                             <?php } ?>
+                        </div>
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Poziom trudności</h2>
+                        </div>
+                        <div class="hardness-container">
+                            <div class="hardness-des" id="hardness-des-min">Min</div>
+                            <div class="hardness-slider">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="0" id="hardness-min">
+                            </div>
+                            <div class="hardness-val" id="hardness-val-min">0</div>
+                        </div>
+                        <div class="hardness-container">
+                            <div class="hardness-des" id="hardness-des-min">Max</div>
+                            <div class="hardness-slider">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="10" id="hardness-max">
+                            </div>
+                            <div class="hardness-val" id="hardness-val-min">10</div>
                         </div>
                     </div>
                 </div>
@@ -67,6 +97,22 @@
                             
                         </tbody>
                     </table>
+                    <div id="communication">
+                        <div id="communication-language" class="communication">
+                            
+                        </div>
+                        <div id="communication-nothing-found" class="communication">
+                            <h2>Nic nie znaleziono!</h2>
+                            <p>Wybierz inne hasło do wyszukiwania.</p>
+                        </div>
+                        <div id="communication-choose-tags" class="communication">
+                            <h2>Nie wybrano słownika!</h2>
+                            <p>Wybierz jeden ze słowników z menu po lewej.<br>A może poziomy trudności są źle ustawione?</p>
+                        </div>
+                        <div id="communication-additional" class="communication">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

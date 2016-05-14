@@ -12,6 +12,34 @@ body {
 #filters {
     background-color: #FFD740;
     width: 100%;
+    padding: 8px;
+}
+#search_box {
+    padding: 8px;
+    text-align: center;
+    margin: -22px auto;
+}
+#search_input {
+    display: inline-block;
+    width: 234px;
+}
+#search_button {
+    display: inline-block;
+}
+.hardness-container {
+    text-align: center;
+}
+.hardness-des {
+    display: inline-block;
+    width: 35px;
+}
+.hardness-slider {
+    display: inline-block;
+    width: 200px;
+}
+.hardness-val {
+    display: inline-block;
+    width: 35px;
 }
 #word-container {
     margin-top: -100px;
@@ -21,4 +49,10 @@ body {
 }
 #words-table {
     width: 100%;
+}
+.base {
+    font-weight: bold;
+}
+.communication {
+    text-align: center;
 }

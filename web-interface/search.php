@@ -15,24 +15,17 @@
        #echo "Opened database successfully\n";
     }
     
-    if ($_GET['tag']!=''){
+    $search = $_GET['search'];
+    $ids = "SELECT * FROM 'words' WHERE ";
     
-        $tags = explode(";", $_GET['tag']);
-        $ids = "SELECT * FROM 'words' WHERE ";
-
-        for ($i = 0; $i<count($tags); $i++) {
-            $stmt = $db->prepare("SELECT * FROM '".$tags[$i]."'");
-            $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
-            $result = $stmt->execute();
-            while($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                $ids .= "id=".$row['word_id']." OR ";
-            }
-        }
-        $ids = substr($ids, 0, -4)." ORDER BY base";
-        #echo $ids;
-
-        $result = $db->query($ids);
-        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    $strQuery = "SELECT * FROM words WHERE base LIKE '%".$search."%' OR author LIKE '%".$search."%' OR trans LIKE '%".$search."%' OR level LIKE '%".$search."%' OR mono LIKE '%".$search."%'";
+    $stmt = $db->prepare($strQuery);
+    #echo $strQuery;
+    $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+    $count = 0;
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $count += 1;
 ?>
         <tr>
             <td class="mdl-data-table__cell--non-numeric base"><?php echo $row['base'] ?></td>
@@ -41,8 +34,8 @@
             <td class="mdl-data-table__cell--non-numeric author"><?php echo $row['author'] ?></td>
         </tr>
 <?php
-        }
-    } else {
+    }
+    if (!$count) {
         echo "//ABC//";
     }
 ?>
