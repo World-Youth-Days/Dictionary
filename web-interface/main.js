@@ -14,12 +14,12 @@ $(document).ready(function() {
     });
     $("#search_button_click").click(function() {
         query = $("#search_input_value").val();
-        location.hash = "search;"+query;
+        location.hash = $("#hardness-min").val()+";"+$("#hardness-max").val()+";"+"search;"+query;
     });
     $("#search_input_value").keyup(function(e){
         if(e.keyCode == 13) {
             query = $("#search_input_value").val();
-            location.hash = "search;"+query;
+            location.hash = $("#hardness-min").val()+";"+$("#hardness-max").val()+";"+"search;"+query;
         }
     });
     
@@ -51,7 +51,7 @@ $(document).ready(function() {
             });
         } else if (mode=="search") {
             hideAll();
-            $.get("search.php?search="+data[1], function(data) {
+            $.get("search.php?search="+data[3], function(data) {
                 if (data == "//ABC//") {
                     $("#words-table-body").html("");
                     $("#communication-nothing-found").show();
