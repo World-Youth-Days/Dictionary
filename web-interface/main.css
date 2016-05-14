@@ -50,9 +50,13 @@ body {
 #words-table {
     width: 100%;
 }
+#words-table-body tr {
+    border: 1px solid rgba(0,0,0,.12);
+}
 .base {
     font-weight: bold;
 }
 .communication {
     text-align: center;
+    display: none;
 }

@@ -60,8 +60,8 @@
                             $ret = $db->query($sql);
                             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                             ?>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['id'] ?>">
-                                <input type="checkbox" id="checkbox-<?php echo $row['id'] ?>" class="mdl-checkbox__input tag-checkbox">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['tag_name'] ?>">
+                                <input type="checkbox" id="checkbox-<?php echo $row['tag_name'] ?>" class="mdl-checkbox__input tag-checkbox">
                                 <span class="mdl-checkbox__label"><?php echo $row['tag_name'] ?></span>
                             </label>
                             <?php } ?>
@@ -72,16 +72,16 @@
                         <div class="hardness-container">
                             <div class="hardness-des" id="hardness-des-min">Min</div>
                             <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="0" id="hardness-min">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="10" value="0" id="hardness-min">
                             </div>
                             <div class="hardness-val" id="hardness-val-min">0</div>
                         </div>
                         <div class="hardness-container">
                             <div class="hardness-des" id="hardness-des-min">Max</div>
                             <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="10" id="hardness-max">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="10" value="10" id="hardness-max">
                             </div>
-                            <div class="hardness-val" id="hardness-val-min">10</div>
+                            <div class="hardness-val" id="hardness-val-max">10</div>
                         </div>
                     </div>
                 </div>
@@ -92,6 +92,7 @@
                             <td class="mdl-data-table__cell--non-numeric">Tłumaczenie</td>
                             <td class="mdl-data-table__cell--non-numeric">Opis</td>
                             <td class="mdl-data-table__cell--non-numeric">Autor</td>
+                            <td>Poziom</td>
                         </thead>
                         <tbody id="words-table-body">
                             
@@ -103,10 +104,10 @@
                         </div>
                         <div id="communication-nothing-found" class="communication">
                             <h2>Nic nie znaleziono!</h2>
-                            <p>Wybierz inne hasło do wyszukiwania.</p>
+                            <p>Wybierz inne hasło do wyszukiwania.<br>A może poziomy trudności są źle ustawione?</p>
                         </div>
                         <div id="communication-choose-tags" class="communication">
-                            <h2>Nie wybrano słownika!</h2>
+                            <h2>Nic tu nie ma!</h2>
                             <p>Wybierz jeden ze słowników z menu po lewej.<br>A może poziomy trudności są źle ustawione?</p>
                         </div>
                         <div id="communication-additional" class="communication">

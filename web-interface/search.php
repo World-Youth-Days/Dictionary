@@ -18,7 +18,7 @@
     $search = $_GET['search'];
     $ids = "SELECT * FROM 'words' WHERE ";
     
-    $strQuery = "SELECT * FROM words WHERE base LIKE '%".$search."%' OR author LIKE '%".$search."%' OR trans LIKE '%".$search."%' OR level LIKE '%".$search."%' OR mono LIKE '%".$search."%'";
+    $strQuery = "SELECT * FROM words WHERE (base LIKE '%".$search."%' OR author LIKE '%".$search."%' OR trans LIKE '%".$search."%' OR level LIKE '%".$search."%' OR mono LIKE '%".$search."%') AND level>=".$_GET['lmin']." AND level<=".$_GET['lmax']." ORDER BY base";
     $stmt = $db->prepare($strQuery);
     #echo $strQuery;
     $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
@@ -32,6 +32,7 @@
             <td class="mdl-data-table__cell--non-numeric trans"><?php echo $row['trans'] ?></td>
             <td class="mdl-data-table__cell--non-numeric mono"><?php echo $row['mono'] ?></td>
             <td class="mdl-data-table__cell--non-numeric author"><?php echo $row['author'] ?></td>
+            <td class="level"><?php echo $row['level'] ?></td>
         </tr>
 <?php
     }
