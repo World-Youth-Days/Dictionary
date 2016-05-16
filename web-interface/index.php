@@ -52,7 +52,47 @@
                             </div>
                         </div>
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Słowniki</h2>
+                            <h2 class="mdl-card__title-text">Języki</h2>
+                        </div>
+                        <div id="language-box">
+                            <div class="language-chooser">
+                                <button id="language-from" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                    en <i class="material-icons">keyboard_arrow_down</i>
+                                </button>
+                                <ul class="mdl-menu mdl-js-menu" for="language-from">
+                                    <li class="mdl-menu__item">
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                                            <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                                            <span class="mdl-radio__label">First</span>
+                                        </label>
+                                    </li>
+                                    <li class="mdl-menu__item">
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                                            <span class="mdl-radio__label">Second</span>
+                                        </label>
+                                    </li>
+                                    <li class="mdl-menu__item">Pause</li>
+                                </ul>
+                            </div>
+                            <div id="language-arrow">
+                                <button class="mdl-button mdl-js-button mdl-button--icon">
+                                    <i class="material-icons">trending_flat</i>
+                                </button>
+                            </div>
+                            <div class="language-chooser">
+                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
+                                    en <i class="material-icons">keyboard_arrow_down</i>
+                                </button>
+                                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="language-to">
+                                    <li class="mdl-menu__item">Continue</li>
+                                    <li class="mdl-menu__item">Stop</li>
+                                    <li class="mdl-menu__item">Pause</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Tagi</h2>
                         </div>
                         <div class="card-content">
                             <?php

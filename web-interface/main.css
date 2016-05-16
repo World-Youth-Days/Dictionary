@@ -26,6 +26,16 @@ body {
 #search_button {
     display: inline-block;
 }
+#language-box {
+    text-align: center;
+}
+.language-chooser {
+    display: inline-block;
+}
+#language-arrow {
+    display: inline-block;
+    /* line-height: 36px; */
+}
 .hardness-container {
     text-align: center;
 }
