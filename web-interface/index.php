@@ -60,19 +60,18 @@
                                     en <i class="material-icons">keyboard_arrow_down</i>
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu" for="language-from">
-                                    <li class="mdl-menu__item">
-                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                                            <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                                            <span class="mdl-radio__label">First</span>
-                                        </label>
-                                    </li>
-                                    <li class="mdl-menu__item">
-                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                                            <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
-                                            <span class="mdl-radio__label">Second</span>
-                                        </label>
-                                    </li>
-                                    <li class="mdl-menu__item">Pause</li>
+                                    <?php
+                                        $sql = "SELECT * FROM 'tags' WHERE flag = 'from'";
+                                        $ret = $db->query($sql);
+                                        while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
+                                    ?>
+                                        <li class="mdl-menu__item">
+                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="from-<?php echo $row['tag-name'] ?>">
+                                                <input type="radio" id="from-<?php echo $row['tag-name'] ?>" class="mdl-radio__button" name="options" value="<?php echo $row['tag-name'] ?>" checked>
+                                                <span class="mdl-radio__label"><?php echo $row['tag-name'] ?></span>
+                                            </label>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                             <div id="language-arrow">
@@ -96,13 +95,14 @@
                         </div>
                         <div class="card-content">
                             <?php
-                            $sql = "SELECT * FROM 'tags'";
+                            $sql = "SELECT * FROM 'tags' WHERE flag = 'live'";
                             $ret = $db->query($sql);
                             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
+                                $tag_name = ($row['readable']!="" ? $row['readable'] : $row['tag_name']);
                             ?>
                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['tag_name'] ?>">
                                 <input type="checkbox" id="checkbox-<?php echo $row['tag_name'] ?>" class="mdl-checkbox__input tag-checkbox">
-                                <span class="mdl-checkbox__label"><?php echo $row['tag_name'] ?></span>
+                                <span class="mdl-checkbox__label"><?php echo $tag_name ?></span>
                             </label>
                             <?php } ?>
                         </div>
