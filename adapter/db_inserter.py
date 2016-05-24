@@ -166,3 +166,14 @@ insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4
 insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", force_yes=False)
 
 test_tags_table()
+
+#
+
+# --------------------------------------------------------------------#
+# ----------------------     CSV import      -------------------------#
+# --------------------------------------------------------------------#
+
+#
+
+def import_from_csv(path, **kwargs):
+	pass
