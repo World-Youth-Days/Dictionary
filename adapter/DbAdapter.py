@@ -41,8 +41,8 @@ class DbAdapter:
 		
 		self.tags = self.db.get_table("tags")
 		# initialize columns with non typical value types
-		self.tags.create_column('readable', String)
-		self.tags.create_column('flag', String)
+		for k in ['tag_name', 'readable', 'flag']:
+			self.tags.create_column(k, String)
 
 		self.words = self.db.get_table("words")
 		self.words.create_column('time', DateTime)
@@ -74,7 +74,7 @@ class DbAdapter:
 	# ---------------------------- Manage tags ---------------------------#
 	# --------------------------------------------------------------------#
 
-	def join(self, word_list, tag_list):
+	def join(self, word_list, tag_list, check=True):
 		if not isinstance(word_list, list):
 			word_list = [word_list]  # make sure they're both iterable
 		if not isinstance(tag_list, list):
@@ -85,12 +85,13 @@ class DbAdapter:
 				continue
 
 			for word in word_list:
-				if self.get_dic(word) is []:  # check for existence...
-					print('Warning: no word with such id!!! ' + word)
-					continue
-				else:
-					r = dict(word_id=word, base=self.get_dic(word)['base'])
 
+				if check is True:
+					if self.get_dic(word) is []:  # check for existence...
+						print('Warning: no word with such id!!! ' + word)
+						continue
+
+				r = dict(word_id=word, base=self.get_dic(word)['base'])
 				self.get_table(tag).insert(r)
 		self.update_tags()
 	
@@ -106,13 +107,17 @@ class DbAdapter:
 		tags = self.db.tables[:]
 		tags.remove("words")
 		tags.remove("tags")
-		self.tags.delete()  # remove all old tag names
+		#self.tags.delete()  # remove all old tag names
 		for tag in tags:
 			if len(tag) == 0:
 				self.db[tag].drop()  # delete >table< from db
 				continue
 			
-			self.tags.insert(dict(tag_name=tag))
+			self.tags.upsert(dict(tag_name=tag), ['tag_name'])
+
+		for t in self.tags.find():
+			if len(t['flag']) == 0:
+				t['flag'] = 'live'
 
 	def set_readable(self, name, readable):
 		if self.tags.count(tag_name=name) is not 0:

@@ -157,13 +157,18 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 	# ----------------------     Add to db       -------------------------#
 	# --------------------------------------------------------------------#
 	records = []
+	stats = [0,0]
 	for p in printable:
 		r = dict(p)
 		del r['tags']
 		records.append(r)
-		db.add_words(r)
+		res = db.add_words(r)
+		stats[0] += res['added']
+		stats[1] += res['updated']
 		del r['time']
 		p['id'] = db.find_id(r)[0]
+
+	print("Added " + str(stats[0]) + ", updated " + str(stats[1]))
 
 	for p in printable:
 		db.join(p['id'], p['tags'])
