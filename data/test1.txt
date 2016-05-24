@@ -1,4 +1,4 @@
 trans,base,tags
-un champigon,grzyb,live_tag1
-les épinards,szpinak,
-cuire,gotować,live_tag_2,live_tag1
+un champigon,grzyb,live_tag1,fr,pl
+les épinards,szpinak,fr,pl
+cuire,gotować,live_tag_2,live_tag1,fr,pl
