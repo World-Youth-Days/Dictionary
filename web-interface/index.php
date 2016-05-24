@@ -10,6 +10,17 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-amber.min.css" />
         <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
         <link rel="stylesheet" href="main.css" />
+        <?php
+        require 'langs/en.php';
+        function t($string) {
+            global $translations;
+            if (isset($translations[$string])) {
+                echo $translations[$string];
+            } else {
+                echo "---";
+            }
+        }
+        ?>
     </head>
     <?php
     class MyDB extends SQLite3
@@ -36,13 +47,13 @@
                 <div class="mdl-cell mdl-cell--4-col">
                     <div id="filters" class="mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Szukaj</h2>
+                            <h2 class="mdl-card__title-text"><?php t("Search") ?></h2>
                         </div>
                         <div id="search_box">
                             <div id="search_input">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <input class="mdl-textfield__input" type="text" id="search_input_value">
-                                    <label class="mdl-textfield__label" for="sample3">Szukaj słowa, definicji, autora...</label>
+                                    <label class="mdl-textfield__label" for="sample3"><?php t("SearchForWordDefLabel") ?></label>
                                 </div>
                             </div>
                             <div id="search_button">
@@ -52,12 +63,12 @@
                             </div>
                         </div>
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Języki</h2>
+                            <h2 class="mdl-card__title-text"><?php t("Languages") ?></h2>
                         </div>
                         <div id="language-box">
                             <div class="language-chooser">
                                 <button id="language-from" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                    en <i class="material-icons">keyboard_arrow_down</i>
+                                    <span class="radio-text">--</span> <i class="material-icons">keyboard_arrow_down</i>
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu" for="language-from">
                                     <?php
@@ -66,9 +77,9 @@
                                         while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                     ?>
                                         <li class="mdl-menu__item">
-                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="from-<?php echo $row['tag-name'] ?>">
-                                                <input type="radio" id="from-<?php echo $row['tag-name'] ?>" class="mdl-radio__button" name="options" value="<?php echo $row['tag-name'] ?>" checked>
-                                                <span class="mdl-radio__label"><?php echo $row['tag-name'] ?></span>
+                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="from-<?php echo $row['tag_name'] ?>">
+                                                <input type="radio" id="from-<?php echo $row['tag_name'] ?>" class="mdl-radio__button from-radio" name="options" value="<?php echo $row['tag_name'] ?>">
+                                                <span class="mdl-radio__label"><?php echo substr($row['tag_name'],5) ?></span>
                                             </label>
                                         </li>
                                     <?php } ?>
@@ -81,17 +92,15 @@
                             </div>
                             <div class="language-chooser">
                                 <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
-                                    en <i class="material-icons">keyboard_arrow_down</i>
+                                    -- <i class="material-icons">keyboard_arrow_down</i>
                                 </button>
-                                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="language-to">
-                                    <li class="mdl-menu__item">Continue</li>
-                                    <li class="mdl-menu__item">Stop</li>
-                                    <li class="mdl-menu__item">Pause</li>
+                                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" id="language-to-ul" for="language-to">
+                                    
                                 </ul>
                             </div>
                         </div>
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Tagi</h2>
+                            <h2 class="mdl-card__title-text"><?php t("Tags") ?></h2>
                         </div>
                         <div class="card-content">
                             <?php
@@ -107,7 +116,7 @@
                             <?php } ?>
                         </div>
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Poziom trudności</h2>
+                            <h2 class="mdl-card__title-text"><?php t("Level") ?></h2>
                         </div>
                         <div class="hardness-container">
                             <div class="hardness-des" id="hardness-des-min">Min</div>
@@ -129,11 +138,11 @@
                     <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                     <table class="mdl-data-table mdl-js-data-table" id="words-table">
                         <thead>
-                            <td class="mdl-data-table__cell--non-numeric">Słowo</td>
-                            <td class="mdl-data-table__cell--non-numeric">Tłumaczenie</td>
-                            <td class="mdl-data-table__cell--non-numeric">Opis</td>
-                            <td class="mdl-data-table__cell--non-numeric">Autor</td>
-                            <td>Poziom</td>
+                            <td class="mdl-data-table__cell--non-numeric"><?php t("Word") ?></td>
+                            <td class="mdl-data-table__cell--non-numeric"><?php t("Translation") ?></td>
+                            <td class="mdl-data-table__cell--non-numeric"><?php t("Definition") ?></td>
+                            <td class="mdl-data-table__cell--non-numeric"><?php t("Author") ?></td>
+                            <td><?php t("Level") ?></td>
                         </thead>
                         <tbody id="words-table-body">
                             

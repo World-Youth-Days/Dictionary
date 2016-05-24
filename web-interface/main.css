@@ -29,6 +29,9 @@ body {
 #language-box {
     text-align: center;
 }
+#language-box .mdl-radio {
+    width: 100%;
+}
 .language-chooser {
     display: inline-block;
 }
