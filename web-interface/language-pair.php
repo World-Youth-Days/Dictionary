@@ -19,6 +19,7 @@
     
         $from = $_GET['from'];
         $base_query = "SELECT * FROM 'words' WHERE (";
+        $return = "";
         
         $stmt = $db->prepare("SELECT * FROM '".$from."'");
         $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
@@ -44,14 +45,18 @@
             }
             $temp_query = substr($temp_query, 0, -4);
             $temp_query .= ")";
-            echo $row['tag_name']."<br>";
-            echo $temp_query."<br>";
+            #echo $row['tag_name']."<br>";
+            #echo $temp_query."<br>";
             #checking the number of words for language pair
             $count = 0;
             $retForCount = $db->query($temp_query);
             while ($rowForCount = $retForCount->fetchArray(SQLITE3_ASSOC)) {$count += 1;}
-            echo $count;
+            #echo $count;
+            if ($count) {
+                $return .= $row['tag_name'].";";
+            }
         }
+        echo $return;
     } else {
         echo "";
     }

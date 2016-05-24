@@ -6,8 +6,18 @@ $(document).ready(function() {
     $(".from-radio").change(function() {
         $("#language-from .radio-text").text($(this).val().substr(5));
         $.get("language-pair.php?from="+$(this).val(), function(data) {
-            $("#language-to-ul").html(data);
+            $("#language-to-ul li").hide();
+            if (data == "") {
+                $("#to-none-li").show();
+            }
+            data = data.split(";");
+            for (i=0; i<data.length; i++) {
+                $("#"+data[i]+"-li").show();
+            }
         })
+    })
+    $(".to-radio").change(function() {
+        $("#language-to .radio-text").text($(this).val().substr(3));
     })
     
     //Checkboxes for tags

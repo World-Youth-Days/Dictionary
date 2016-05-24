@@ -77,8 +77,8 @@
                                         while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                     ?>
                                         <li class="mdl-menu__item">
-                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="from-<?php echo $row['tag_name'] ?>">
-                                                <input type="radio" id="from-<?php echo $row['tag_name'] ?>" class="mdl-radio__button from-radio" name="options" value="<?php echo $row['tag_name'] ?>">
+                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<?php echo $row['tag_name'] ?>">
+                                                <input type="radio" id="<?php echo $row['tag_name'] ?>" class="mdl-radio__button from-radio" name="options" value="<?php echo $row['tag_name'] ?>">
                                                 <span class="mdl-radio__label"><?php echo substr($row['tag_name'],5) ?></span>
                                             </label>
                                         </li>
@@ -91,11 +91,25 @@
                                 </button>
                             </div>
                             <div class="language-chooser">
-                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
-                                    -- <i class="material-icons">keyboard_arrow_down</i>
+                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" >
+                                    <span class="radio-text">--</span> <i class="material-icons">keyboard_arrow_down</i>
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" id="language-to-ul" for="language-to">
-                                    
+                                    <?php
+                                        $sql = "SELECT * FROM 'tags' WHERE flag = 'to'";
+                                        $ret = $db->query($sql);
+                                        while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
+                                    ?>
+                                        <li class="mdl-menu__item" id="<?php echo $row['tag_name'] ?>-li" style="display: none;">
+                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<?php echo $row['tag_name'] ?>">
+                                                <input type="radio" id="<?php echo $row['tag_name'] ?>" class="mdl-radio__button to-radio" name="options" value="<?php echo $row['tag_name'] ?>">
+                                                <span class="mdl-radio__label"><?php echo substr($row['tag_name'],3) ?></span>
+                                            </label>
+                                        </li>
+                                    <?php } ?>
+                                    <li class="mdl-menu__item" id="to-none-li">
+                                        ---
+                                    </li>
                                 </ul>
                             </div>
                         </div>
