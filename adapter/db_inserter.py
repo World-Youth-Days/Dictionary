@@ -4,14 +4,15 @@ from DbAdapter import DbAdapter
 from display_dict import display_dict
 
 db = DbAdapter(None)  # define db connection
-printable = []
+records = []
 
 # --------------------------------------------------------------------#
 # --------------------------   Open file     -------------------------#
 # --------------------------------------------------------------------#
 
+
 def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
-	global printable
+	global records
 	tags_pos = None,
 	
 	try:
@@ -97,7 +98,7 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 	# for r in records:
 	#	print r
 
-	display_dict(records, rows)  # display using new method form display_dict.py
+	display_dict(records, [key for key in pos.keys()])  # display using new method form display_dict.py
 
 	# --------------------------------------------------------------------#
 	# ----------------------    Human check ;)   -------------------------#
@@ -156,7 +157,7 @@ def test_tags_table():
 	db.set_flag('live_tag_2', 'live')
 	print(db.get_tag("heheszki"))
 
-# --------------------------------------------------------------------#
+# -------------------------------------------y-------------------------#
 # ----------------------    Call the function-------------------------#
 # --------------------------------------------------------------------#
 insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
