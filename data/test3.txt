@@ -1,4 +1,4 @@
 mono,base,level,tags
-najczęściej znajdujesz go na ścianie,grzyb,7,heheszki,pl,def
-w starożytności wierzono że jest bogaty w żelazo,szpinak,4,PRL_time,pl,def
-np. szczura w przypadku muzyków rockowych,gotować,4,heheszki,rock4ever,pl,def
+najczęściej znajdujesz go na ścianie,grzyb,7,heheszki
+w starożytności wierzono że jest bogaty w żelazo,szpinak,4,PRL_time
+np. szczura w przypadku muzyków rockowych,gotować,4,heheszki,rock4ever
