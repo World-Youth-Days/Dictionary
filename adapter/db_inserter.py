@@ -3,14 +3,15 @@ import codecs
 from DbAdapter import DbAdapter
 from display_dict import display_dict
 
+db = DbAdapter(None)  # define db connection
+printable = []
 
 # --------------------------------------------------------------------#
 # --------------------------   Open file     -------------------------#
 # --------------------------------------------------------------------#
 
-
 def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
-	records = []
+	global printable
 	tags_pos = None,
 	
 	try:
@@ -108,7 +109,7 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 		print("Aborting...")
 		return 5
 
-	db = DbAdapter(None)  # define db connection
+	global db
 	db.add_words(records)  # add words to db
 	
 	# --------------------------------------------------------------------#
@@ -158,11 +159,14 @@ def test_tags_table():
 # --------------------------------------------------------------------#
 # ----------------------    Call the function-------------------------#
 # --------------------------------------------------------------------#
-insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="const_tag_1",
+insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
                                 level=10, force_yes=True)
 
-insert_from_file_line_is_record("../data/test2.txt", author="angielski", level=4, force_yes=True)
+insert_from_file_line_is_record("../data/test2.txt", author="angielski", tags="from_en,to_pl",
+                                level=4, force_yes=True)
 
-insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", force_yes=False)
+insert_from_file_line_is_record("../data/test3.txt", author="śmieszek",
+                                tags="from_pl,to_pl", force_yes=False)
 
-test_tags_table()
+
+#test_tags_table()
