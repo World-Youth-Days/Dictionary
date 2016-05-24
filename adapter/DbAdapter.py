@@ -75,23 +75,23 @@ class DbAdapter:
 	# --------------------------------------------------------------------#
 
 	def join(self, word_list, tag_list):
-		for item in [word_list, tag_list]:
-			if type(item) != list:
-				item = [item]  # make sure they're both iterable
+		if not isinstance(word_list, list):
+			word_list = [word_list]  # make sure they're both iterable
+		if not isinstance(tag_list, list):
+			tag_list = [tag_list]
 
 		for tag in tag_list:
 			if tag is '':
 				continue
-			for word in word_list:
 
-				if self.get_dic(word) is None:  # check for existence...
+			for word in word_list:
+				if self.get_dic(word) is []:  # check for existence...
 					print('Warning: no word with such id!!! ' + word)
 					continue
 				else:
 					r = dict(word_id=word, base=self.get_dic(word)['base'])
 
 				self.get_table(tag).insert(r)
-
 		self.update_tags()
 	
 	def disjoin(self, word_list, tag_list):
@@ -157,7 +157,7 @@ class DbAdapter:
 		
 		# have some statistic idea about what's happened ;)
 		delta = len(self.words) - count
-		print("Added " + str(delta) + " new words; updated " + str(len(records) - delta) + ".")
+		return dict(added=delta, updated=(len(records) - delta))
 
 	def remove_without_tag(self):
 		# get complete list of words, then remove every with tag
