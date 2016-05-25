@@ -41,8 +41,8 @@ class DbAdapter:
 		
 		self.tags = self.db.get_table("tags")
 		# initialize columns with non typical value types
-		self.tags.create_column('readable', String)
-		self.tags.create_column('flag', String)
+		for k in ['tag_name', 'readable', 'flag']:
+			self.tags.create_column(k, String)
 
 		self.words = self.db.get_table("words")
 		self.words.create_column('time', DateTime)
@@ -59,40 +59,52 @@ class DbAdapter:
 			return self.db.get_table(name)
 
 	def unify(self):
-		# check tag's id's integrity with words
-		self.update_tags()
+
+		"""
+			1. Removes words with no tag
+			2. Searches for corrupted entries in tag-tables
+			3. Removes empty tag-tables. Does enhncing
+		"""
+
+		self.remove_without_tag()
+
 		for tag in self.tags:
-			for word in tag:
-				if len(self.words.find(id=word)) == 0:
+			for word in self.db['tag']:
+				if self.words.count(id=word) == 0:
 					print("No word found: " + word)
-					self.db[tag].delete(word_id=word)
+					self.db[tag].delete(word_id=word['word_id'])
 		
 		self.update_tags()
-		self.remove_without_tag()
+
+		for t in self.db['tags'].find():
+			self.tags.upsert(self.tag_enhance(t), ['tag_name', 'id'])
 
 	# --------------------------------------------------------------------#
 	# ---------------------------- Manage tags ---------------------------#
 	# --------------------------------------------------------------------#
 
-	def join(self, word_list, tag_list):
-		for item in [word_list, tag_list]:
-			if type(item) != list:
-				item = [item]  # make sure they're both iterable
+	def join(self, word_list, tag_list, check=True):
+		if not isinstance(word_list, list):
+			word_list = [word_list]  # make sure they're both iterable
+		if not isinstance(tag_list, list):
+			tag_list = [tag_list]
 
 		for tag in tag_list:
 			if tag is '':
 				continue
+
 			for word in word_list:
 
-				if self.get_dic(word) is None:  # check for existence...
-					print('Warning: no word with such id!!! ' + word)
-					continue
-				else:
+				if check is True:
+					if self.get_dic(word) in [[], dict()]:  # check for existence...
+						print('Warning: no word with such id!!! ' + word)
+						continue
+				if self.db[tag].count(word_id=word) == 0:
+				# check if word is already joined with tag...
 					r = dict(word_id=word, base=self.get_dic(word)['base'])
-
-				self.get_table(tag).insert(r)
-
-		self.update_tags()
+					self.get_table(tag).insert(r)
+		if check is True:
+			self.update_tags()
 	
 	def disjoin(self, word_list, tag_list):
 		for tag in tag_list:
@@ -103,16 +115,16 @@ class DbAdapter:
 		self.update_tags()
 
 	def update_tags(self):
+		"""removes empty tags and drops their tables."""
 		tags = self.db.tables[:]
 		tags.remove("words")
 		tags.remove("tags")
-		self.tags.delete()  # remove all old tag names
 		for tag in tags:
-			if len(tag) == 0:
+			if self.db[tag].count() == 0:
 				self.db[tag].drop()  # delete >table< from db
 				continue
 			
-			self.tags.insert(dict(tag_name=tag))
+			self.tags.upsert(dict(tag_name=tag), ['tag_name'])
 
 	def set_readable(self, name, readable):
 		if self.tags.count(tag_name=name) is not 0:
@@ -134,6 +146,26 @@ class DbAdapter:
 		l = [t for t in self.tags.find(tag_name=name)]
 		return l[0]
 
+	def tag_enhance(self, tag):
+		""":argument tag : OrderedDict"""
+		n = tag['tag_name']
+		r = tag['readable']
+		f = tag['flag']
+
+		if r is None:
+			tag['readable'] = n.replace('_', ' ').capitalize()
+
+		if f is None:  # is this needed at all?
+			tag['flag'] = 'live'
+
+		if n[:3] is 'to_':
+			tag['flag'] = 'to'
+		elif n[:5] is 'from_':
+			tag['flag'] = 'from'
+
+		return tag
+
+
 	# --------------------------------------------------------------------#
 	# ------------------------- Manage words -----------------------------#
 	# --------------------------------------------------------------------#S
@@ -151,19 +183,19 @@ class DbAdapter:
 		for r in records:
 			# add current time, with accuracy to 1 minute
 			r['time'] = datetime.datetime.today().replace(second=0, microsecond=0)
-			# print( "Time: " + str(r['time']))
-			self.words.upsert(r, ['base', 'author', 'trans', 'mono', 'level'])
-		# adding level to this list causes strange crash...
-		
+			self.words.upsert(r, ['base', 'trans', 'mono', 'level'])
+			#author-insensitive because of technical limitation of upsert to take up to four
+		# filters...
+
 		# have some statistic idea about what's happened ;)
 		delta = len(self.words) - count
-		print("Added " + str(delta) + " new words; updated " + str(len(records) - delta) + ".")
+		return dict(added=delta, updated=(len(records) - delta))
 
 	def remove_without_tag(self):
 		# get complete list of words, then remove every with tag
 		id_list = self.get_id_list()
 		for tag in self.tags:
-			for word in tag:
+			for word in self.db[tag['tag_name']]:
 				try:
 					id_list.remove(word['word_id'])
 				except ValueError:
@@ -173,8 +205,7 @@ class DbAdapter:
 		for word_id in id_list:
 			self.words.delete(id=word_id)
 
-		print('Removed ' + str(len(id_list)) + ' words without any tag.')
-		self.unify()
+			logging.info('Removed ' + str(len(id_list)) + ' words without any tag.')
 
 	def remove_by_id(self, id_list):
 		if not isinstance(id_list, (list, tuple)):
@@ -228,7 +259,7 @@ class DbAdapter:
 		id_list = []
 		# @type : list
 		for word in self.words:
-			id_list.appednd(word['id'])
+			id_list.append(word['id'])
 		return id_list
 
 	def search_with_tags(self, tags):
@@ -250,21 +281,3 @@ class DbAdapter:
 # ----------------- This is a class-file, no runs -------------------#
 # -------------------------------------------------------------------#
 
-
-# db = DbAdapter()
-# print db.query_from_dict(dict(name='John Doe', age=46, #country='China'))
-
-
-# --------------------------------------------------------------------#
-# ------------------      Additional ideas        --------------------#
-# --------------------------------------------------------------------#
-
-
-# def additional():
-#	return None
-#	#remove element from list:
-#	while el in lst:
-#		lst.remove(el)
-#		
-#	# Insert a new record.
-#	table.insert(dict(name='John Doe', age=46, country='China'))
