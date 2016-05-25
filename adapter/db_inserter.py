@@ -180,6 +180,8 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 		db.join(p['id'], p['tags'])
 		print("Joined " + str(p['id']) + " with tags " + str(p['tags']))
 
+	db.unify()
+
 	db.db.commit()
 	# write data to db. Additional checking might be done before
 

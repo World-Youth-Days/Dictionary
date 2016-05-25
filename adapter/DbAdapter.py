@@ -59,16 +59,22 @@ class DbAdapter:
 			return self.db.get_table(name)
 
 	def unify(self):
-		# check tag's id's integrity with words
-		self.update_tags()
+
+		"""
+			1. Removes words with no tag
+			2. Searches for corrupted entries in tag-tables
+			3. Removes empty tag-tables. Does enhncing
+		"""
+
+		self.remove_without_tag()
+
 		for tag in self.tags:
-			for word in tag:
-				if len(self.words.find(id=word)) == 0:
+			for word in self.db['tag']:
+				if self.words.count(id=word) == 0:
 					print("No word found: " + word)
-					self.db[tag].delete(word_id=word)
+					self.db[tag].delete(word_id=word['word_id'])
 		
 		self.update_tags()
-		self.remove_without_tag()
 
 	# --------------------------------------------------------------------#
 	# ---------------------------- Manage tags ---------------------------#
@@ -90,10 +96,12 @@ class DbAdapter:
 					if self.get_dic(word) in [[], dict()]:  # check for existence...
 						print('Warning: no word with such id!!! ' + word)
 						continue
-
-				r = dict(word_id=word, base=self.get_dic(word)['base'])
-				self.get_table(tag).insert(r)
-		self.update_tags()
+				if self.db[tag].count(word_id=word) == 0:
+				# check if word is already joined with tag...
+					r = dict(word_id=word, base=self.get_dic(word)['base'])
+					self.get_table(tag).insert(r)
+		if check is True:
+			self.update_tags()
 	
 	def disjoin(self, word_list, tag_list):
 		for tag in tag_list:
@@ -104,12 +112,12 @@ class DbAdapter:
 		self.update_tags()
 
 	def update_tags(self):
+		"""removes empty tags and drops their tables. Does the enhancing"""
 		tags = self.db.tables[:]
 		tags.remove("words")
 		tags.remove("tags")
-		#self.tags.delete()  # remove all old tag names
 		for tag in tags:
-			if len(tag) == 0:
+			if self.db[tag].count() == 0:
 				self.db[tag].drop()  # delete >table< from db
 				continue
 			
@@ -187,7 +195,7 @@ class DbAdapter:
 		# get complete list of words, then remove every with tag
 		id_list = self.get_id_list()
 		for tag in self.tags:
-			for word in tag:
+			for word in self.db[tag['tag_name']]:
 				try:
 					id_list.remove(word['word_id'])
 				except ValueError:
@@ -198,7 +206,6 @@ class DbAdapter:
 			self.words.delete(id=word_id)
 
 		print('Removed ' + str(len(id_list)) + ' words without any tag.')
-		self.unify()
 
 	def remove_by_id(self, id_list):
 		if not isinstance(id_list, (list, tuple)):
@@ -252,7 +259,7 @@ class DbAdapter:
 		id_list = []
 		# @type : list
 		for word in self.words:
-			id_list.appednd(word['id'])
+			id_list.append(word['id'])
 		return id_list
 
 	def search_with_tags(self, tags):
