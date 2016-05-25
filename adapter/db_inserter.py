@@ -156,8 +156,10 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 	# --------------------------------------------------------------------#
 	# ----------------------     Add to db       -------------------------#
 	# --------------------------------------------------------------------#
+	db.db.begin()
+	# begin a transaction. No data will be written to db until commit()
 	records = []
-	stats = [0,0]
+	stats = [0, 0]
 	for p in printable:
 		r = dict(p)
 		del r['tags']
@@ -173,8 +175,11 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 	for p in printable:
 		db.join(p['id'], p['tags'])
 		print("Joined " + str(p['id']) + " with tags " + str(p['tags']))
-	
-	print("Closing source file...")
+
+	db.db.commit()
+	# write data to db. Additional checking might be done before
+
+	print("Changes written to db. Closing source file...")
 	f.close()
 
 
@@ -193,13 +198,13 @@ def test_tags_table():
 
 
 insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
-                                level=10, force_yes=True)
+                                level=7, force_yes=True)
 
 insert_from_file_line_is_record("../data/test2.txt", author="angielski", tags="from_en,to_pl",
  level=4, force_yes=True)
 
 insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", tags="from_pl,to_pl",
- force_yes=False)
+ force_yes=True)
 
 #test_tags_table()
 

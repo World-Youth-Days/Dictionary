@@ -115,9 +115,10 @@ class DbAdapter:
 			
 			self.tags.upsert(dict(tag_name=tag), ['tag_name'])
 
-		for t in self.tags.find():
-			if len(t['flag']) == 0:
+		for t in self.db['tags'].find():
+			if t['flag'] in [None, '']:
 				t['flag'] = 'live'
+				self.tags.upsert(t, ['tag_name', 'id'])
 
 	def set_readable(self, name, readable):
 		if self.tags.count(tag_name=name) is not 0:
@@ -156,10 +157,10 @@ class DbAdapter:
 		for r in records:
 			# add current time, with accuracy to 1 minute
 			r['time'] = datetime.datetime.today().replace(second=0, microsecond=0)
-			# print( "Time: " + str(r['time']))
-			self.words.upsert(r, ['base', 'author', 'trans', 'mono', 'level'])
-		# adding level to this list causes strange crash...
-		
+			self.words.upsert(r, ['base', 'trans', 'mono', 'level'])
+			#author-insensitive because of technical limitation of upsert to take up to four
+		# filters...
+
 		# have some statistic idea about what's happened ;)
 		delta = len(self.words) - count
 		return dict(added=delta, updated=(len(records) - delta))
