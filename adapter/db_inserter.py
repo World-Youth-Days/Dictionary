@@ -6,6 +6,7 @@ from DbAdapter import DbAdapter
 from display_dict import display_dict
 
 db = DbAdapter(None)  # define db connection
+<<<<<<< HEAD
 printable = []    # here place all processed records
 rows = ['base', 'mono', 'trans', 'author', 'level']
 pos = dict()  # dict with positions in file
@@ -18,12 +19,16 @@ def zero():
 	pos = dict()
 	const = dict()
 
+=======
+records = []
+>>>>>>> master
 
 # --------------------------------------------------------------------#
 # ----------------------    Examine header   -------------------------#
 # --------------------------------------------------------------------#
 
 
+<<<<<<< HEAD
 def examine_sources(header, **kwargs):
 
 	# --------need to add remove-# feature
@@ -33,6 +38,27 @@ def examine_sources(header, **kwargs):
 	logging.info("Header: " + str(header))
 
 	global rows, pos, const
+=======
+def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
+	global records
+	tags_pos = None,
+	
+	try:
+		f = codecs.open(path_name, "r", 'utf-8')
+	except SystemError:
+		print("Error while opening file!")
+		return 4
+	print("\nFile: " + path_name + "\n")
+	
+	rows = ['base', 'mono', 'trans', 'author', 'level']
+	pos = dict(base=None, mono=None, trans=None, author=None,
+	           level=None)  # sorry, I avoid understanding deep/shallow copy specs ;)
+	const = dict()
+	
+	# --------------------------------------------------------------------#
+	# ----------------------    Examine header   -------------------------#
+	# --------------------------------------------------------------------#
+>>>>>>> master
 
 	for col in rows:
 		if col in kwargs:
@@ -145,7 +171,11 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 			if t[0] is '#':
 				d['tags'][d['tags'].index(t)] = t[1:]       # remove initial # in tags
 
+<<<<<<< HEAD
 		printable.append(d)   # now contains tags as a list also
+=======
+	display_dict(records, [key for key in pos.keys()])  # display using new method form display_dict.py
+>>>>>>> master
 
 	# May be further developped to allow issue solving
 
@@ -158,6 +188,12 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 		print(human)
 		return 3
 
+<<<<<<< HEAD
+=======
+	global db
+	db.add_words(records)  # add words to db
+	
+>>>>>>> master
 	# --------------------------------------------------------------------#
 	# ----------------------     Add to db       -------------------------#
 	# --------------------------------------------------------------------#
@@ -199,6 +235,7 @@ def test_tags_table():
 	db.set_flag('live_tag_2', 'live')
 	print(db.get_tag("heheszki"))
 
+<<<<<<< HEAD
 # --------------------------------------------------------------------#
 # ----------------------    Call the functions   ---------------------#
 # --------------------------------------------------------------------#
@@ -238,3 +275,19 @@ def import_from_csv(path_name, **kwargs):
 	pos = dict(base=None, mono=None, trans=None, author=None,
 			   level=None)  # sorry, I avoid understanding deep/shallow copy specs ;)
 	const = dict()
+=======
+# -------------------------------------------y-------------------------#
+# ----------------------    Call the function-------------------------#
+# --------------------------------------------------------------------#
+insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
+                                level=10, force_yes=True)
+
+insert_from_file_line_is_record("../data/test2.txt", author="angielski", tags="from_en,to_pl",
+                                level=4, force_yes=True)
+
+insert_from_file_line_is_record("../data/test3.txt", author="śmieszek",
+                                tags="from_pl,to_pl", force_yes=False)
+
+
+#test_tags_table()
+>>>>>>> master
