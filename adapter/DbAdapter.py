@@ -87,7 +87,7 @@ class DbAdapter:
 			for word in word_list:
 
 				if check is True:
-					if self.get_dic(word) is []:  # check for existence...
+					if self.get_dic(word) in [[], dict()]:  # check for existence...
 						print('Warning: no word with such id!!! ' + word)
 						continue
 
@@ -116,9 +116,7 @@ class DbAdapter:
 			self.tags.upsert(dict(tag_name=tag), ['tag_name'])
 
 		for t in self.db['tags'].find():
-			if t['flag'] in [None, '']:
-				t['flag'] = 'live'
-				self.tags.upsert(t, ['tag_name', 'id'])
+			self.tags.upsert(self.tag_enhance(t), ['tag_name', 'id'])
 
 	def set_readable(self, name, readable):
 		if self.tags.count(tag_name=name) is not 0:
@@ -139,6 +137,26 @@ class DbAdapter:
 	def get_tag(self, name):
 		l = [t for t in self.tags.find(tag_name=name)]
 		return l[0]
+
+	def tag_enhance(self, tag):
+		""":argument tag : OrderedDict"""
+		n = tag['tag_name']
+		r = tag['readable']
+		f = tag['flag']
+
+		if r is None:
+			tag['readable'] = n.replace('_', ' ').capitalize()
+
+		if f is None:  # is this needed at all?
+			tag['flag'] = 'live'
+
+		if n[:3] is 'to_':
+			tag['flag'] = 'to'
+		elif n[:5] is 'from_':
+			tag['flag'] = 'from'
+
+		return tag
+
 
 	# --------------------------------------------------------------------#
 	# ------------------------- Manage words -----------------------------#
@@ -256,21 +274,3 @@ class DbAdapter:
 # ----------------- This is a class-file, no runs -------------------#
 # -------------------------------------------------------------------#
 
-
-# db = DbAdapter()
-# print db.query_from_dict(dict(name='John Doe', age=46, #country='China'))
-
-
-# --------------------------------------------------------------------#
-# ------------------      Additional ideas        --------------------#
-# --------------------------------------------------------------------#
-
-
-# def additional():
-#	return None
-#	#remove element from list:
-#	while el in lst:
-#		lst.remove(el)
-#		
-#	# Insert a new record.
-#	table.insert(dict(name='John Doe', age=46, country='China'))

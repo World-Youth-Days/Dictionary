@@ -140,6 +140,10 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 
 		if 'tags' in const:
 			d['tags'] += const['tags']
+		for t in d['tags']:
+			if t[0] is '#':
+				d['tags'][d['tags'].index(t)] = t[1:]       # remove initial # in tags
+
 		printable.append(d)   # now contains tags as a list also
 
 	# May be further developped to allow issue solving
@@ -198,12 +202,12 @@ def test_tags_table():
 
 
 insert_from_file_line_is_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
-                                level=7, force_yes=True)
+                                level=8, force_yes=True)
 
-insert_from_file_line_is_record("../data/test2.txt", author="angielski", tags="from_en,to_pl",
+insert_from_file_line_is_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
  level=4, force_yes=True)
 
-insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", tags="from_pl,to_pl",
+insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
  force_yes=True)
 
 #test_tags_table()
