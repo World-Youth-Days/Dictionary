@@ -199,7 +199,7 @@ insert_from_file_line_is_record("../data/test2.txt", author="angielski", tags="f
  level=4, force_yes=True)
 
 insert_from_file_line_is_record("../data/test3.txt", author="śmieszek", tags="from_pl,to_pl",
- force_yes=False)
+ force_yes=True)
 
 #test_tags_table()
 

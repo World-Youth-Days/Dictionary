@@ -115,9 +115,10 @@ class DbAdapter:
 			
 			self.tags.upsert(dict(tag_name=tag), ['tag_name'])
 
-		for t in self.tags.find():
-			if len(t['flag']) == 0:
+		for t in self.db['tags'].find():
+			if t['flag'] in [None, '']:
 				t['flag'] = 'live'
+				self.tags.upsert(t, ['tag_name', 'id'])
 
 	def set_readable(self, name, readable):
 		if self.tags.count(tag_name=name) is not 0:
