@@ -76,6 +76,9 @@ class DbAdapter:
 		
 		self.update_tags()
 
+		for t in self.db['tags'].find():
+			self.tags.upsert(self.tag_enhance(t), ['tag_name', 'id'])
+
 	# --------------------------------------------------------------------#
 	# ---------------------------- Manage tags ---------------------------#
 	# --------------------------------------------------------------------#
@@ -112,7 +115,7 @@ class DbAdapter:
 		self.update_tags()
 
 	def update_tags(self):
-		"""removes empty tags and drops their tables. Does the enhancing"""
+		"""removes empty tags and drops their tables."""
 		tags = self.db.tables[:]
 		tags.remove("words")
 		tags.remove("tags")
@@ -122,9 +125,6 @@ class DbAdapter:
 				continue
 			
 			self.tags.upsert(dict(tag_name=tag), ['tag_name'])
-
-		for t in self.db['tags'].find():
-			self.tags.upsert(self.tag_enhance(t), ['tag_name', 'id'])
 
 	def set_readable(self, name, readable):
 		if self.tags.count(tag_name=name) is not 0:
@@ -205,7 +205,7 @@ class DbAdapter:
 		for word_id in id_list:
 			self.words.delete(id=word_id)
 
-		print('Removed ' + str(len(id_list)) + ' words without any tag.')
+			logging.info('Removed ' + str(len(id_list)) + ' words without any tag.')
 
 	def remove_by_id(self, id_list):
 		if not isinstance(id_list, (list, tuple)):

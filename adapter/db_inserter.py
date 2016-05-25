@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import codecs
+import logging
+
 from DbAdapter import DbAdapter
 from display_dict import display_dict
 
@@ -28,21 +30,20 @@ def examine_sources(header, **kwargs):
 
 	"""find pos and const in file and kwargs"""
 	""":arg : header : list(str)"""
-	print("Header: " + str(header))
-	print("Kwargs: " + str(kwargs))
+	logging.info("Header: " + str(header))
 
 	global rows, pos, const
 
 	for col in rows:
 		if col in kwargs:
 			const[col] = kwargs[col]
-			print("OK: Const " + col + " found")
+			logging.info("OK: Const " + col + " found")
 
 		try:
 			pos[col] = header.index(col)
-			print("OK: " + col + " at column " + str(pos[col]))
+			logging.info("OK: " + col + " at column " + str(pos[col]))
 		except ValueError:
-			print("Info: No " + col + " header found")
+			logging.info("Info: No " + col + " header found")
 
 		if 'tags' in header:
 			pos['tags'] = header.index('tags')
@@ -114,8 +115,8 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 	header = f.readline().strip().split(delimiter)
 	examine_sources(header, **kwargs)
 	
-	print("pos: " + str(pos))
-	print("const: " + str(const))
+	logging.info("pos: " + str(pos))
+	logging.info("const: " + str(const))
 
 	# ----------------------- check sources -----------------------------#
 	check = check_sources()
@@ -178,7 +179,7 @@ def insert_from_file_line_is_record(path_name, delimiter=',', **kwargs):
 
 	for p in printable:
 		db.join(p['id'], p['tags'])
-		print("Joined " + str(p['id']) + " with tags " + str(p['tags']))
+		logging.info("Joined '" + str(p['base']) + "' with tags " + str(p['tags']))
 
 	db.unify()
 
