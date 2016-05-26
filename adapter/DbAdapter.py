@@ -153,7 +153,7 @@ class DbAdapter:
 		f = tag['flag']
 
 		if r is None:
-			tag['readable'] = n.replace('_', ' ').capitalize()
+			tag['readable'] = n.replace('_', ' ').title() # first letter of each word is upper-case
 
 		if f is None:  # is this needed at all?
 			tag['flag'] = 'live'
