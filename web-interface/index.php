@@ -91,7 +91,7 @@
                                 </button>
                             </div>
                             <div class="language-chooser">
-                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" >
+                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
                                     <span class="radio-text">--</span> <i class="material-icons">keyboard_arrow_down</i>
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" id="language-to-ul" for="language-to">

@@ -14,6 +14,7 @@ $(document).ready(function() {
             for (i=0; i<data.length; i++) {
                 $("#"+data[i]+"-li").show();
             }
+            $("#language-to").prop("disabled", false);
         })
     })
     $(".to-radio").change(function() {
@@ -69,7 +70,7 @@ $(document).ready(function() {
     //Main update function
     function update() {
         $("#loading").stop();
-        $("#loading").fadeIn("slow")
+        $("#loading").fadeIn("slow");
         data = location.hash.split(";");
         data[0] = data[0].substring(1, data[0].length);
         mode = data[0];
