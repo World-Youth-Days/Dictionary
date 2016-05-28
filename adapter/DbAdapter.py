@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import datetime
 import dataset
 from sqlalchemy import Integer, DateTime, String
-import datetime
 
 
 def query_from_dict(dic, table="words", operator="AND"):
@@ -49,8 +49,32 @@ class DbAdapter:
 		self.words.create_column('level', Integer)
 
 	def backup(self):
-		print("No backup utility so far...")
-		return 1
+		import codecs, os, hashlib
+
+		try:
+			ver_f = codecs.open('../backup/version.txt', "r", 'utf-8')
+		except SystemError:
+			print("Error while opening version file!")
+			return 1
+
+		ver = int(ver_f.readline()) + 1
+
+
+		os.system('cp ../dictionary.db ../backup/dictionary-'+str(ver)+'.db')
+		print( 'New backup file with version {} created!'.format(ver))
+		ver_f.close()
+
+		try:
+			ver_f = codecs.open('../backup/version.txt', "w", 'utf-8')
+		except SystemError:
+			print("Error while opening version file!")
+		ver_f.write(str(ver))
+
+		ver_f.close()
+
+
+
+
 
 	def get_table(self, name=None):
 		if name is None:

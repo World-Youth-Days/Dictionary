@@ -6,10 +6,10 @@ from DbAdapter import DbAdapter
 from display_dict import display_dict
 
 db = DbAdapter(None)  # define db connection
-printable = []    # here place all processed records
+printable = []  # here place all processed records
 rows = ['base', 'mono', 'trans', 'author', 'level']
 pos = dict()  # dict with positions in file
-const = dict()      # dict with const values
+const = dict()  # dict with const values
 
 
 def zero():
@@ -20,7 +20,6 @@ def zero():
 
 
 def examine_sources(header, **kwargs):
-
 	# --------need to add remove-# feature
 
 	"""find pos and const in file and kwargs"""
@@ -70,7 +69,6 @@ def check_sources():
 
 
 def human_check(force_yes):
-
 	display_dict(printable, rows + ['tags'])  # display using new method form display_dict.py
 
 	if force_yes is True:
@@ -138,7 +136,7 @@ def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
 	# --------------------       Grab data     --------------------------#
 
 	data = [s.split(col_delim) for s in f.read().split(row_delim)]
-	if len(data[-1][0]) == 0:    # prevent last empty line in file...
+	if len(data[-1][0]) == 0:  # prevent last empty line in file...
 		data = data[:-1]
 	f.close()
 
@@ -277,9 +275,9 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 			d['tags'] += const['tags']
 		for t in d['tags']:
 			if t.startswith('#'):
-				d['tags'][d['tags'].index(t)] = t[1:]       # remove initial # in tags
+				d['tags'][d['tags'].index(t)] = t[1:]  # remove initial # in tags
 
-		printable.append(d)   # now contains tags as a list also
+		printable.append(d)  # now contains tags as a list also
 
 	f.close()
 
@@ -308,6 +306,7 @@ def import_from_csv(path_name, **kwargs):
 	           level=None)  # sorry, I avoid understanding deep/shallow copy specs ;)
 	const = dict()
 
+
 def test_tags_table():
 	global db
 	db.set_readable('const_tag_1', 'First Constant Tag')
@@ -317,18 +316,21 @@ def test_tags_table():
 	db.set_flag('live_tag_2', 'live')
 	print(db.get_tag("heheszki"))
 
+
 # --------------------------------------------------------------------#
 # ----------------------    Call the functions   ---------------------#
 # --------------------------------------------------------------------#
 
 
-insert_custom_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
-                       level=8, force_yes=True)
+insert_custom_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl", level=8,
+                     force_yes=True)
+#
+# insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
+#                        level=4, force_yes=True)
+#
+# insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
+#                        force_yes=True)
 
-insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
-                       level=4, force_yes=True)
+# db.backup()
 
-insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
-                       force_yes=True)
-
-#test_tags_table()
+# test_tags_table()
