@@ -166,8 +166,10 @@
                         </tbody>
                     </table>
                     <div id="communication">
-                        <div id="communication-language" class="communication">
-                            
+                        <div id="communication-welcome" class="communication">
+                            <h2><?php t("welcome") ?></h2>
+                            <p><?php t("welcomeContent") ?></p>
+                            <div id="chooseLanguage"></div>
                         </div>
                         <div id="communication-nothing-found" class="communication">
                             <h2>Nic nie znaleziono!</h2>

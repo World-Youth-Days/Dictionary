@@ -125,7 +125,12 @@ $(document).ready(function() {
         data[0] = data[0].substring(1, data[0].length);
         mode = data[0];
         //Tags mode
-        if (mode=="tags") {
+        if (mode == "") {
+            hideAll();
+            $("#communication-welcome").show();
+            $("#loading").stop();
+            $("#loading").fadeOut("slow");
+        } else if (mode=="tags") {
             hideAll();
             $("#words-table").show();
             tags="";
