@@ -71,6 +71,7 @@ class DbAdapter:
 		ver_f.write(str(ver))
 
 		ver_f.close()
+		return 0
 
 
 
