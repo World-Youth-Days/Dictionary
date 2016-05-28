@@ -27,7 +27,7 @@ $(document).ready(function() {
         $("#search_input div").removeClass("is-dirty");
         tags = "";
         $(".tag-checkbox:checked").each(function() {
-            tags+=$("label[for='"+$(this).attr('id')+"'] .mdl-checkbox__label").text()+";";
+            tags+=$(this).attr("id").substr(9)+";";
         });
         tags = tags.substring(0, tags.length-1);
         location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+tags;

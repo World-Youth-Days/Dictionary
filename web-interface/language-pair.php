@@ -16,7 +16,7 @@
     }
     
     if ($_GET['from']!=''){
-        echo "Start";
+        #echo "Start";
         $from = $_GET['from'];
         $fromIds = array();
         $return = "";
@@ -41,11 +41,8 @@
                $toIds[] = $row2['word_id'];
             }
             #checking the number of words for language pair
-            $count = array_intersect($toIds, $fromIds);
-            foreach($toIds as $result) {
-                echo $result, '<br>';
-            }
-            echo $count."Count<br>";
+            $count = count(array_intersect($toIds, $fromIds));
+            #echo $count."Count<br>";
             if ($count) {
                 $return .= $row['tag_name'].";";
             }

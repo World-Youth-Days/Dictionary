@@ -18,10 +18,10 @@
     if ($_GET['tag']!=''){
     
         $tags = explode(";", $_GET['tag']);
-        $ids = "SELECT * FROM 'words' WHERE (";
+        $ids = "SELECT * FROM words WHERE (";
 
         for ($i = 0; $i<count($tags); $i++) {
-            $stmt = $db->prepare("SELECT * FROM '".$tags[$i]."'");
+            $stmt = $db->prepare("SELECT * FROM ".$tags[$i]);
             $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
             $result = $stmt->execute();
             while($row = $result->fetchArray(SQLITE3_ASSOC)) {
