@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import dataset
+import logging
 from sqlalchemy import Integer, DateTime, String
 
 
@@ -19,6 +20,26 @@ def query_from_dict(dic, table="words", operator="AND"):
 
 	return q[0:-len(c) - 1] + ";"  # remove last conjuncton
 
+def tag_enhance(tag):
+	""":argument tag : OrderedDict"""
+	n = tag['tag_name']
+	r = tag.get('readable')
+	f = tag.get('flag')
+	d = tag.get('description')
+
+	if r in [None, '']:
+		tag['readable'] = n.replace('_', ' ').title()  # first letter of each word is upper-case
+
+	if f in [None, '']:  # is this needed at all?
+		tag['flag'] = 'live'
+
+	if 'to_' in n[:3]:
+		tag['flag'] = 'to'
+
+	if 'from_' in n[:5]:
+		tag['flag'] = 'from'
+
+	return tag
 
 class DbAdapter:
 	# --------------------------------------------------------------------#
@@ -41,7 +62,7 @@ class DbAdapter:
 		
 		self.tags = self.db.get_table("tags")
 		# initialize columns with non typical value types
-		for k in ['tag_name', 'readable', 'flag']:
+		for k in ['tag_name', 'readable', 'flag', 'description']:
 			self.tags.create_column(k, String)
 
 		self.words = self.db.get_table("words")
@@ -73,10 +94,6 @@ class DbAdapter:
 		ver_f.close()
 		return 0
 
-
-
-
-
 	def get_table(self, name=None):
 		if name is None:
 			return self.db.tables
@@ -102,7 +119,7 @@ class DbAdapter:
 		self.update_tags()
 
 		for t in self.db['tags'].find():
-			self.tags.upsert(self.tag_enhance(t), ['tag_name', 'id'])
+			self.tags.upsert(tag_enhance(t), ['tag_name'])
 
 	# --------------------------------------------------------------------#
 	# ---------------------------- Manage tags ---------------------------#
@@ -130,7 +147,7 @@ class DbAdapter:
 					self.get_table(tag).insert(r)
 		if check is True:
 			self.update_tags()
-	
+
 	def disjoin(self, word_list, tag_list):
 		for tag in tag_list:
 			for word in word_list:
@@ -162,35 +179,26 @@ class DbAdapter:
 	def set_flag(self, name, flag):
 		if self.tags.count(tag_name=name) is not 0:
 			self.tags.upsert(
-				dict(tag_name=name, flag=flag, readable=self.get_tag(name)['readable']),
+				dict(tag_name=name, flag=flag),
 				['tag_name'])
 		else:
 			print("Error, no such tag in tags: " + str(name))
 
+	def set_description(self, name, description):
+		if self.tags.count(tag_name=name) is not 0:
+			tag = self.get_tag(name)
+		else:
+			print("Error, no such tag in tags: " + str(name))
+
+		if description != '':
+			self.tags.upsert(
+				dict(tag_name=name, description=description),
+				['tag_name'])
+
+
 	def get_tag(self, name):
 		l = [t for t in self.tags.find(tag_name=name)]
 		return l[0]
-
-	def tag_enhance(self, tag):
-		""":argument tag : OrderedDict"""
-		n = tag['tag_name']
-		r = tag['readable']
-		f = tag['flag']
-
-		if r is None:
-			tag['readable'] = n.replace('_', ' ').title() # first letter of each word is upper-case
-
-		if f is None:  # is this needed at all?
-			tag['flag'] = 'live'
-
-		if 'to_' in n[:3]:
-			tag['flag'] = 'to'
-
-		if 'from_' in n[:5]:
-			tag['flag'] = 'from'
-
-		return tag
-
 
 	# --------------------------------------------------------------------#
 	# ------------------------- Manage words -----------------------------#
