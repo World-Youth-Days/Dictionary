@@ -40,7 +40,12 @@
     }
     ?>
     <body>
-        <div id="header" class="mdl-shadow--2dp">          
+        <div id="header" class="mdl-shadow--2dp">
+            <div id="nav">
+                <a href="/"><div class="nav-elem active"><?php t("mainPage") ?></div></a>
+                <a href="#contribute"><div class="nav-elem"><?php t("contribute") ?></div></a>
+                <a href="#about"><div class="nav-elem"><?php t("about") ?></div></a>
+            </div>
         </div>
         <div id="content">
             <div class="mdl-grid">

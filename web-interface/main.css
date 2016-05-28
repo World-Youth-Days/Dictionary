@@ -5,6 +5,23 @@ body {
     background-color: #2196F3;
     height: 150px;
 }
+#nav {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+#nav .active {
+    background-color: rgba(255, 255, 255, 0.23);
+}
+.nav-elem {
+    display: inline-block;
+    padding: 13px;
+    color: white;
+    transition: all 1s;
+}
+.nav-elem:hover {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+}
 #content {
     max-width: 1154px;
     margin: 0 auto;
@@ -77,5 +94,17 @@ body {
 }
 .communication {
     text-align: center;
+    display: none;
+}
+.communication p {
+    margin: 20px;
+}
+
+/*Adding form*/
+.common-tag .mdl-textfield {
+    width: 25%;
+    margin: 0 5px;
+}
+.hidden {
     display: none;
 }

@@ -1,5 +1,8 @@
 <?php 
 $translations = array(
+    "mainPage" => "Main Page",
+    "contribute" => "Contribute",
+    "about" => "About",
     "Search" => "Search",
     "SearchForWordDefLabel" => "Search for word, definition, label...",
     "Languages" => "Languages",
@@ -9,6 +12,23 @@ $translations = array(
     "Word" => "Word",
     "Translation" => "Translation",
     "Definition" => "Definition",
-    "Author" => "Author"
+    "Author" => "Author",
+    "contributeHi" => "If you are willing to help us create the dictionary, please contact us at [email]. If you have already contacted us and you're willing to add your work, plese fill out the following form and we'll verify and add your records to the database as soon as possible!",
+    "name" => "Name",
+    "defaultLevel" => "Default level of the dictionary",
+    "pin" => "Translator's PIN",
+    "notANumber" => "This needs to be a number",
+    "mail" => "E-mail adress",
+    "fromLanguage" => "The base language of your dictionary ('from')",
+    "toLanguage" => "The language into which you translate the words",
+    "commonTags" => "If you want a tag to be added to all of the words in your dictionary, specify it here:",
+    "tagName" => "The tag's short name",
+    "tagReadable" => "The name visible to the user",
+    "tagDescription" => "A longer tag description",
+    "addTag" => "Add next tag...",
+    "specialTags" => "If you specified any additional tags in the file you're uploading, please give their details down here:",
+    "fileTransfer" => "Now add the file you prepared down here:",
+    "readyToGo" => "You're ready to go! Just click the button: ",
+    "send" => "Send"
 );
 ?>

@@ -2,21 +2,23 @@ $(document).ready(function() {
     
     update();
     
-    $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-        if (data!="\\ABC\\") {
-            data = data.split(";");
-            for (i=0; i<data.length; i++) {
-                $("#checkbox-"+data[i]).parent().show();
+    if($("input[name='options-from']:checked").val()!=undefined && $("input[name='options-to']:checked").val()!=undefined) {
+        $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
+            if (data!="\\ABC\\") {
+                data = data.split(";");
+                for (i=0; i<data.length; i++) {
+                    $("#checkbox-"+data[i]).parent().show();
+                }
+                $(".tag-checkbox").each(function() {
+                    $(this).parent().removeClass("is-checked");
+                    $(this).prop('checked', false);
+                });
+                $("#tags-instruction").hide();
+            } else {
+                $("#tags-instruction").show();
             }
-            $(".tag-checkbox").each(function() {
-                $(this).parent().removeClass("is-checked");
-                $(this).prop('checked', false);
-            });
-            $("#tags-instruction").hide();
-        } else {
-            $("#tags-instruction").show();
-        }
-    });
+        });
+    }
     
     //Languages input events
     $(".from-radio").change(function() {
@@ -125,6 +127,7 @@ $(document).ready(function() {
         //Tags mode
         if (mode=="tags") {
             hideAll();
+            $("#words-table").show();
             tags="";
             $(".tag-checkbox").prop('checked', false);
             for (i=5; i<data.length; i++) {
@@ -162,6 +165,7 @@ $(document).ready(function() {
         //Search mode
         } else if (mode=="search") {
             hideAll();
+            $("#words-table").show();
             $(".tag-checkbox").each(function() {
                 $(this).parent().removeClass("is-checked");
                 $(this).prop('checked', false);
@@ -182,6 +186,15 @@ $(document).ready(function() {
                 $("#loading").stop();
                 $("#loading").fadeOut("slow");
             });
+        } else {
+            hideAll();
+            $.get("pages/"+mode+".php", function(data) {
+                $("#communication-additional").html(data);
+                $("#words-table").hide();
+                $("#communication-additional").show();
+                $("#loading").stop();
+                $("#loading").fadeOut("slow");
+            })
         }
     }
 });

@@ -15,7 +15,7 @@
        #echo "Opened database successfully\n";
     }
     
-    if ($_GET['from']!='' && $_GET['to']!=''){
+    if ($_GET['from']!="undefined" && $_GET['to']!="undefined"){
         #echo "Start";
         $from = $_GET['from'];
         $to = $_GET['to'];
