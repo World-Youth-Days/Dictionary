@@ -72,13 +72,13 @@
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu" for="language-from">
                                     <?php
-                                        $sql = "SELECT * FROM 'tags' WHERE flag = 'from'";
+                                        $sql = "SELECT * FROM tags WHERE flag = 'from'";
                                         $ret = $db->query($sql);
                                         while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                     ?>
                                         <li class="mdl-menu__item">
                                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<?php echo $row['tag_name'] ?>">
-                                                <input type="radio" id="<?php echo $row['tag_name'] ?>" class="mdl-radio__button from-radio" name="options" value="<?php echo $row['tag_name'] ?>">
+                                                <input type="radio" id="<?php echo $row['tag_name'] ?>" class="mdl-radio__button from-radio" name="options-from" value="<?php echo $row['tag_name'] ?>">
                                                 <span class="mdl-radio__label"><?php echo substr($row['tag_name'],5) ?></span>
                                             </label>
                                         </li>
@@ -91,43 +91,41 @@
                                 </button>
                             </div>
                             <div class="language-chooser">
-                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" disabled>
+                                <button id="language-to" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                                     <span class="radio-text">--</span> <i class="material-icons">keyboard_arrow_down</i>
                                 </button>
-                                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" id="language-to-ul" for="language-to">
+                                <ul class="mdl-menu mdl-js-menu" id="language-to-ul" for="language-to">
                                     <?php
-                                        $sql = "SELECT * FROM 'tags' WHERE flag = 'to'";
+                                        $sql = "SELECT * FROM tags WHERE flag = 'to'";
                                         $ret = $db->query($sql);
                                         while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                     ?>
-                                        <li class="mdl-menu__item" id="<?php echo $row['tag_name'] ?>-li" style="display: none;">
+                                        <li class="mdl-menu__item">
                                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<?php echo $row['tag_name'] ?>">
-                                                <input type="radio" id="<?php echo $row['tag_name'] ?>" class="mdl-radio__button to-radio" name="options" value="<?php echo $row['tag_name'] ?>">
+                                                <input type="radio" id="<?php echo $row['tag_name'] ?>" class="mdl-radio__button to-radio" name="options-to" value="<?php echo $row['tag_name'] ?>">
                                                 <span class="mdl-radio__label"><?php echo substr($row['tag_name'],3) ?></span>
                                             </label>
                                         </li>
                                     <?php } ?>
-                                    <li class="mdl-menu__item" id="to-none-li">
-                                        ---
-                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text"><?php t("Tags") ?></h2>
                         </div>
-                        <div class="card-content">
+                        <div class="card-content" id="tag-container">
                             <?php
                             $sql = "SELECT * FROM 'tags' WHERE flag = 'live'";
                             $ret = $db->query($sql);
                             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                 $tag_name = ($row['readable']!="" ? $row['readable'] : $row['tag_name']);
                             ?>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['tag_name'] ?>">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['tag_name'] ?>" style="display: none;">
                                 <input type="checkbox" id="checkbox-<?php echo $row['tag_name'] ?>" class="mdl-checkbox__input tag-checkbox">
                                 <span class="mdl-checkbox__label"><?php echo $tag_name ?></span>
                             </label>
                             <?php } ?>
+                            <div id="tags-instruction"><?php t("firstChooseTheLanguages") ?></div>
                         </div>
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text"><?php t("Level") ?></h2>
