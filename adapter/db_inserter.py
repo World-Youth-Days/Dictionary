@@ -10,6 +10,8 @@ printable = []  # here place all processed records
 rows = ['base', 'mono', 'trans', 'author', 'level']
 pos = dict()  # dict with positions in file
 const = dict()  # dict with const values
+col_delim = None
+row_delim = None
 
 
 def zero():
@@ -118,6 +120,51 @@ def add_to_db():
 	# write data to db. Additional checking might be done before
 
 	print("Changes written to db.")
+
+
+def extract_info(filename):
+	global const, row_delim, col_delim
+	tags = []
+
+	try:
+		info = codecs.open(filename, 'r', 'utf-8')
+	except SystemError:
+		print("Failed to open metadata file!")
+		return 1
+	d = dict()
+	for x in ['rd', 'cd', 'author', 'from', 'to', 'level']:
+		d[x] = info.readline().strip()
+
+	row_delim = d['rd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+	col_delim = d['cd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+	#           process delimiters!!!! str.replace([\n, \t])...
+
+	const['tags'] = 'from_' + d['from'].strip()
+	const['tags'] += (',to_' + d['to'].strip())
+	const['level'] = int(d['level'])
+
+	for line in info:       # const tags
+		if len(line) < 5:
+			break
+
+		tag = line[:line.find(',')]
+		read = line[line.find('<r>') + 3: line.find('</r>')]
+		desc = line[line.find('<d>') + 3: line.find('</d>')]
+
+		tags.append({'tag_name': tag, 'readable': read, 'description': desc})
+		const['tags'] += (',' + tag)
+
+	for line in info:       # live tag's descriptions
+		if len(line) < 5:
+			break
+
+		tag = line[:line.find(',')]
+		read = line[line.find('<r>') + 3: line.find('</r>')]
+		desc = line[line.find('<d>') + 3: line.find('</d>')]
+
+		tags.append({'tag_name': tag, 'readable': read, 'description': desc})
+
+	return tags
 
 
 # --------------------------------------------------------------------#
@@ -322,15 +369,14 @@ def test_tags_table():
 # --------------------------------------------------------------------#
 
 
-insert_custom_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl", level=8,
-                     force_yes=True)
+# insert_custom_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl", level=8,
+#                      force_yes=True)
 #
 # insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
 #                        level=4, force_yes=True)
 #
 # insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
 #                        force_yes=True)
-
-# db.backup()
-
 # test_tags_table()
+
+print(extract_info('../data/info-test1.txt'))
