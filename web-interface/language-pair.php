@@ -21,10 +21,10 @@
         $base_query = "SELECT * FROM 'words' WHERE (";
         $return = "";
         
-        $stmt = $db->prepare("SELECT * FROM '".$from."'");
-        $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
-        $result = $stmt->execute();
-        while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $stmtFromIds = $db->prepare("SELECT * FROM '".$from."'");
+        $stmtFromIds->bindValue(':id', 1, SQLITE3_INTEGER);
+        $resultFromIds = $stmtFromIds->execute();
+        while($row = $resultFromIds->fetchArray(SQLITE3_ASSOC)) {
             $base_query .= "id=".$row['word_id']." OR ";
         }
         $base_query = substr($base_query, 0, -4);
@@ -32,15 +32,15 @@
         #echo $base_query."<br>";
         #We've got the first condition
         
-        $sql = "SELECT * FROM 'tags' WHERE flag = 'to'";
-        $ret = $db->query($sql);
-        while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
+        $stmtToTags = "SELECT * FROM 'tags' WHERE flag = 'to'";
+        $returnToTags = $db->query($stmtToTags);
+        while ($row = $returnToTags->fetchArray(SQLITE3_ASSOC)) {
             #Now for every language combination with the specified FROM we check whether there are any words
             $temp_query = $base_query;
-            $stmt = $db->prepare("SELECT * FROM '".$row['tag_name']."'");
-            $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
-            $result = $stmt->execute();
-            while($row2 = $result->fetchArray(SQLITE3_ASSOC)) {
+            $stmtToIds = $db->prepare("SELECT * FROM '".$row['tag_name']."'");
+            $stmtToIds->bindValue(':id', 1, SQLITE3_INTEGER);
+            $resultToIds = $stmtToIds->execute();
+            while($row2 = $resultToIds->fetchArray(SQLITE3_ASSOC)) {
                 $temp_query .= "id=".$row2['word_id']." OR ";
             }
             $temp_query = substr($temp_query, 0, -4);
