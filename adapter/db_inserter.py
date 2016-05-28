@@ -325,10 +325,10 @@ def test_tags_table():
 insert_custom_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
                        level=8, force_yes=True)
 
-#insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
-#                       level=4, force_yes=True)
+insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
+                       level=4, force_yes=True)
 
-#insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
-#                       force_yes=True)
+insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
+                       force_yes=True)
 
 #test_tags_table()

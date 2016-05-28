@@ -158,9 +158,10 @@ class DbAdapter:
 		if f is None:  # is this needed at all?
 			tag['flag'] = 'live'
 
-		if n[:3] is 'to_':
+		if 'to_' in n[:3]:
 			tag['flag'] = 'to'
-		elif n[:5] is 'from_':
+
+		if 'from_' in n[:5]:
 			tag['flag'] = 'from'
 
 		return tag
