@@ -29,6 +29,8 @@ $translations = array(
     "specialTags" => "If you specified any additional tags in the file you're uploading, please give their details down here:",
     "fileTransfer" => "Now add the file you prepared down here:",
     "readyToGo" => "You're ready to go! Just click the button: ",
-    "send" => "Send"
+    "columnSeparator" => "Column separator",
+    "lineSeparator" => "Line separator",
+    "separatorsExplanation" => "White characters: use \\n as new line (enter), \\t as tabulator and \\r as cariage return"
 );
 ?>
