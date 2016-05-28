@@ -137,7 +137,6 @@ function t($string) {
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 <?php t("send"); ?>
             </button>
-            <input type="submit" value="Upload Image" name="submit">
         </p>
     </form>
 </div>

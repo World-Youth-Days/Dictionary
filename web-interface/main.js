@@ -194,6 +194,7 @@ $(document).ready(function() {
                 $("#communication-additional").show();
                 $("#loading").stop();
                 $("#loading").fadeOut("slow");
+                componentHandler.upgradeAllRegistered()
             })
         }
     }
