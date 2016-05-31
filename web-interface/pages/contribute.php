@@ -41,11 +41,11 @@ function t($string) {
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="separator" name="separator" value=",">
-            <label class="mdl-textfield__label" for="to"><?php t("lineSeparator") ?></label>
+            <label class="mdl-textfield__label" for="to"><?php t("columnSeparator") ?></label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="row_delimiter" name="row_delimiter" value="\n">
-            <label class="mdl-textfield__label" for="row_delimiter"><?php t("columnSeparator") ?></label>
+            <label class="mdl-textfield__label" for="row_delimiter"><?php t("lineSeparator") ?></label>
         </div><br>
         <span style="font-size: 15px"><?php t("separatorsExplanation") ?></span>
         <hr>

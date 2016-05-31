@@ -118,12 +118,18 @@ $(document).ready(function() {
     });
     
     //Main update function
+    var prev = "tags";
     function update() {
         $("#loading").stop();
         $("#loading").fadeIn("slow");
         data = location.hash.split(";");
         data[0] = data[0].substring(1, data[0].length);
         mode = data[0];
+        if (mode != prev) {
+            $(".active").removeClass("active");
+            activate = (mode == "" || mode=="search" || mode=="tags" ? "mainPage" : mode);
+            $("#nav-"+activate).addClass("active");
+        }
         //Tags mode
         if (mode == "") {
             hideAll();
