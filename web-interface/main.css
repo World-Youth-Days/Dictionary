@@ -31,6 +31,9 @@ body {
     width: 100%;
     padding: 8px;
 }
+#filters a {
+    color: white;
+}
 #search_box {
     padding: 8px;
     text-align: center;
