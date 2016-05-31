@@ -1,7 +1,32 @@
 <?php
 require_once('PHPMailer-master/class.phpmailer.php');
 
-$check = TRUE;
+class MyDB extends SQLite3
+{
+   function __construct()
+   {
+      $this->open('users.db');
+   }
+}
+
+$db = new MyDB();
+
+if(!$db){
+   echo $db->lastErrorMsg();
+} else {
+   #echo "Opened database successfully\n";
+}
+
+$check = 0;
+$PIN_hash = md5($_POST['pin']);
+$sql = "SELECT * FROM users WHERE author = '".$_POST['author']."' AND PIN_hash = '".$PIN_hash."'";
+$stmt = $db->prepare($sql);
+$stmt->bindValue(':id', 1, SQLITE3_INTEGER);
+$result = $stmt->execute();
+while($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    $check += 1;
+}
+
 
 if ($check) {
     if (isset($_FILES['file_src']) && $_FILES['file_src']['error'] == UPLOAD_ERR_OK) {
@@ -32,7 +57,7 @@ if ($check) {
             $email->addStringAttachment($inf, $name.'.inf');
             $email->AddAddress( 'aaaaaa.hberes@gmail.com' );
             if (!$email->send()) {
-                echo "Mailer Error: " . $mail->ErrorInfo;
+                echo "Mailer Error: " . $email->ErrorInfo;
             } else {
                 echo "Message sent!";
             }
