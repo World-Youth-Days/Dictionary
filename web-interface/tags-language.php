@@ -68,4 +68,5 @@
     } else {
         echo "";
     }
+    $db->close(); unset($db);
 ?>

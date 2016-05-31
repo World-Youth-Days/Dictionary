@@ -39,4 +39,5 @@
     if (!$count) {
         echo "//ABC//";
     }
+    $db->close(); unset($db);
 ?>
