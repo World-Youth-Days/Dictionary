@@ -100,6 +100,18 @@ body {
     margin: 20px;
     font-size: 19px;
 }
+#footer {
+    font-size: 9px;
+    text-align: center;
+    line-height: 12px;
+    color: #686868;
+}
+#footer i {
+    font-size: 8px;
+}
+#footer a {
+    color: #686868;
+}
 
 /*Adding form*/
 .common-tag .mdl-textfield {

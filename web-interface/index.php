@@ -186,6 +186,11 @@
                 </div>
             </div>
         </div>
+        <div id="footer">
+            Project by Jakub Dranczewski (<a href="https://github.com/z-gora">@ZGora</a>) and Hubert Bereś (<a href="https://github.com/Ddedalus">@Dedalus</a>).<br>
+            <a href="https://github.com/World-Youth-Days/Dictionary" target=_blank>We <i class="material-icons">favorite</i> Open Source, so it's all on GitHub!</a><br>
+            If you want to use the data, ask us first!
+        </div>
         <?php $db->close(); ?>
     </body>
 </html>
