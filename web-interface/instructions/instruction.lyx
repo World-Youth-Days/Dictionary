@@ -1,0 +1,874 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\date{}
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be coloured
+  linkcolor=black,% hyperlink text will be green
+  urlcolor=cyan,
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language polish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language polish
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+World Youth Day Dictionary - instrukcja dla tłumaczy
+\end_layout
+
+\begin_layout Author
+Hubert Bereś & Jakub Draczewski
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Wersja uproszczona (z obrazkami!)
+\end_layout
+
+\begin_layout Subparagraph
+To naprawdę nie takie trudne ;)
+\end_layout
+
+\begin_layout Enumerate
+Wejdź na 
+\begin_inset CommandInset href
+LatexCommand href
+name "Quizlet.com"
+target "quizlet.com"
+
+\end_inset
+
+, zaloguj się (można przez fb), stwórz nowy card-set.
+\end_layout
+
+\begin_layout Enumerate
+Wybierz mu nazwę odpowiadającą wybranemu podpunktowi z 
+\begin_inset CommandInset href
+LatexCommand href
+name "Listy tematów"
+target "https://docs.google.com/document/d/1pFyGuzC46A-w2bvjD92EjwC6iyGCTUhDDJpTrNSIa9Y/edit?usp=sharing"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+W pierwszym wierszu wprowadź nazwy kolumn: ‘base’ oraz ‘trans’ (od translation).
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename instruction-images/1.png
+	lyxscale 10
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Przykładowe tłumaczenia w Quizlet
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wybierz sprawdzanie pisowni w odpowiednim języku, żeby uniknąć błędów.
+\end_layout
+
+\begin_layout Enumerate
+Wprowadź odpowiednie słówka (czyli po prostu wykonaj swoją pracę jako tłumacz),
+ sprawdź i kliknij ‘Done’.
+\end_layout
+
+\begin_layout Enumerate
+Wybierz Tools -> More -> Export
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename instruction-images/2.png
+	lyxscale 10
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Wybierz opcję 
+\begin_inset Quotes pld
+\end_inset
+
+Export
+\begin_inset Quotes prd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wybierz separatory 
+\begin_inset Quotes pld
+\end_inset
+
+coma
+\begin_inset Quotes prd
+\end_inset
+
+ oraz 
+\begin_inset Quotes pld
+\end_inset
+
+new line
+\begin_inset Quotes prd
+\end_inset
+
+, po czym skopiuj cały tekst do schowka.
+\end_layout
+
+\begin_layout Enumerate
+Otwórz Notatnik, wklej całą zawartość i zapisz plik tekstowy, pamiętaj tylko,
+ by wybrać kodowanie UTF-8!
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename instruction-images/3.png
+	lyxscale 10
+	width 10cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zapisz plik tekstowy z Notatnika pamiętając o kodowaniu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wejdź na stronę Słownika i kliknij w 
+\begin_inset Quotes pld
+\end_inset
+
+Współtwórz słownik
+\begin_inset Quotes prd
+\end_inset
+
+ (Contribute)
+\end_layout
+
+\begin_layout Enumerate
+Wpisz swoje dane, wymyśl i zapamiętaj PIN (będzie potem potrzebny do sprawdzania
+ czy Ty to Ty, kiedy będziesz znowu wysyłać coś do Słownika, ale nie martw
+ się - wyślemy Ci go mailem :P).
+\end_layout
+
+\begin_layout Enumerate
+W polu 
+\begin_inset Quotes pld
+\end_inset
+
+Poziom
+\begin_inset Quotes prd
+\end_inset
+
+ (Level) wpisz numer dużego punktu z 
+\begin_inset CommandInset href
+LatexCommand href
+name "Listy tematów"
+target "https://docs.google.com/document/d/1pFyGuzC46A-w2bvjD92EjwC6iyGCTUhDDJpTrNSIa9Y/edit?usp=sharing"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+W polach dotyczących wspólnych tagów (zostaną dodane do wszystkich przetłumaczon
+ych przez Ciebie słów) wpisz informacje według schematu:
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename instruction-images/4.png
+	lyxscale 10
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schemat wpisywania informacji o wspólnych tagach
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Dodatkowymi tagami możesz się na razie nie przejmować, ale więcej o nich
+ możesz przeczytać w sekcji zaawansowanej ;) Polecamy, bo są praktyczne!
+\end_layout
+
+\begin_layout Enumerate
+Załącz zapisany w Notatniku plik.
+\end_layout
+
+\begin_layout Enumerate
+Gotowe!
+\end_layout
+
+\begin_layout Part
+Szczegółowe instrukcje
+\end_layout
+
+\begin_layout Subparagraph
+Tu zaczyna się zabawa ;) Polecamy zapoznanie się z tą sekcją, żebyś mógł
+ w pełni wykorzystać możliwości przygotowanej przez nas platformy.
+\end_layout
+
+\begin_layout Section
+Co może znaleźć się w Bazie? 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Odpowiedź brzmi: prawie wszystko.
+ Staraliśmy się, by w jednym miejscu można było gromadzić tłumaczenia w
+ różnych językach, quizy językowe jak i dłuższe teksty – np.
+ przetłumaczone czytania na okres DDM.
+ Każde słowo składa się z następujących części:
+\end_layout
+
+\begin_layout Itemize
+‘base’ - czyli słowo w języku z którego tłumaczysz 
+\end_layout
+
+\begin_layout Itemize
+‘trans’(lation) - czyli tłumaczenie w języku na który tłumaczysz
+\end_layout
+
+\begin_layout Itemize
+‘mono’ - definicja monolingulana (w tym samym języku).
+ Jeśli Twoja część Słownika ma postać quizu lub uczy słówek poprzez definicje
+ w tym samym języku, wypełnij to pole, a ‘trans’ po prostu zostaw puste
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Każde słowo jest również przypisane do swojego autora oraz ma określony
+ poziom trudności.
+\end_layout
+
+\begin_layout Section
+Jak poprawnie opisać nowe słówka?
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+W tak różnorodnej zbieraninie informacji kluczowe będzie sprawne wyszukiwanie.
+ Dlatego oprócz samych danych, musisz dostarczyć nam jeszcze inne informacje.
+ Najważniejsze z nich to:
+\end_layout
+
+\begin_layout Itemize
+Twoja ksywka ;)
+\end_layout
+
+\begin_layout Itemize
+pomiędzy jakimi językami dokonujesz tłumaczenia
+\end_layout
+
+\begin_layout Itemize
+jaki jest orientacyjny poziom trudności
+\end_layout
+
+\begin_layout Itemize
+specyficzne cechy Twojej listy słówek
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Do opisu tych parametrów baza wykorzystuje system tagów.
+ Część z nich jest obowiązkowa, jak np.
+ oznaczenia języków i wygenerujemy ją automatycznie po wypełnieniu przez
+ Ciebie formularza zgłoszenia.
+ Część natomiast możesz przypisać sam(a), według uznania i naszych kryteriów.
+\end_layout
+
+\begin_layout Standard
+Jeśli informacje mają zostać przypisane do wszystkich słówek w pliku (np.
+ języki tłumaczenia, autor), należy je umieścić w odpowiednim polu formularza.
+ Można tam dodać również tagi wspólne dla wszystkich wysyłanych słówek.
+\end_layout
+
+\begin_layout Standard
+Jeśli wartość danego pola (
+\emph on
+level
+\emph default
+, 
+\emph on
+tags
+\emph default
+, ...) różni się pomiędzy słówkami należy wprowadzić w pliku nową kolumnę,
+ w której odpowiednie wartości zostaną umieszczone przy odpowiednich słówkach.
+ Nie wszystkie słowa muszą mieć wypełnioną każdą kolumnę, o ile w formularzu
+ znajdzie się jej domyślna wartość.
+ Zaraz zobaczysz to na kilku przykładach.
+\end_layout
+
+\begin_layout Section
+Przygotowanie zgłoszenia
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Wiesz już mniej więcej, czego od Ciebie oczekujemy.
+ Aby zgłosić nowe tłumaczenie, musisz postępować według poniższych kroków:
+\end_layout
+
+\begin_layout Subsection
+Zapisz odpowiednie tłumaczenia
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+W tym celu możesz użyć prawie dowolnego programu.
+ Może to być arkusz kalkulacyjny, edytor tesktu, ulubiona aplikacja do robienia
+ komputerowych fiszek (np.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Quizlet.com"
+target "quizlet.com"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Przygotuj dane
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Większość programów takich jak Excel, Arkusze Google, czy Quizelet oferuje
+ eksport jednym kliknięciem, więc nie powinno być z tym problemu! Pamiętaj,
+ szukaj opcji eksportu do pliku .csv lub .txt.
+\end_layout
+
+\begin_layout Standard
+Taki plik tekstowy to tak jakby arkusz kalkulacyjny zapisany w formie tekstu
+ - kolejne linijki to wiersze arkusza, a przecinki oddzielają kolumny.
+ Pierwsza linijka pliku to nagłówki tabeli, czyli nazwy kolumn - pamiętaj,
+ żeby je dodać! Każda kolejna linijka to słowo, do którego możesz dodawać
+ różne własności w postaci kolumn.
+ Obowiązkowe to 
+\begin_inset Quotes pld
+\end_inset
+
+base
+\begin_inset Quotes prd
+\end_inset
+
+ i 
+\begin_inset Quotes pld
+\end_inset
+
+trans
+\begin_inset Quotes prd
+\end_inset
+
+ (lub 
+\begin_inset Quotes pld
+\end_inset
+
+mono
+\begin_inset Quotes prd
+\end_inset
+
+), czyli słowo w podstawowym języku i jego tłumaczenie.
+ Możesz dodawać kolejne opcje do słów po prostu tworząc kolumny:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes pld
+\end_inset
+
+mono
+\begin_inset Quotes prd
+\end_inset
+
+ - definicja
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes pld
+\end_inset
+
+author
+\begin_inset Quotes prd
+\end_inset
+
+ - jeśli autorem danego tłumaczenia jest ktoś inny, zaznacz to tutaj
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes pld
+\end_inset
+
+level
+\begin_inset Quotes prd
+\end_inset
+
+ - jeśli dane tłumaczenie jest prostsze lub trudniejsze od pozostałych,
+ zaznacz to tutaj (w skali od 1-8)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes pld
+\end_inset
+
+tags
+\begin_inset Quotes prd
+\end_inset
+
+ - dodatkowe tagi, które chcesz dodać do słowa, oddzielone przecinkami.
+ Zawsze muszą być ostatnią kolumną
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Przykładowo, Twój słownik przygotowywany w Excelu może wyglądać tak (zauważ,
+ że nie wszystkie słowa mają wypełnione dodatkowe parametry, nie jest to
+ konieczne):
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename instruction-images/5.png
+	lyxscale 10
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Przykładowy arkusz kalkulacyjny
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A po eksporcie tak:
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename instruction-images/6.png
+	lyxscale 10
+	width 13cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Plik tekstowy po eksporcie
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwróć uwagę, jakimi znakami są oddzielone kolumny w Twoim pliku tekstowym
+ - jeśli innym niż przecinkiem, zaznacz to koniecznie w formularzu! Jeśli
+ program pyta, jakich separatorów użyć, to powiedz mu, że przecinków.
+\end_layout
+
+\begin_layout Subsection
+Wyślij swój plik
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Formularz jest dość czytelny ;) Wpisz swoje dane, wymyśl i zapamiętaj PIN
+ (będzie potem potrzebny do sprawdzania czy Ty to Ty, kiedy będziesz znowu
+ wysyłać coś do Słownika, ale nie martw się - wyślemy Ci go mailem :P).
+ Poziom słówek określ w skali 1-8.
+\end_layout
+
+\begin_layout Standard
+Pola dotyczące tagów są podzielone na dwie sekcje - tagi dodawane do każdego
+ słowa i informacje o tagach, które dodałeś do pojedynczych słów.
+ Zwróć uwagę na pola do wypełnienia:
+\end_layout
+
+\begin_layout Itemize
+‘nazwa’ jest elementem bazy danych.
+ Może się składać tylko z cyfr, małych liter podkreślników i myślników (_,-).
+ Dodatkowo nie może się zaczynać od ‘to_’ oraz ‘from_’.
+\end_layout
+
+\begin_layout Itemize
+‘czytelna nazwa’ to sposób, w jaki Twój tag zobaczą inni.
+ Tutaj możesz użyć dowolnego tesktu.
+ Pole to jest opcjonalne.
+ Jeśli używasz tagu, który znajduje się już w bazie, otrzyma on zapisane
+ wcześniej ‘readable’ automatycznie.
+ Pole to jest opcjonalne.
+\end_layout
+
+\begin_layout Itemize
+‘opis’ - czasem nazwa to zbyt mało, żeby zrozumieć znaczenie tagu.
+ Możesz pomóc innym użytkownikom umieszczając krótki opis, który zobaczą
+ po najechaniu myszką na nazwę tagu.
+ Jeśli używasz tagu, który znajduje się już w bazie, otrzyma on zapisane
+ wcześniej ‘description’ automatycznie.
+ Pole to jest opcjonalne.
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Wszystko gotowe? Kliknij 
+\begin_inset Quotes pld
+\end_inset
+
+Wyślij
+\begin_inset Quotes prd
+\end_inset
+
+!
+\end_layout
+
+\begin_layout Part
+Pytania?
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hspace{}
+\length 1.5em
+\end_inset
+
+Jeśli masz jakieś dodatkowe pytania, jesteśmy otwarci na kontakt!
+\end_layout
+
+\begin_layout Standard
+Napisz do nas na 
+\begin_inset CommandInset href
+LatexCommand href
+name "dict.wyd@gmail.com"
+target "dict.wyd@gmail.com"
+type "mailto:"
+
+\end_inset
+
+.
+ Jesteśmy też na Telegramie: Kuba Dranczewski - 
+\begin_inset CommandInset href
+LatexCommand href
+name "@ZGora"
+target "telegram.me/ZGora"
+
+\end_inset
+
+ i Hubert Bereś - 
+\begin_inset CommandInset href
+LatexCommand href
+name "@HubertB"
+target "telegram.me/HubertB"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part
+Przydatne linki
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset href
+LatexCommand href
+name "wyd-dict.ddm.org.pl"
+target "wyd-dict.ddm.org.pl"
+
+\end_inset
+
+- Słownik
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset href
+LatexCommand href
+name "wyd-dict.ddm.org.pl#contribute"
+target "wyd-dict.ddm.org.pl#contribute"
+
+\end_inset
+
+- formularz zgłoszeniowy
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset href
+LatexCommand href
+name "sheets.google.com"
+target "sheets.google.com"
+
+\end_inset
+
+- dobra alternatywa dla Excela
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset href
+LatexCommand href
+name "quizlet.com"
+target "quizlet.com"
+
+\end_inset
+
+- apka do fiszek
+\end_layout
+
+\end_body
+\end_document
