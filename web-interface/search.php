@@ -30,9 +30,9 @@
         <tr>
             <td class="mdl-data-table__cell--non-numeric base"><?php echo $row['base'] ?></td>
             <td class="mdl-data-table__cell--non-numeric trans"><?php echo $row['trans'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric mono"><?php echo $row['mono'] ?></td>
+            <td class="mdl-data-table__cell--non-numeric mono mdl-cell--hide-phone mdl-cell--hide-tablet"><?php echo $row['mono'] ?></td>
             <td class="mdl-data-table__cell--non-numeric author"><?php echo $row['author'] ?></td>
-            <td class="level"><?php echo $row['level'] ?></td>
+            <td class="level mdl-cell--hide-phone"><?php echo $row['level'] ?></td>
         </tr>
 <?php
     }

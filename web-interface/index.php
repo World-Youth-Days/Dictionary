@@ -44,12 +44,12 @@
             <div id="nav">
                 <a href="/"><div class="nav-elem active" id="nav-mainPage"><?php t("mainPage") ?></div></a>
                 <a href="#contribute"><div class="nav-elem" id="nav-contribute"><?php t("contribute") ?></div></a>
-                <a href="#about"><div class="nav-elem" div="nav-about"><?php t("about") ?></div></a>
+                <a href="#about"><div class="nav-elem" id="nav-about"><?php t("about") ?></div></a>
             </div>
         </div>
         <div id="content">
             <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--4-col">
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
                     <div id="filters" class="mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text"><?php t("Search") ?></h2>
@@ -157,9 +157,9 @@
                         <thead>
                             <td class="mdl-data-table__cell--non-numeric"><?php t("Word") ?></td>
                             <td class="mdl-data-table__cell--non-numeric"><?php t("Translation") ?></td>
-                            <td class="mdl-data-table__cell--non-numeric"><?php t("Definition") ?></td>
+                            <td class="mdl-data-table__cell--non-numeric mdl-cell--hide-phone mdl-cell--hide-tablet"><?php t("Definition") ?></td>
                             <td class="mdl-data-table__cell--non-numeric"><?php t("Author") ?></td>
-                            <td><?php t("Level") ?></td>
+                            <td class="mdl-cell--hide-phone"><?php t("Level") ?></td>
                         </thead>
                         <tbody id="words-table-body">
                             
@@ -172,8 +172,8 @@
                             <div id="chooseLanguage"></div>
                         </div>
                         <div id="communication-nothing-found" class="communication">
-                            <h2>Nic nie znaleziono!</h2>
-                            <p>Wybierz inne hasło do wyszukiwania.<br>A może poziomy trudności są źle ustawione?</p>
+                            <h2><?php t("nothingFound") ?></h2>
+                            <p><?php t("nothingFoundTroubleshooting") ?></p>
                         </div>
                         <div id="communication-choose-tags" class="communication">
                             <h2>Nic tu nie ma!</h2>

@@ -12,6 +12,7 @@ function t($string) {
 <div id="page">
     <h2><?php t("contribute") ?></h2>
     <p><?php t("contributeHi") ?></p>
+    <hr>
     <form action="contribute.php" method="post" target="_blank" enctype="multipart/form-data">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="author" name="author">
