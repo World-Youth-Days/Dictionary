@@ -125,10 +125,15 @@
                             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                 $tag_name = ($row['readable']!="" ? $row['readable'] : $row['tag_name']);
                             ?>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['tag_name'] ?>" style="display: none;">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-<?php echo $row['tag_name'] ?>" style="display: none;" id="label-for-<?php echo $row['tag_name'] ?>">
                                 <input type="checkbox" id="checkbox-<?php echo $row['tag_name'] ?>" class="mdl-checkbox__input tag-checkbox">
                                 <span class="mdl-checkbox__label"><?php echo $tag_name ?></span>
                             </label>
+                            <?php if ($row['description']!="") { ?>
+                            <div class="mdl-tooltip mdl-tooltip--large" for="label-for-<?php echo $row['tag_name'] ?>">
+                                <?php echo $row['description'] ?>
+                            </div>
+                            <?php } ?>
                             <?php } ?>
                             <div id="tags-instruction"><?php t("firstChooseTheLanguages") ?></div>
                         </div>

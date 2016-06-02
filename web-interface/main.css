@@ -59,6 +59,9 @@ body {
     display: inline-block;
     /* line-height: 36px; */
 }
+#tag-container .mdl-tooltip {
+    margin-top: -35px;
+}
 .hardness-container {
     text-align: center;
 }
