@@ -2,14 +2,15 @@
 import codecs
 import logging
 
-from DbAdapter import DbAdapter
+from DbAdapter import DbAdapter, tag_enhance
 from display_dict import display_dict
 
 db = DbAdapter(None)  # define db connection
-printable = []    # here place all processed records
+printable = []  # here place all processed records
 rows = ['base', 'mono', 'trans', 'author', 'level']
 pos = dict()  # dict with positions in file
-const = dict()      # dict with const values
+const = dict()  # dict with const values
+tags_info = []
 
 
 def zero():
@@ -20,7 +21,6 @@ def zero():
 
 
 def examine_sources(header, **kwargs):
-
 	# --------need to add remove-# feature
 
 	"""find pos and const in file and kwargs"""
@@ -70,7 +70,6 @@ def check_sources():
 
 
 def human_check(force_yes):
-
 	display_dict(printable, rows + ['tags'])  # display using new method form display_dict.py
 
 	if force_yes is True:
@@ -93,9 +92,21 @@ def open_file(path_name):
 
 
 def add_to_db():
-	global printable, db
+	global printable, db, tags_info
+
 	db.db.begin()
 	# begin a transaction. No data will be written to db until commit()
+
+	for tag in tags_info:
+		db.db[tag['tag_name']]
+		tag = tag_enhance(tag)
+		if tag['description'] == '':
+			tag['description'] = None
+		db.tags.upsert(tag, ['tag_name'])
+		# db.set_flag(tag['tag_name'], tag['flag'])
+		# db.set_readable(tag['tag_name'], tag['readable'])
+		# db.set_description(tag['tag_name'], tag.get('description'))
+
 	records = []
 	stats = [0, 0]
 	for p in printable:
@@ -122,6 +133,50 @@ def add_to_db():
 	print("Changes written to db.")
 
 
+def extract_info(filename, tab):
+	global tags_info
+
+	try:
+		info = codecs.open(filename, 'r', 'utf-8')
+	except SystemError:
+		print("Failed to open metadata file!")
+		return 1
+	d = dict()
+	for x in ['rd', 'cd', 'author', 'from', 'to', 'level']:
+		d[x] = info.readline().strip()
+
+	tab['row_delim'] = d['rd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+	tab['col_delim'] = d['cd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+	#           process delimiters!!!! str.replace([\n, \t])...
+
+	tab['tags'] = 'from_' + d['from'].strip()
+	tab['tags'] += (',to_' + d['to'].strip())
+	tab['level'] = int(d['level'])
+
+	for line in info:       # const tags
+		if len(line) < 5:
+			break
+
+		tag = line[:line.find(',')]
+		read = line[line.find('<r>') + 3: line.find('</r>')]
+		desc = line[line.find('<d>') + 3: line.find('</d>')]
+
+		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
+		tab['tags'] += (',' + tag)
+
+	for line in info:       # live tag's descriptions
+		if len(line) < 5:
+			break
+
+		tag = line[:line.find(',')]
+		read = line[line.find('<r>') + 3: line.find('</r>')]
+		desc = line[line.find('<d>') + 3: line.find('</d>')]
+
+		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
+
+	return tab
+
+
 # --------------------------------------------------------------------#
 # ----------------------   Main methods      -------------------------#
 # --------------------------------------------------------------------#
@@ -131,6 +186,8 @@ def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
 	global db, printable, rows, pos, const
 
 	zero()
+	extract_info(path_name + '.inf', kwargs)
+
 	f = open_file(path_name)
 	if f == 1:
 		return 4
@@ -138,7 +195,7 @@ def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
 	# --------------------       Grab data     --------------------------#
 
 	data = [s.split(col_delim) for s in f.read().split(row_delim)]
-	if len(data[-1][0]) == 0:    # prevent last empty line in file...
+	if len(data[-1][0]) == 0:  # prevent last empty line in file...
 		data = data[:-1]
 	f.close()
 
@@ -182,13 +239,13 @@ def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
 
 	add_to_db()
 
-	print("Changes written to db.")
-
 
 def insert_custom_record_quotes(path_name, col_delim=',', row_begin='', row_end='\n', **kwargs):
 	global db, printable, rows, pos, const
 
 	zero()
+	extract_info(path_name, kwargs)
+
 	f = open_file(path_name)
 	if f == 1:
 		return 4
@@ -238,8 +295,6 @@ def insert_custom_record_quotes(path_name, col_delim=',', row_begin='', row_end=
 
 	add_to_db()
 
-	print("Changes written to db.")
-
 
 def insert_line_per_record(path_name, delimiter=',', **kwargs):
 	global db, printable, rows, pos, const
@@ -277,9 +332,9 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 			d['tags'] += const['tags']
 		for t in d['tags']:
 			if t.startswith('#'):
-				d['tags'][d['tags'].index(t)] = t[1:]       # remove initial # in tags
+				d['tags'][d['tags'].index(t)] = t[1:]  # remove initial # in tags
 
-		printable.append(d)   # now contains tags as a list also
+		printable.append(d)  # now contains tags as a list also
 
 	f.close()
 
@@ -308,6 +363,7 @@ def import_from_csv(path_name, **kwargs):
 	           level=None)  # sorry, I avoid understanding deep/shallow copy specs ;)
 	const = dict()
 
+
 def test_tags_table():
 	global db
 	db.set_readable('const_tag_1', 'First Constant Tag')
@@ -317,18 +373,19 @@ def test_tags_table():
 	db.set_flag('live_tag_2', 'live')
 	print(db.get_tag("heheszki"))
 
+
 # --------------------------------------------------------------------#
 # ----------------------    Call the functions   ---------------------#
 # --------------------------------------------------------------------#
 
 
-insert_custom_record("../data/test1.txt", author="francuski", tags="from_fr,to_pl",
-                       level=8, force_yes=True)
+insert_custom_record("../data/test1.txt", force_yes=True)
+#
+insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
+                       level=4, force_yes=True)
 
-#insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
-#                       level=4, force_yes=True)
+insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
+                       force_yes=True)
+# test_tags_table()
 
-#insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
-#                       force_yes=True)
-
-#test_tags_table()
+# print(extract_info('../data/info-test1.txt'))
