@@ -143,16 +143,16 @@
                         <div class="hardness-container">
                             <div class="hardness-des" id="hardness-des-min">Min</div>
                             <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="10" value="1" id="hardness-min">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="8" value="1" id="hardness-min">
                             </div>
                             <div class="hardness-val" id="hardness-val-min">0</div>
                         </div>
                         <div class="hardness-container">
                             <div class="hardness-des" id="hardness-des-min">Max</div>
                             <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="10" value="10" id="hardness-max">
+                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="8" value="8" id="hardness-max">
                             </div>
-                            <div class="hardness-val" id="hardness-val-max">10</div>
+                            <div class="hardness-val" id="hardness-val-max">8</div>
                         </div>
                     </div>
                 </div>

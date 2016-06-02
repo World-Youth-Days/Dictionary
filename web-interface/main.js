@@ -4,7 +4,6 @@ $(document).ready(function() {
     
     if($("input[name='options-from']:checked").val()!=undefined && $("input[name='options-to']:checked").val()!=undefined) {
         $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-            alert(data);
             if (data!="//ABC//") {
                 data = data.split(";");
                 for (i=0; i<data.length; i++) {
