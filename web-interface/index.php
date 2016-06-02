@@ -181,8 +181,8 @@
                             <p><?php t("nothingFoundTroubleshooting") ?></p>
                         </div>
                         <div id="communication-choose-tags" class="communication">
-                            <h2>Nic tu nie ma!</h2>
-                            <p>Wybierz jeden ze słowników z menu po lewej.<br>A może poziomy trudności są źle ustawione?</p>
+                            <h2><?php t("noWords") ?></h2>
+                            <p><?php t("noWordsTroubleshooting") ?></p>
                         </div>
                         <div id="communication-additional" class="communication">
                             

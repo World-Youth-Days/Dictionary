@@ -8,6 +8,8 @@ $translations = array(
     "aboutContent" => "Hi, we are two young people from Poland!",
     "nothingFound" => "Nothing found!",
     "nothingFoundTroubleshooting" => "Please refine your query or the hardness levels you've chosen!",
+    "noWords" => "Nothing to show!",
+    "noWordsTroubleshooting" => "We sadly don't have any words to show you for the selected pair of languages. Maybe trying choosing them the other way round will help?<br><br>There's also another fix for this situation! <a href='#contribute'>Help us and create the translations yourself!</a>",
     "Search" => "Search",
     "SearchForWordDefLabel" => "Search for word, definition, label...",
     "Languages" => "Languages",

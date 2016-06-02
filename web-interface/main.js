@@ -4,7 +4,8 @@ $(document).ready(function() {
     
     if($("input[name='options-from']:checked").val()!=undefined && $("input[name='options-to']:checked").val()!=undefined) {
         $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-            if (data!="\\ABC\\") {
+            alert(data);
+            if (data!="//ABC//") {
                 data = data.split(";");
                 for (i=0; i<data.length; i++) {
                     $("#checkbox-"+data[i]).parent().show();
@@ -25,9 +26,9 @@ $(document).ready(function() {
         $("#language-from .radio-text").text($(this).val().substr(5));
         if($("input[name='options-to']:checked").val() != undefined) {
             $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-                if (data!="\\ABC\\") {
+                $("#tag-container label").hide();
+                if (data!="//ABC//") {
                     data = data.split(";");
-                    $("#tag-container label").hide();
                     for (i=0; i<data.length; i++) {
                         $("#checkbox-"+data[i]).parent().show();
                     }
@@ -50,7 +51,8 @@ $(document).ready(function() {
         $("#language-to .radio-text").text($(this).val().substr(3));
         if($("input[name='options-from']:checked").val() != undefined) {
             $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-                if (data!="\\ABC\\") {
+                $("#tag-container label").hide();
+                if (data!="//ABC//") {
                     data = data.split(";");
                     for (i=0; i<data.length; i++) {
                         $("#checkbox-"+data[i]).parent().show();

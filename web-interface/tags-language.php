@@ -65,8 +65,9 @@
             }
         }
         echo $return;
+        if ($return == "") echo "//ABC//";
     } else {
-        echo "";
+        echo "//ABC//";
     }
     $db->close(); unset($db);
 ?>
