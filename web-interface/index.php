@@ -7,7 +7,7 @@
         <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-amber.min.css" />
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-orange.min.css" />
         <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
         <link rel="stylesheet" href="main.css" />
         <?php
@@ -175,6 +175,7 @@
                     </table>
                     <div id="communication">
                         <div id="communication-welcome" class="communication">
+                            <img src="img/logo-self.png" id="welcome-logo" class="mdl-cell--hide-phone" alt="logo">
                             <h2><?php t("welcome") ?></h2>
                             <p><?php t("welcomeContent") ?></p>
                             <div id="chooseLanguage"></div>

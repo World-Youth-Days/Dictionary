@@ -12,4 +12,5 @@ function t($string) {
 <div id="page">
     <h2><?php t("about") ?></h2>
     <?php t("aboutContent") ?>
+    <span class="mini"><?php t("code") ?> translation by <?php t("transAuthor") ?></span>
 </div>

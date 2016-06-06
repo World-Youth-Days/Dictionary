@@ -126,6 +126,20 @@ body {
 #footer a {
     color: #686868;
 }
+.fill {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 19px auto;
+}
+.mini {
+    font-size: 10px;
+    font-style: italic;
+}
+#welcome-logo {
+    float: left;
+    margin: 0px 25px;
+}
 
 /*Adding form*/
 .common-tag .mdl-textfield {
