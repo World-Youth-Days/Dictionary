@@ -22,12 +22,12 @@ $translations = array(
     "Translation" => "Translation",
     "Definition" => "Definition",
     "Author" => "Author",
-    "contributeHi" => "If you want to help create the Dictionary, that's great! You can find the instructions <a href='instructions/pl.pdf' target=_blank>here</a>. Please follow them carefully - the process is easier than it seems! Should you have any problems, we're accessible at dict.wyd[at]gmail.com.<br><br>Please note that the first time you use the following form to send us your translations, you actually create an account - remeber the mail and PIN, because they will be later used to verify your persoanlity ;) All the details will also be send to the email adress you provide.",
+    "contributeHi" => "If you want to help create the Dictionary, that's great! You can find the instructions <a href='instructions/pl.pdf' target=_blank>here</a>. Please follow them carefully - the process is easier than it seems! Should you have any problems, we're accessible at dict.wyd[at]gmail.com.<br><br>Please note that the first time you use the following form to send us your translations, you actually create an account - remeber the mail and PIN, because they will be later used to verify your persoanlity ;) All the details will also be send to the email address you provide.",
     "name" => "Name",
     "defaultLevel" => "Default level of the dictionary",
     "pin" => "Translator's PIN",
     "notANumber" => "This needs to be a number",
-    "mail" => "E-mail adress",
+    "mail" => "E-mail address",
     "fromLanguage" => "The base language of your dictionary ('from')",
     "toLanguage" => "The language into which you translate the words",
     "commonTags" => "If you want a tag to be added to all of the words in your dictionary, specify it here:",
@@ -41,6 +41,6 @@ $translations = array(
     "send" => "Send",
     "columnSeparator" => "Column separator",
     "lineSeparator" => "Line separator",
-    "separatorsExplanation" => "White characters: use \\n as new line (enter), \\t as tabulator and \\r as cariage return"
+    "separatorsExplanation" => "White characters: use \\n as new line (enter), \\t as tabulator and \\r as carriage return"
 );
 ?>
