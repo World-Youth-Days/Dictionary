@@ -1,0 +1,6 @@
+Options FollowSymLinks
+RewriteEngine On
+
+<FilesMatch "\.(db)$">
+deny from all
+</FilesMatch>
