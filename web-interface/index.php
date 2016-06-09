@@ -2,6 +2,13 @@
 <html>
     <head>
         <title>WYD Dictionary</title>
+        <meta name="description" content="WYD Dictionary - the best dictionary for the World Youth Day!" />
+        <meta property="og:title" content="WYD Dictionary" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://wyd-dict.tk/" />
+        <meta property="og:image" content="http://wyd-dict.tk/img/fb.png" />
+        <meta property="og:description" content="WYD Dictionary - the best dictionary for the World Youth Day!" />
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
