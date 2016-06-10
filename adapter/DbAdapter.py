@@ -94,6 +94,11 @@ class DbAdapter:
 		ver_f.close()
 		return 0
 
+	def backup_version_reset(self, version):
+		f = open('../data/version.txt', 'w')
+		f.write(str(version))
+		f.close()
+
 	def get_table(self, name=None):
 		if name is None:
 			return self.db.tables

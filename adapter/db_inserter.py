@@ -2,10 +2,10 @@
 import codecs
 import logging
 
-from DbAdapter import DbAdapter, tag_enhance
-from display_dict import display_dict
+from DbAdapter import *
+from display_dict import *
 
-db = DbAdapter(None)  # define db connection
+db = DbAdapter(None)  # open db connection
 printable = []  # here place all processed records
 rows = ['base', 'mono', 'trans', 'author', 'level']
 pos = dict()  # dict with positions in file
@@ -98,7 +98,7 @@ def add_to_db():
 	# begin a transaction. No data will be written to db until commit()
 
 	for tag in tags_info:
-		db.db[tag['tag_name']]
+		db.db.get_table(tag['tag_name'])
 		tag = tag_enhance(tag)
 		if tag['description'] == '':
 			tag['description'] = None
@@ -130,7 +130,9 @@ def add_to_db():
 	db.db.commit()
 	# write data to db. Additional checking might be done before
 
-	print("Changes written to db.")
+	print("Changes written to db. Now check if everything went properly...")
+	if input("Do you want to make backup?[y/n]") in ['y', 'yes', 'Y', 'Yes']:
+		db.backup()
 
 
 def extract_info(filename, tab):
@@ -349,19 +351,59 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 def import_from_csv(path_name, **kwargs):
 	import csv
 	global db, printable, pos, const, rows
-	pos['tags'] = None,
+	zero()
 
-	try:
-		f = csv.reader(codecs.open("foo.csv", encoding="utf-8"), dialect='excel')
-	except SystemError:
-		print("Error while opening file!")
-		return 4
-	print("\nFile: " + path_name + "\n")
+	file = open_file(path_name)
+	if file == 1:
+		print("Can't open file", path_name)
+		return 1
 
-	rows = ['base', 'mono', 'trans', 'author', 'level']
-	pos = dict(base=None, mono=None, trans=None, author=None,
-	           level=None)  # sorry, I avoid understanding deep/shallow copy specs ;)
-	const = dict()
+	f = csv.reader(file, **(kwargs.setdefault('csv', dict())))       # dialect='excel'
+
+	# --------------------       Grab data     --------------------------#
+
+	for row in f:
+		header = row
+		break
+
+	examine_sources(header, **kwargs)
+	logging.info("pos: " + str(pos) + ", const: " + str(const))
+
+	if check_sources() != 0:
+		return 2
+
+	# ----------------------    Build records    ------------------------#
+
+	for line in f:
+		d = dict()
+		for key in const:
+			d[key] = const[key]
+		for key in pos:  # constant values CAN be overridden by those
+			# taken directly from table (^-^)
+			d[key] = line[pos[key]]
+
+		d['tags'] = []  # override with table containing all live tags
+		if line[pos['tags']] is not '':
+			d['tags'] += line[pos['tags']:] # adding tables here
+
+		if 'tags' in const:
+			d['tags'] += const['tags']
+		for t in d['tags']:
+			if t.startswith('#'):
+				d['tags'][d['tags'].index(t)] = t[1:]  # remove initial # in tags
+
+		printable.append(d)  # now contains tags as a list also
+
+	file.close()
+
+	# -----------------------    Human check    --------------------------#
+
+	if human_check(kwargs.get('force_yes')) != 0:
+		return 3
+
+	add_to_db()
+
+
 
 
 def test_tags_table():
@@ -379,13 +421,16 @@ def test_tags_table():
 # --------------------------------------------------------------------#
 
 
-insert_custom_record("../data/test1.txt", force_yes=True)
+# insert_custom_record("../data/test1.txt", force_yes=True)
 #
-insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
-                       level=4, force_yes=True)
+# insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
+#                        level=4, force_yes=True)
+#
+# insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
+#                        force_yes=True)
 
-insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
-                       force_yes=True)
+import_from_csv("../data/test1.csv", author='Hubert', level=2, csv={})
+
 # test_tags_table()
 
 # print(extract_info('../data/info-test1.txt'))
