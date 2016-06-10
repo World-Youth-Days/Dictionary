@@ -13,7 +13,7 @@ $translations = array(
     "noWords" => "Nic tu nie ma...",
     "noWordsTroubleshooting" => "Niestety nie mamy żadnych słówek do pokazania w tej kombinacji języków. Może spróbujesz wybrać inną parę?<br><br>Jest też inne rozwiązanie tego problemu ;) <a href='#contribute'>Sam dodaj brakujące tłumaczenie!</a>",
     "Search" => "Szukaj",
-    "SearchForWordDefLabel" => "Wyszukaj słowo, definicję, autora...",
+    "SearchForWordDefLabel" => "Wyszukaj słowo, definicję, opis...",
     "Languages" => "Języki",
     "Tags" => "Tagi",
     "firstChooseTheLanguages" => "Wybierz języki powyżej, by wyświetlić listę dostępnych tagów. Jeśli tłumaczenie nie jest jeszcze dostępne, dlaczego nie <a href='#contribute'>stworzysz go teraz?</a>",
