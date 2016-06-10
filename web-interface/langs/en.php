@@ -22,7 +22,7 @@ $translations = array(
     "Translation" => "Translation",
     "Definition" => "Definition",
     "Author" => "Author",
-    "contributeHi" => "If you want to help create the Dictionary, that's great! You can find the instructions <a href='instructions/pl.pdf' target=_blank>here</a>. Please follow them carefully - the process is easier than it seems! Should you have any problems, we're accessible at dict.wyd[at]gmail.com.<br><br>Please note that the first time you use the following form to send us your translations, you actually create an account - remeber the mail and PIN, because they will be later used to verify your persoanlity ;) All the details will also be send to the email address you provide.",
+    "contributeHi" => "If you want to help create the Dictionary, that's great! You can find the instructions <a href='instructions/pl.pdf' target=_blank>here</a>. Please follow them carefully - the process is easier than it seems! Should you have any problems, we're accessible at dict.wyd[at]gmail.com.<br><br>Please note that the first time you use the following form to send us your translations, you actually create an account - remember the mail and PIN, because they will be later used to verify your personality ;) All the details will also be send to the email address you provide.",
     "name" => "Name",
     "defaultLevel" => "Default level of the dictionary",
     "pin" => "Translator's PIN",
