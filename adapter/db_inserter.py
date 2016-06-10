@@ -309,6 +309,7 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 	# --------------------       Grab data     --------------------------#
 
 	header = f.readline().strip().split(delimiter)
+	header[0] = header[0].replace('\ufeff', '')
 	examine_sources(header, **kwargs)
 	logging.info("pos: " + str(pos) + ", const: " + str(const))
 
@@ -327,7 +328,7 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 			d[key] = line[pos[key]]
 
 		d['tags'] = []  # override with table containing all live tags
-		if line[pos['tags']] is not '':
+		if len(line) >= pos.get('tags', 100):
 			d['tags'] += line[pos['tags']:]
 
 		if 'tags' in const:
@@ -358,7 +359,7 @@ def import_from_csv(path_name, **kwargs):
 		print("Can't open file", path_name)
 		return 1
 
-	f = csv.reader(file, **(kwargs.setdefault('csv', dict())))       # dialect='excel'
+	f = csv.reader(file, **(kwargs.get('csv', dict())))       # dialect='excel'
 
 	# --------------------       Grab data     --------------------------#
 
@@ -429,8 +430,9 @@ def test_tags_table():
 # insert_line_per_record("../data/test3.txt", author="śmieszek", tags="from_pl-de,#to_pl",
 #                        force_yes=True)
 
-import_from_csv("../data/test1.csv", author='Hubert', level=2, csv={})
+# import_from_csv("../data/test1.csv", author='Hubert', level=2, csv={})
 
 # test_tags_table()
 
 # print(extract_info('../data/info-test1.txt'))
+insert_line_per_record('../data/Księgi.txt', author='Magda', level=3, tags='ksiegi')

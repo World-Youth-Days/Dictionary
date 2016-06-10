@@ -1,0 +1,26 @@
+﻿trans,base
+Łukasz,Luke
+Marek,Mark
+Jan,John
+Dzieje Apostolskie,Acts
+List do Rzymian,Romans
+List do Koryntian,Corinthians
+List do Galatów,Galatians
+List do Efezjan,Ephesians
+List do Kolosan,Colossians
+List do Tesaloniczan,Thessalonians
+List do Tymoteusza,Timothy
+List do Hebrajczyków,Hebrews
+List św. Piotra,Peter
+List św. Jana,John
+Apokalipsa,Revelation
+Rodzaju,Genesis
+Wyjścia,Exodus
+Kapłańska,Leviticus
+Liczb,Numbers
+Powtórzonego Prawa,Deuterenomy
+Księga Przysłów,Proverbs
+Księga Koheleta,Ecclesiastes
+Hioba,Job
+Psalmów,Psalm
+Pieśń nad Pieśniami,Song of Solomon
