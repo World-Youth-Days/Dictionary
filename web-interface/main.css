@@ -1,0 +1,151 @@
+body {
+    background-color: #e6e6e6;
+}
+#header {
+    background-color: #2196F3;
+    height: 150px;
+    position: relative;
+}
+#logo {
+    margin-left: 34px;
+    height: 100%;
+    line-height: 11;
+}
+#nav {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+#nav .active {
+    background-color: rgba(255, 255, 255, 0.23);
+}
+.nav-elem {
+    display: inline-block;
+    padding: 13px;
+    color: white;
+    transition: all 1s;
+}
+.nav-elem:hover {
+    background-color: rgba(255, 255, 255, 0.6) !important;
+}
+#content {
+    max-width: 1154px;
+    margin: 0 auto;
+}
+#filters {
+    background-color: #FFD740;
+    width: 100%;
+    padding: 8px;
+}
+#filters a {
+    color: white;
+}
+#search_box {
+    padding: 8px;
+    text-align: center;
+    margin: -22px auto;
+}
+#search_input {
+    display: inline-block;
+    width: 234px;
+}
+#search_button {
+    display: inline-block;
+}
+#language-box {
+    text-align: center;
+}
+#language-box .mdl-radio {
+    width: 100%;
+}
+.language-chooser {
+    display: inline-block;
+}
+#language-arrow {
+    display: inline-block;
+    /* line-height: 36px; */
+}
+#tag-container .mdl-tooltip {
+    margin-top: -35px;
+}
+.hardness-container {
+    text-align: center;
+}
+.hardness-des {
+    display: inline-block;
+    width: 35px;
+}
+.hardness-slider {
+    display: inline-block;
+    width: 200px;
+}
+.hardness-val {
+    display: inline-block;
+    width: 35px;
+}
+@media screen and (min-width: 992px) {
+    #word-container {
+        margin-top: -100px;
+    }
+}
+.card-content {
+    padding: 8px;
+}
+#loading {
+    width: 100%;
+    display: none;
+    margin-bottom: -4px;
+    z-index: 1;
+}
+#words-table {
+    width: 100%;
+}
+#words-table-body tr {
+    border: 1px solid rgba(0,0,0,.12);
+}
+.base {
+    font-weight: bold;
+}
+.communication {
+    text-align: center;
+    display: none;
+}
+.communication p {
+    margin: 20px;
+    font-size: 18px;
+}
+#footer {
+    font-size: 9px;
+    text-align: center;
+    line-height: 12px;
+    color: #686868;
+}
+#footer i {
+    font-size: 8px;
+}
+#footer a {
+    color: #686868;
+}
+.fill {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 19px auto;
+}
+.mini {
+    font-size: 10px;
+    font-style: italic;
+}
+#welcome-logo {
+    float: left;
+    margin: 0px 25px;
+}
+
+/*Adding form*/
+.common-tag .mdl-textfield {
+    width: 25%;
+    margin: 0 5px;
+}
+.hidden {
+    display: none;
+}
