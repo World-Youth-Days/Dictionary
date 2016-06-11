@@ -58,7 +58,7 @@ $(document).ready(function() {
     
     $(".from-radio").change(function() {
         $("#language-from .radio-text").text($(this).val().substr(5));
-        if($("input[name='options-to']:checked").val() != undefined) {
+        if($("input[name='options-to']:checked")[0] != undefined) {
             $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
                 $("#tag-container label").hide();
                 if (data!="//ABC//") {
@@ -75,15 +75,15 @@ $(document).ready(function() {
                     $("#tags-instruction").show();
                 }
             });
+            data = location.hash;
+            data = data.split(";");
+            data[3] = $("input[name='options-from']:checked").val();
+            location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val();
         }
-        data = location.hash;
-        data = data.split(";");
-        data[3] = $("input[name='options-from']:checked").val();
-        location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val()
     });
     $(".to-radio").change(function() {
         $("#language-to .radio-text").text($(this).val().substr(3));
-        if($("input[name='options-from']:checked").val() != undefined) {
+        if($("input[name='options-from']:checked")[0] != undefined) {
             $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
                 $("#tag-container label").hide();
                 if (data!="//ABC//") {
@@ -100,11 +100,11 @@ $(document).ready(function() {
                     $("#tags-instruction").show();
                 }
             });
+            data = location.hash;
+            data = data.split(";");
+            data[4] = $("input[name='options-to']:checked").val();
+            location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val();
         }
-        data = location.hash;
-        data = data.split(";");
-        data[4] = $("input[name='options-to']:checked").val();
-        location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val()
     });
     
     //Checkboxes for tags
