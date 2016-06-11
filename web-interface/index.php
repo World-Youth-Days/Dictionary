@@ -82,6 +82,16 @@
                 <a href="/"><div class="nav-elem active" id="nav-mainPage"><?php t("mainPage") ?></div></a>
                 <a href="#contribute"><div class="nav-elem" id="nav-contribute"><?php t("contribute") ?></div></a>
                 <a href="#about"><div class="nav-elem" id="nav-about"><?php t("about") ?></div></a>
+                <div class="nav-elem" id="nav-language-picker"><i class="material-icons">language</i><?php t("code") ?></div>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" id="nav-language-picker-menu" for="nav-language-picker">
+                    <?php
+                    $avLang = scandir("langs");
+                    foreach ($avLang as $name) {
+                        if (strlen($name)==6) {?>
+                    <li class="mdl-menu__item"><?php echo strtoupper(substr($name, 0, 2)) ?></li>
+                    <?php }} ?>
+                    <li class="mdl-menu__item" id="nav-language-picker-add">Add language...</li>
+                </ul>
             </div>
         </div>
         <div id="content">

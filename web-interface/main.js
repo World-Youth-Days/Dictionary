@@ -19,6 +19,16 @@ $(document).ready(function() {
         })
     })
     
+    //Interface language chooser
+    $("#nav-language-picker-menu li").click(function() {
+        if($(this)[0].id == "nav-language-picker-add") {
+            location.hash = "addlanguage";
+        } else {
+            monster.set("language", $(this).text().toLowerCase())
+            location.reload()
+        }
+    })
+    
     //Languages input events
     if($("input[name='options-from']:checked").val()!=undefined && $("input[name='options-to']:checked").val()!=undefined) {
         $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {

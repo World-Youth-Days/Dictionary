@@ -27,11 +27,20 @@ body {
 .nav-elem {
     display: inline-block;
     padding: 13px;
+    overflow: hidden;
     color: white;
     transition: all 1s;
+    cursor: pointer;
+}
+.nav-elem .material-icons {
+    font-size: 12px;
+    margin: 0;
 }
 .nav-elem:hover {
     background-color: rgba(255, 255, 255, 0.6) !important;
+}
+#nav-language-picker {
+    text-transform: uppercase;
 }
 #content {
     max-width: 1154px;
