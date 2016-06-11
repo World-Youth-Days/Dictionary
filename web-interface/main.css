@@ -1,6 +1,11 @@
 body {
     background-color: #e6e6e6;
 }
+#consent {
+    background-color: #1E88E5;
+    padding: 8px;
+    text-align: center;
+}
 #header {
     background-color: #2196F3;
     height: 150px;

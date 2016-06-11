@@ -57,6 +57,15 @@
     }
     ?>
     <body>
+        <?php
+        if(!isset($_COOKIE["consent"])) {?>
+        <div id="consent">
+            <?php t("cookieConsent"); ?>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" id="okConsent">
+                <?php t("okCookieConsent"); ?>
+            </button>
+        </div>
+        <?php } ?>
         <div id="header" class="mdl-shadow--2dp">
             <div id="logo">
                 <img src="/img/logo-top.png" alt="WYD Dictionary" >
@@ -178,7 +187,7 @@
                 </div>
                 <div id="word-container" class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--2dp">
                     <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                    <table class="mdl-data-table mdl-js-data-table" id="words-table">
+                    <table class="mdl-data-table mdl-js-data-table" id="words-table" style="display:none;">
                         <thead>
                             <td class="mdl-data-table__cell--non-numeric"><?php t("Word") ?></td>
                             <td class="mdl-data-table__cell--non-numeric"><?php t("Translation") ?></td>
