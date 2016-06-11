@@ -15,6 +15,12 @@
        #echo "Opened database successfully\n";
     }
     
+    error_reporting(0);
+    register_shutdown_function( "fatal_handler" );
+    function fatal_handler() {
+        echo "//ABC//";
+    }
+    
     $search = $_GET['search'];
     $ids = "SELECT * FROM 'words' WHERE ";
     

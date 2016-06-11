@@ -14,6 +14,13 @@
     } else {
        #echo "Opened database successfully\n";
     }
+    
+    error_reporting(0);
+    register_shutdown_function( "fatal_handler" );
+    function fatal_handler() {
+        echo "//ABC//";
+    }
+    
     if ($_GET['from']!="undefined" && $_GET['to']!="undefined") {
         $ids = "SELECT * FROM words WHERE (";
         if ($_GET['tag'] != ""){
