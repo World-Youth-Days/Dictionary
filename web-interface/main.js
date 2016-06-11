@@ -167,6 +167,9 @@ $(document).ready(function() {
     //Main update function
     var prev = "tags";
     function update() {
+        ga('send', 'pageview', {
+            'page': location.pathname + location.search  + location.hash
+        });
         $("#loading").stop();
         $("#loading").fadeIn("slow");
         data = location.hash.split(";");
