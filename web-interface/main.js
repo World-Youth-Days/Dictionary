@@ -133,17 +133,28 @@ $(document).ready(function() {
     
     //Level input events
     $("#hardness-min").change(function() {
-        $("#hardness-val-min").text($(this).val());
         data = location.hash.split(";");
         data[1] = $(this).val();
         location.hash = data.join(";");
     });
+    $("#hardness-min").on('input', function () {
+        $("#hardness-val-min").text($(this).val());
+        $(".min-des").hide();
+        $("#min-des-"+$(this).val()).show();
+    });
+    $("#min-des-1").show();
     $("#hardness-max").change(function() {
         $("#hardness-val-max").text($(this).val());
         data = location.hash.split(";");
         data[2] = $(this).val();
         location.hash = data.join(";");
     });
+    $("#hardness-max").on('input', function () {
+        $("#hardness-val-max").text($(this).val());
+        $(".max-des").hide();
+        $("#max-des-"+$(this).val()).show();
+    });
+    $("#max-des-8").show();
     
     //Some misc functions
     function hideAll() {
@@ -195,8 +206,12 @@ $(document).ready(function() {
             
             $("#hardness-min").val(data[1]);
             $("#hardness-val-min").text(data[1]);
+            $(".min-des").hide();
+            $("#min-des-"+data[1]).show();
             $("#hardness-max").val(data[2]);
             $("#hardness-val-max").text(data[2]);
+            $(".max-des").hide();
+            $("#max-des-"+data[2]).show();
             
             tags = tags.substring(0, tags.length-1);
             $.get("query.php?tag="+tags+"&lmin="+data[1]+"&lmax="+data[2]+"&from="+data[3]+"&to="+data[4], function(data) {
