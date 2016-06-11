@@ -61,6 +61,7 @@ class DbAdapter:
 		                 'time': 0}
 		
 		self.tags = self.db.get_table("tags")
+		self.mono = self.db.get_table("mono")
 		# initialize columns with non typical value types
 		for k in ['tag_name', 'readable', 'flag', 'description']:
 			self.tags.create_column(k, String)
