@@ -18,7 +18,10 @@
     error_reporting(0);
     register_shutdown_function( "fatal_handler" );
     function fatal_handler() {
-        echo "//ABC//";
+        $error = error_get_last();
+        if ($error['type'] === E_ERROR) {
+            echo "//ABC//";
+        }
     }
     
     $search = $_GET['search'];
