@@ -19,6 +19,14 @@ $(document).ready(function() {
         })
     })
     
+    //Scroll on mobile
+    $(".scroll").click(function() {
+        if ($( window ).width()<826) {
+            toppy = {scrollTop: $("#word-container").offset().top-8};
+            $("html, body").animate(toppy, "slow", "swing")
+        }
+    })
+    
     //Interface language chooser
     $("#nav-language-picker-menu li").click(function() {
         if($(this)[0].id == "nav-language-picker-add") {
