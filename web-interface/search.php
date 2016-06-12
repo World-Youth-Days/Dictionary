@@ -24,12 +24,18 @@
         }
     }
     
-    $search = $_GET['search'];
+    function my_case($string) {
+        return mb_strtolower($string);
+    }
+    $db->createFunction('my_case', 'my_case');
+    $search = my_case($_GET['search']);
+    #echo $search;
     $ids = "SELECT * FROM 'words' WHERE ";
     
-    $strQuery = "SELECT * FROM words WHERE (base LIKE '%".$search."%' OR author LIKE '%".$search."%' OR trans LIKE '%".$search."%' OR level LIKE '%".$search."%' OR mono LIKE '%".$search."%') AND level>=".$_GET['lmin']." AND level<=".$_GET['lmax']." ORDER BY base";
-    $stmt = $db->prepare($strQuery);
+    
+    $strQuery = "SELECT * FROM words WHERE (my_case(base) LIKE '%".$search."%' OR my_case(author) LIKE '%".$search."%' OR my_case(trans) LIKE '%".$search."%' OR my_case(level) LIKE '%".$search."%' OR my_case(mono) LIKE '%".$search."%') AND level>=".$_GET['lmin']." AND level<=".$_GET['lmax']." ORDER BY base";
     #echo $strQuery;
+    $stmt = $db->prepare($strQuery);
     $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
     $result = $stmt->execute();
     $count = 0;
