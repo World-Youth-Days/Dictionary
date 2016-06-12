@@ -43,7 +43,8 @@ def examine_sources(header, **kwargs):
 		if 'tags' in header:
 			pos['tags'] = header.index('tags')
 		if 'tags' in kwargs:
-			const['tags'] = kwargs['tags'].split(',')
+			const['tags'] = []      # if needed #issue
+			const['tags'] += kwargs['tags'].strip().split(',')
 		# override plain string with table
 
 	return 0
@@ -135,25 +136,25 @@ def add_to_db():
 		db.backup()
 
 
-def extract_info(filename, tab):
-	global tags_info
+def extract_metadata(filename, delimiters):
+	global tags_info, const
 
 	try:
 		info = codecs.open(filename, 'r', 'utf-8')
 	except SystemError:
 		print("Failed to open metadata file!")
 		return 1
+
 	d = dict()
 	for x in ['rd', 'cd', 'author', 'from', 'to', 'level']:
 		d[x] = info.readline().strip()
 
-	tab['row_delim'] = d['rd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
-	tab['col_delim'] = d['cd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+	delimiters['row_delim'] = d['rd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+	delimiters['col_delim'] = d['cd'].replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
 	#           process delimiters!!!! str.replace([\n, \t])...
 
-	tab['tags'] = 'from_' + d['from'].strip()
-	tab['tags'] += (',to_' + d['to'].strip())
-	tab['level'] = int(d['level'])
+	const['tags'] = ['from_' + d['from'], 'to_' + d['to']]
+	const['level'] = int(d['level'])
 
 	for line in info:       # const tags
 		if len(line) < 5:
@@ -164,7 +165,7 @@ def extract_info(filename, tab):
 		desc = line[line.find('<d>') + 3: line.find('</d>')]
 
 		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
-		tab['tags'] += (',' + tag)
+		const['tags'].append(tag)
 
 	for line in info:       # live tag's descriptions
 		if len(line) < 5:
@@ -176,7 +177,8 @@ def extract_info(filename, tab):
 
 		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
 
-	return tab
+	m.close()
+	return 0
 
 
 # --------------------------------------------------------------------#
@@ -184,15 +186,20 @@ def extract_info(filename, tab):
 # --------------------------------------------------------------------#
 
 
-def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
+def insert_with_meta_delimiters(path_name, **kwargs):
 	global db, printable, rows, pos, const
-
-	zero()
-	extract_info(path_name + '.inf', kwargs)
 
 	f = open_file(path_name)
 	if f == 1:
 		return 4
+
+	# --------------------       Set delimiters    -----------------------#
+
+	delimiters = dict()
+	if extract_metadata(path_name, delimiters) != 0:
+		return 5
+	col_delim = delimiters['col_delim']
+	row_delim = delimiters['row_delim']
 
 	# --------------------       Grab data     --------------------------#
 
@@ -218,7 +225,7 @@ def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
 			# taken directly from table (^-^)
 			d[key] = line[pos[key]].strip()
 
-		d['tags'] = []  # override with table containing all live tags
+		d['tags'] = d['tags'][:-1]  # override with table containing all live tags
 		if line[pos['tags']] is not '':
 			d['tags'] += line[pos['tags']:]
 
@@ -241,17 +248,17 @@ def insert_custom_record(path_name, col_delim=',', row_delim='\n', **kwargs):
 
 	add_to_db()
 
+	zero()
+
 
 def insert_custom_record_quotes(path_name, col_delim=',', row_begin='', row_end='\n', **kwargs):
 	global db, printable, rows, pos, const
-
-	zero()
-	extract_info(path_name, kwargs)
 
 	f = open_file(path_name)
 	if f == 1:
 		return 4
 
+	extract_metadata(path_name, kwargs)
 	# --------------------       Grab data     --------------------------#
 
 	data = [s.split(col_delim) for s in f.read().split(row_delim)]
@@ -297,14 +304,18 @@ def insert_custom_record_quotes(path_name, col_delim=',', row_begin='', row_end=
 
 	add_to_db()
 
+	zero()
+
 
 def insert_line_per_record(path_name, delimiter=',', **kwargs):
 	global db, printable, rows, pos, const
-	zero()
 
 	f = open_file(path_name)
 	if f == 1:
 		return 4
+
+	# if extract_metadata(path_name, dict()) != 0:
+	# 	return 5
 
 	# --------------------       Grab data     --------------------------#
 
@@ -348,11 +359,12 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 
 	add_to_db()
 
+	zero()
+
 
 def import_from_csv(path_name, **kwargs):
 	import csv
 	global db, printable, pos, const, rows
-	zero()
 
 	file = open_file(path_name)
 	if file == 1:
@@ -360,6 +372,9 @@ def import_from_csv(path_name, **kwargs):
 		return 1
 
 	f = csv.reader(file, **(kwargs.get('csv', dict())))       # dialect='excel'
+
+	if extract_metadata(path_name, dict()) != 0:
+		return 5
 
 	# --------------------       Grab data     --------------------------#
 
@@ -404,6 +419,8 @@ def import_from_csv(path_name, **kwargs):
 
 	add_to_db()
 
+	zero()
+
 
 
 
@@ -422,7 +439,7 @@ def test_tags_table():
 # --------------------------------------------------------------------#
 
 
-# insert_custom_record("../data/test1.txt", force_yes=True)
+# insert_with_meta_delimiters("../data/test1.txt", force_yes=True)
 #
 # insert_line_per_record("../data/test2.txt", author="angielski", tags="#from_en,to_pl",
 #                        level=4, force_yes=True)
@@ -434,5 +451,9 @@ def test_tags_table():
 
 # test_tags_table()
 
-# print(extract_info('../data/info-test1.txt'))
-insert_line_per_record('../data/Księgi.txt', author='Magda', level=3, tags='ksiegi')
+# print(extract_metadata('../data/info-test1.txt'))
+
+tags_info = [{'tag_name': 'scriptures', 'flag': 'live', 'readable': 'Księgi', 'description':
+	'Księgi Pisma Świętego'}]
+insert_line_per_record('../data/Księgi.txt', author='Magda', level=3, tags='scriptures,from_en,'
+                                                                           'to_pl')
