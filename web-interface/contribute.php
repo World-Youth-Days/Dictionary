@@ -72,7 +72,7 @@ if (isset($_FILES['file_src']) && $_FILES['file_src']['error'] == UPLOAD_ERR_OK)
             $email->From      = $_POST['mail'];
             $email->FromName  = $_POST['author'];
             $email->Subject   = 'Words addition';
-            $email->Body      = $_POST['author']." wants to add records to the dictionary. Language: ".$_POST['from']."=>".$_POST['to'].". The level is ".$_POST['default_level'].". His PIN is correct.";
+            $email->Body      = $_POST['author']." wants to add records to the dictionary. Language: ".$_POST['from']."=>".$_POST['to'].". The level is ".$_POST['default_level'].". Their PIN is correct.";
 
             $name = date('m-d')."-".$_POST['author'].".".pathinfo($_FILES['file_src']['name'], PATHINFO_EXTENSION);
             $email->AddAttachment($_FILES['file_src']['tmp_name'], $name);
