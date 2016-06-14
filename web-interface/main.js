@@ -241,6 +241,16 @@ $(document).ready(function() {
             });
             $("#language-from .radio-text").text("--");
             $("#language-to .radio-text").text("--");
+            
+            $("#hardness-min").val(data[1]);
+            $("#hardness-val-min").text(data[1]);
+            $(".min-des").hide();
+            $("#min-des-"+data[1]).show();
+            $("#hardness-max").val(data[2]);
+            $("#hardness-val-max").text(data[2]);
+            $(".max-des").hide();
+            $("#max-des-"+data[2]).show();
+            
             $.get("search.php?search="+data[3]+"&lmin="+data[1]+"&lmax="+data[2], function(data) {
                 if (data == "//ABC//") {
                     $("#words-table-body").html("");
