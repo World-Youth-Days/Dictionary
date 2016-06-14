@@ -49,6 +49,7 @@ $translations = array(
     "tagDescription" => "Opis tagu",
     "addTag" => "Dodaj kolejny tag...",
     "specialTags" => "Jeśli używasz dodatkowych tagów w wysyłanym pliku, tutaj możesz dodać ich opisy:",
+    "userInput" => "Tu możesz dodać dodatkowe informacj dla nas.",
     "fileTransfer" => "Teraz załącz przygotowany plik z tłumaczeniami:",
     "readyToGo" => "Gotowe! Wystarczy kliknąć: ",
     "send" => "Wyślij",
