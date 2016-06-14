@@ -142,6 +142,12 @@ function t($string) {
         
         <p><?php t("fileTransfer") ?></p>
         <input type="file" name="file_src">
+        <hr>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label user-input">
+            <textarea class="mdl-textfield__input" type="text" id="user-input" name="user-input"></textarea>
+            <label class="mdl-textfield__label" for="user-input"><?php t("userInput") ?></label>
+        </div>
+        <hr>
         <p>
             <?php t("readyToGo") ?>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">

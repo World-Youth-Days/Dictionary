@@ -181,3 +181,12 @@ body {
 .hidden {
     display: none;
 }
+.user-input {
+    width: 90%;
+}
+.user-input.is-focused {
+    min-height: 200px;
+}
+.user-input.is-focused textarea {
+    min-height: 150px;
+}
