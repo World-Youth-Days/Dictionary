@@ -90,7 +90,7 @@ function t($string) {
                         <input class="mdl-textfield__input" type="text" id="common_description" name="common_description[]">
                         <label class="mdl-textfield__label" for="common_description"><?php t("tagDescription") ?></label>
                     </div>
-                    <button class="mdl-button mdl-js-button mdl-button--icon">
+                    <button class="mdl-button mdl-js-button mdl-button--icon delete-disabled" disabled>
                         
                     </button>
                 </div>
@@ -129,7 +129,7 @@ function t($string) {
                         <input class="mdl-textfield__input" type="text" id="special_description" name="special_description[]">
                         <label class="mdl-textfield__label" for="special_description"><?php t("tagDescription") ?></label>
                     </div>
-                    <button class="mdl-button mdl-js-button mdl-button--icon">
+                    <button class="mdl-button mdl-js-button mdl-button--icon delete-disabled" disabled>
                         
                     </button>
                 </div>

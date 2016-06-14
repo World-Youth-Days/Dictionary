@@ -170,6 +170,14 @@ body {
     width: 25%;
     margin: 0 5px;
 }
+.common-tag .delete {
+    vertical-align: top;
+    margin-top: 20px;
+}
+.common-tag .delete-disabled {
+    vertical-align: top;
+    margin-top: 20px;
+}
 .hidden {
     display: none;
 }
