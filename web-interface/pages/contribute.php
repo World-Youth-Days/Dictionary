@@ -152,30 +152,30 @@ function t($string) {
 </div>
 
 <script type="text/javascript">
-    $(".common-tags .delete").click(function(e) {
+    $(".common-tags .delete").click(function(event) {
         event.preventDefault();
         $(this).parent().remove();
     })
-    $(".common-ones .addTag").click(function(e) {
+    $(".common-ones .addTag").click(function(event) {
         event.preventDefault();
         $(this).parent().children(".common-tags-container").children(".common-tag-example").each(function() {
             $(this).removeClass("hidden");
             $(this).clone().removeClass("common-tag-example").appendTo(".common-ones .common-tags-container");
             $(this).addClass("hidden");
         });
-        $(".common-tags .delete").click(function(e) {
+        $(".common-tags .delete").click(function(event) {
             event.preventDefault();
             $(this).parent().remove();
         })
     })
-    $(".special-ones .addTag").click(function(e) {
+    $(".special-ones .addTag").click(function(event) {
         event.preventDefault();
         $(this).parent().children(".common-tags-container").children(".common-tag-example").each(function() {
             $(this).removeClass("hidden");
             $(this).clone().removeClass("common-tag-example").appendTo(".special-ones .common-tags-container");
             $(this).addClass("hidden");
         });
-        $(".common-tags .delete").click(function(e) {
+        $(".common-tags .delete").click(function(event) {
             event.preventDefault();
             $(this).parent().remove();
         })
