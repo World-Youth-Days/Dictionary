@@ -166,6 +166,17 @@ body {
 }
 
 /*Adding form*/
+#default-level {
+    display: inline-block;
+    position: relative;
+    width: 300px;
+    padding: 20px 0;
+}
+#default-level .mdl-textfield__label {
+    color: rgb(33,150,243);
+    font-size: 12px;
+    top: 4px;
+}
 .common-tag .mdl-textfield {
     width: 25%;
     margin: 0 5px;

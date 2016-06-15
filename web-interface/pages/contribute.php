@@ -36,10 +36,14 @@ function t($string) {
             <input class="mdl-textfield__input" type="text" id="mail" name="mail">
             <label class="mdl-textfield__label" for="mail"><?php t("mail") ?></label>
         </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="default_level" name="default_level" pattern="-?[0-9]*(\.[0-9]+)?">
-            <label class="mdl-textfield__label" for="default_level"><?php t("defaultLevel") ?></label>
-            <span class="mdl-textfield__error"><?php t("notANumber") ?></span>
+        <div id="default-level" class="is-focused">
+            <input class="mdl-slider mdl-js-slider" type="range" min="1" max="9" value="1" name="default_level" id="default-level-slider">
+            <div class="mdl-textfield__label"><?php t("defaultLevel") ?>: <span>1</span></div>
+        </div>
+        <div class="mdl-tooltip mdl-tooltip--large" for="default-level-slider">
+            <?php for($i=1; $i<10; $i++) {?>
+                <span class="default-level-des" id="default-level-des-<?php echo $i ?>" style="display: none"><?php t($i."-des") ?></span>
+            <?php } ?>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="from" name="from">
@@ -186,4 +190,10 @@ function t($string) {
             $(this).parent().remove();
         })
     })
+    $("#default-level-des-1").show();
+    $("#default-level-slider").on('input', function () {
+        $("#default-level .mdl-textfield__label span").text($(this).val());
+        $(".default-level-des").hide();
+        $("#default-level-des-"+$(this).val()).show();
+    });
 </script>
