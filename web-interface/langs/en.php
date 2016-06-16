@@ -23,6 +23,7 @@ $translations = array(
     "Tags" => "Tags",
     "firstChooseTheLanguages" => "Choose the languages above to get a list of available tags. If a pair of languages is not available, why not <a href='#contribute'>create it yourself?</a>",
     "Level" => "Level",
+    "hardnessInstructions" => "Choose the levels of your interest. You can select or deselect them with a click. Hover over a level button to see its description.",
     "1-des" => "Basic conversations",
     "2-des" => "Advanced conversations",
     "3-des" => "Church-related",

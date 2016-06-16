@@ -82,23 +82,11 @@ body {
 #tag-container .mdl-tooltip {
     margin-top: -35px;
 }
-.hardness-container {
-    text-align: center;
-}
-.hardness-des {
-    display: inline-block;
-    width: 35px;
-}
-.hardness-slider {
-    display: inline-block;
-    width: 190px;
-}
-.hardness-val {
-    display: inline-block;
-    width: 35px;
-}
 .hardness-toogle-container {
     text-align: center;
+    width: 210px;
+    line-height: 40px;
+    margin: -17px auto 7px auto;
 }
 .hardness-toogle-container label {
     display: inline-block;
@@ -107,6 +95,10 @@ body {
     line-height: 32px;
     font-size: 24px;
     color: rgba(148, 148, 148, 0.62);
+}
+#hardness-des {
+    font-size: 12px;
+    text-align: center;
 }
 @media screen and (max-width: 992px) {
     #word-container {

@@ -38,7 +38,7 @@ $(document).ready(function() {
     })
     
     //Languages input events
-    if($("input[name='options-from']:checked").val()!=undefined && $("input[name='options-to']:checked").val()!=undefined) {
+    /*if($("input[name='options-from']:checked").val()!=undefined && $("input[name='options-to']:checked").val()!=undefined) {
         $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
             if (data!="//ABC//") {
                 data = data.split(";");
@@ -54,56 +54,24 @@ $(document).ready(function() {
                 $("#tags-instruction").show();
             }
         });
-    }
+    }*/
     
     $(".from-radio").change(function() {
         $("#language-from .radio-text").text($(this).val().substr(5));
         if($("input[name='options-to']:checked")[0] != undefined) {
-            $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-                $("#tag-container label").hide();
-                if (data!="//ABC//") {
-                    data = data.split(";");
-                    for (i=0; i<data.length; i++) {
-                        $("#checkbox-"+data[i]).parent().show();
-                    }
-                    $(".tag-checkbox").each(function() {
-                        $(this).parent().removeClass("is-checked");
-                        $(this).prop('checked', false);
-                    });
-                    $("#tags-instruction").hide();
-                } else {
-                    $("#tags-instruction").show();
-                }
-            });
             data = location.hash;
             data = data.split(";");
             data[3] = $("input[name='options-from']:checked").val();
-            location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val();
+            location.hash = "tags;"+selectedLevels()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val();
         }
     });
     $(".to-radio").change(function() {
         $("#language-to .radio-text").text($(this).val().substr(3));
         if($("input[name='options-from']:checked")[0] != undefined) {
-            $.get("tags-language.php?from="+$("input[name='options-from']:checked").val()+"&to="+$("input[name='options-to']:checked").val(), function(data) {
-                $("#tag-container label").hide();
-                if (data!="//ABC//") {
-                    data = data.split(";");
-                    for (i=0; i<data.length; i++) {
-                        $("#checkbox-"+data[i]).parent().show();
-                    }
-                    $(".tag-checkbox").each(function() {
-                        $(this).parent().removeClass("is-checked");
-                        $(this).prop('checked', false);
-                    });
-                    $("#tags-instruction").hide();
-                } else {
-                    $("#tags-instruction").show();
-                }
-            });
             data = location.hash;
             data = data.split(";");
             data[4] = $("input[name='options-to']:checked").val();
-            location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val();
+            location.hash = "tags;"+selectedLevels()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val();
         }
     });
     
@@ -116,45 +84,34 @@ $(document).ready(function() {
             tags+=$(this).attr("id").substr(9)+";";
         });
         tags = tags.substring(0, tags.length-1);
-        location.hash = "tags;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val()+";"+tags;
+        location.hash = "tags;"+selectedLevels()+";"+$("input[name='options-from']:checked").val()+";"+$("input[name='options-to']:checked").val()+";"+tags;
     });
     
     //Search input events
     $("#search_button_click").click(function() {
         query = $("#search_input_value").val();
-        location.hash = "search;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+query;
+        location.hash = "search;"+selectedLevels()+";"+query;
     });
     $("#search_input_value").keyup(function(e){
         if(e.keyCode == 13) {
             query = $("#search_input_value").val();
-            location.hash = "search;"+$("#hardness-min").val()+";"+$("#hardness-max").val()+";"+query;
+            location.hash = "search;"+selectedLevels()+";"+query;
         }
     });
     
     //Level input events
-    $("#hardness-min").change(function() {
+    $(".hardness-toggle-input").change(function() {
         data = location.hash.split(";");
-        data[1] = $(this).val();
+        data[1] = selectedLevels();
         location.hash = data.join(";");
-    });
-    $("#hardness-min").on('input', function () {
-        $("#hardness-val-min").text($(this).val());
-        $(".min-des").hide();
-        $("#min-des-"+$(this).val()).show();
-    });
-    $("#min-des-1").show();
-    $("#hardness-max").change(function() {
-        $("#hardness-val-max").text($(this).val());
-        data = location.hash.split(";");
-        data[2] = $(this).val();
-        location.hash = data.join(";");
-    });
-    $("#hardness-max").on('input', function () {
-        $("#hardness-val-max").text($(this).val());
-        $(".max-des").hide();
-        $("#max-des-"+$(this).val()).show();
-    });
-    $("#max-des-8").show();
+    })
+    function selectedLevels() {
+        selected = "";
+        $(".hardness-toggle-input:checked").each(function() {
+            selected += $(this).next().text()+",";
+        });
+        return selected.substr(0,selected.length-1);
+    }
     
     //Some misc functions
     function hideAll() {
@@ -183,54 +140,86 @@ $(document).ready(function() {
         //Tags mode
         if (mode == "") {
             hideAll();
+            $("#words-table").hide();
+            $("#tag-container label").hide();
+            $("#tags-instruction").show();
+            $(".tag-checkbox").each(function() {
+                $(this).parent().removeClass("is-checked");
+                $(this).prop('checked', false);
+            });
+            $("#language-box input").each(function() {
+                $(this).removeAttr("checked");
+                $(this).parent().removeClass("is-checked");
+            });
+            $("#language-from .radio-text").text("--");
+            $("#language-to .radio-text").text("--");
             $("#communication-welcome").show();
             $("#loading").stop();
             $("#loading").fadeOut("slow");
         } else if (mode=="tags") {
             hideAll();
             $("#words-table").show();
+            
             tags="";
-            $(".tag-checkbox").prop('checked', false);
-            for (i=5; i<data.length; i++) {
-                tags += data[i] + ";";
-                $("#checkbox-"+data[i]).prop('checked', true);
-            }
-            $(".tag-checkbox").each(function() {
-                if($(this).prop('checked')) {
-                    $(this).parent().addClass("is-checked");
+            $.get("tags-language.php?from="+data[2]+"&to="+data[3], function(tag_data) {
+                $("#tag-container label").hide();
+                if (tag_data!="//ABC//") {
+                    tag_data = tag_data.split(";");
+                    for (i=0; i<tag_data.length; i++) {
+                        $("#checkbox-"+tag_data[i]).parent().show();
+                    }
+                    $("#tags-instruction").hide();
                 } else {
-                    $(this).parent().removeClass("is-checked");
+                    $("#tags-instruction").show();
                 }
-            });
-            $("#"+data[3]).prop("checked", true);
-            $("#language-from .radio-text").text(data[3].substr(5));
-            $("#"+data[4]).prop("checked", true);
-            $("#language-to .radio-text").text(data[4].substr(3));
-            
-            $("#hardness-min").val(data[1]);
-            $("#hardness-val-min").text(data[1]);
-            $(".min-des").hide();
-            $("#min-des-"+data[1]).show();
-            $("#hardness-max").val(data[2]);
-            $("#hardness-val-max").text(data[2]);
-            $(".max-des").hide();
-            $("#max-des-"+data[2]).show();
-            
-            tags = tags.substring(0, tags.length-1);
-            $.get("query.php?tag="+tags+"&lmin="+data[1]+"&lmax="+data[2]+"&from="+data[3]+"&to="+data[4], function(data) {
-                if (data == "//ABC//") {
-                    $("#words-table-body").html("");
-                    $("#communication-choose-tags").show();
-                } else {
-                    $("#words-table-body").html(data);
+                $(".tag-checkbox").prop('checked', false);
+                for (i=4; i<data.length; i++) {
+                    tags += data[i] + ";";
+                    $("#checkbox-"+data[i]).prop('checked', true);
                 }
-                $("#loading").stop();
-                $("#loading").fadeOut("slow");
+                $(".tag-checkbox").each(function() {
+                    if($(this).prop('checked')) {
+                        $(this).parent().addClass("is-checked");
+                    } else {
+                        $(this).parent().removeClass("is-checked");
+                    }
+                });
+                $("#"+data[2]).prop("checked", true);
+                $("#language-from .radio-text").text(data[2].substr(5));
+                $("#"+data[3]).prop("checked", true);
+                $("#language-to .radio-text").text(data[3].substr(3));
+                levels = data[1].split(",");
+                $(".hardness-toggle-input").prop('checked', false);
+                for (i=0; i<levels.length; i++) {
+                    $("#hardness-toggle-"+levels[i]).prop("checked", true);
+                }
+                $(".hardness-toggle-input").each(function() {
+                    if($(this).prop('checked')) {
+                        $(this).parent().addClass("is-checked");
+                    } else {
+                        $(this).parent().removeClass("is-checked");
+                    }
+                });
+
+                tags = tags.substring(0, tags.length-1);
+                $.get("query.php?tag="+tags+"&levels="+data[1]+"&from="+data[2]+"&to="+data[3], function(data) {
+                    if (data == "//ABC//") {
+                        $("#words-table-body").html("");
+                        $("#communication-choose-tags").show();
+                    } else {
+                        $("#words-table-body").html(data);
+                    }
+                    $("#loading").stop();
+                    $("#loading").fadeOut("slow");
+                });
             });
+            
         //Search mode
         } else if (mode=="search") {
             hideAll();
             $("#words-table").show();
+            $("#tag-container label").hide();
+            $("#tags-instruction").show();
             $(".tag-checkbox").each(function() {
                 $(this).parent().removeClass("is-checked");
                 $(this).prop('checked', false);
@@ -242,16 +231,7 @@ $(document).ready(function() {
             $("#language-from .radio-text").text("--");
             $("#language-to .radio-text").text("--");
             
-            $("#hardness-min").val(data[1]);
-            $("#hardness-val-min").text(data[1]);
-            $(".min-des").hide();
-            $("#min-des-"+data[1]).show();
-            $("#hardness-max").val(data[2]);
-            $("#hardness-val-max").text(data[2]);
-            $(".max-des").hide();
-            $("#max-des-"+data[2]).show();
-            
-            $.get("search.php?search="+data[3]+"&lmin="+data[1]+"&lmax="+data[2], function(data) {
+            $.get("search.php?search="+data[2]+"&levels="+data[1], function(data) {
                 if (data == "//ABC//") {
                     $("#words-table-body").html("");
                     $("#communication-nothing-found").show();
@@ -263,6 +243,19 @@ $(document).ready(function() {
             });
         } else {
             hideAll();
+            $("#words-table").hide();
+            $("#tag-container label").hide();
+            $("#tags-instruction").show();
+            $(".tag-checkbox").each(function() {
+                $(this).parent().removeClass("is-checked");
+                $(this).prop('checked', false);
+            });
+            $("#language-box input").each(function() {
+                $(this).removeAttr("checked");
+                $(this).parent().removeClass("is-checked");
+            });
+            $("#language-from .radio-text").text("--");
+            $("#language-to .radio-text").text("--");
             $.get("pages/"+mode+".php", function(data) {
                 $("#communication-additional").html(data);
                 $("#words-table").hide();

@@ -33,7 +33,13 @@
     $ids = "SELECT * FROM 'words' WHERE ";
     
     
-    $strQuery = "SELECT * FROM words WHERE (my_case(base) LIKE '%".$search."%' OR my_case(author) LIKE '%".$search."%' OR my_case(trans) LIKE '%".$search."%' OR my_case(level) LIKE '%".$search."%' OR my_case(mono) LIKE '%".$search."%') AND level>=".$_GET['lmin']." AND level<=".$_GET['lmax']." ORDER BY base";
+    $strQuery = "SELECT * FROM words WHERE (my_case(base) LIKE '%".$search."%' OR my_case(author) LIKE '%".$search."%' OR my_case(trans) LIKE '%".$search."%' OR my_case(level) LIKE '%".$search."%' OR my_case(mono) LIKE '%".$search."%') AND (";
+    $levelsArray = explode(",", $_GET['levels']);
+    for ($i = 0; $i<count($levelsArray); $i++) {
+        $strQuery .= "level=".$levelsArray[$i]." OR ";
+    }
+    $strQuery = substr($strQuery, 0, strlen($strQuery)-4);
+    $strQuery .= ") ORDER BY base";
     #echo $strQuery;
     $stmt = $db->prepare($strQuery);
     $stmt->bindValue(':id', 1, SQLITE3_INTEGER);
@@ -43,10 +49,10 @@
         $count += 1;
 ?>
         <tr>
-            <td class="mdl-data-table__cell--non-numeric base"><?php echo $row['base'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric trans"><?php echo $row['trans'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric mono mdl-cell--hide-phone mdl-cell--hide-tablet"><?php echo $row['mono'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric author"><?php echo $row['author'] ?></td>
+            <td class="mdl-data-table__cell--non-numeric base"><?php echo str_replace("\n", "<br>", $row['base']) ?></td>
+            <td class="mdl-data-table__cell--non-numeric trans"><?php echo str_replace("\n", "<br>", $row['trans']) ?></td>
+            <td class="mdl-data-table__cell--non-numeric mono mdl-cell--hide-phone mdl-cell--hide-tablet"><?php echo str_replace("\n", "<br>", $row['mono']) ?></td>
+            <td class="mdl-data-table__cell--non-numeric author"><?php echo str_replace("\n", "<br>", $row['author']) ?></td>
             <td class="level mdl-cell--hide-phone"><?php echo $row['level'] ?></td>
         </tr>
 <?php

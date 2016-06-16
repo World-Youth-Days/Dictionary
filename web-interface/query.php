@@ -54,7 +54,13 @@
         while($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $ids .= "id=".$row['word_id']." OR ";
         }
-        $ids = substr($ids, 0, -4).") AND level>=".$_GET['lmin']." AND level<=".$_GET['lmax']." ORDER BY base";
+        $ids = substr($ids, 0, -4).") AND (";
+        $levelsArray = explode(",", $_GET['levels']);
+        for ($i = 0; $i<count($levelsArray); $i++) {
+            $ids .= "level=".$levelsArray[$i]." OR ";
+        }
+        $ids = substr($ids, 0, strlen($ids)-4);
+        $ids .= ") ORDER BY base";
         #echo $ids;
 
         $result = $db->query($ids);
@@ -63,10 +69,10 @@
             $count+=1;
     ?>
         <tr>
-            <td class="mdl-data-table__cell--non-numeric base"><?php echo $row['base'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric trans"><?php echo $row['trans'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric mono mdl-cell--hide-phone mdl-cell--hide-tablet"><?php echo $row['mono'] ?></td>
-            <td class="mdl-data-table__cell--non-numeric author"><?php echo $row['author'] ?></td>
+            <td class="mdl-data-table__cell--non-numeric base"><?php echo str_replace("\n", "<br>", $row['base']) ?></td>
+            <td class="mdl-data-table__cell--non-numeric trans"><?php echo str_replace("\n", "<br>", $row['trans']) ?></td>
+            <td class="mdl-data-table__cell--non-numeric mono mdl-cell--hide-phone mdl-cell--hide-tablet"><?php echo str_replace("\n", "<br>", $row['mono']) ?></td>
+            <td class="mdl-data-table__cell--non-numeric author"><?php echo str_replace("\n", "<br>", $row['author']) ?></td>
             <td class="level mdl-cell--hide-phone"><?php echo $row['level'] ?></td>
         </tr>
     <?php

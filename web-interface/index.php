@@ -187,39 +187,18 @@
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text"><?php t("Level") ?></h2>
                         </div>
-                        <div class="hardness-container" id="hardness-container-min">
-                            <div class="hardness-des" id="hardness-des-min">Min</div>
-                            <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="9" value="1" id="hardness-min">
-                            </div>
-                            <div class="hardness-val" id="hardness-val-min">1</div>
-                        </div>
-                        <div class="hardness-container" id="hardness-container-max">
-                            <div class="hardness-des" id="hardness-des-min">Max</div>
-                            <div class="hardness-slider">
-                                <input class="mdl-slider mdl-js-slider" type="range" min="1" max="9" value="9" id="hardness-max">
-                            </div>
-                            <div class="hardness-val" id="hardness-val-max">9</div>
-                        </div>
                         <div class="hardness-toogle-container">
                             <?php for($i=1; $i<10; $i++) {?>
                                 <label class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" id="hardness-toggle-label-<?php echo $i ?>" for="hardness-toggle-<?php echo $i ?>">
-                                    <input type="checkbox" id="hardness-toggle-<?php echo $i ?>" class="mdl-icon-toggle__input" checked>
+                                    <input type="checkbox" id="hardness-toggle-<?php echo $i ?>" class="mdl-icon-toggle__input hardness-toggle-input" checked>
                                     <i class="mdl-icon-toggle__label"><?php echo $i ?></i>
                                 </label>
                             <?php } ?>
                         </div>
+                        <div id="hardness-des">
+                            <?php t("hardnessInstructions") ?>
+                        </div>
                     </div>
-                </div>
-                <div class="mdl-tooltip mdl-tooltip--large" for="hardness-container-min">
-                    <?php for($i=1; $i<10; $i++) {?>
-                        <span  class="min-des" id="min-des-<?php echo $i ?>" style="display: none"><?php t($i."-des") ?></span>
-                    <?php } ?>
-                </div>
-                <div class="mdl-tooltip mdl-tooltip--large" for="hardness-container-max">
-                    <?php for($i=1; $i<10; $i++) {?>
-                        <span class="max-des" id="max-des-<?php echo $i ?>" style="display: none"><?php t($i."-des") ?></span>
-                    <?php } ?>
                 </div>
                 <?php for($i=1; $i<10; $i++) {?>
                     <div class="mdl-tooltip mdl-tooltip--large" for="hardness-toggle-label-<?php echo $i ?>"><?php t($i."-des") ?></div>
