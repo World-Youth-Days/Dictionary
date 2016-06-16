@@ -1,7 +1,7 @@
 <?php 
 $translations = array(
     "code" => "pl",
-    "transAuthor" => "Hubert Bereś",
+    "transAuthor" => "Hubert Bereś & Jakub Dranczewski",
     "mainPage" => "Strona Główna",
     "contribute" => "Współtwórz",
     "about" => "O Słowniku",
@@ -23,6 +23,7 @@ $translations = array(
     "Tags" => "Tagi",
     "firstChooseTheLanguages" => "Wybierz języki powyżej, by wyświetlić listę dostępnych tagów. Jeśli tłumaczenie nie jest jeszcze dostępne, dlaczego nie <a href='#contribute'>stworzysz go teraz?</a>",
     "Level" => "Poziom trudności",
+    "hardnessInstructions" => "Wybierz poziomy, którymi jesteś zainteresowany. Możesz je zaznaczać lub odznaczać klikając w nie. Najedź myszką, by zobaczyć opis poziomu.",
     "1-des" => "Podstawowe rozmówki",
     "2-des" => "Zaawansowane rozmówki",
     "3-des" => "Związane z Kościołem",
