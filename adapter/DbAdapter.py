@@ -61,7 +61,6 @@ class DbAdapter:
 		                 'time': 0}
 		
 		self.tags = self.db.get_table("tags")
-		self.mono = self.db.get_table("mono")
 		# initialize columns with non typical value types
 		for k in ['tag_name', 'readable', 'flag', 'description']:
 			self.tags.create_column(k, String)
@@ -69,6 +68,7 @@ class DbAdapter:
 		self.words = self.db.get_table("words")
 		self.words.create_column('time', DateTime)
 		self.words.create_column('level', Integer)
+		self.words.create_column('mono', String)
 
 	def backup(self):
 		import codecs, os, hashlib
