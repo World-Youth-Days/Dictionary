@@ -141,7 +141,7 @@ def extract_metadata(filename, delimiters):
 	global tags_info, const
 
 	try:
-		info = codecs.open(filename, 'r', 'utf-8')
+		info = codecs.open(filename + '.inf', 'r', 'utf-8')
 	except SystemError:
 		print("Failed to open metadata file!")
 		return 1
@@ -156,12 +156,13 @@ def extract_metadata(filename, delimiters):
 
 	const['tags'] = ['from_' + d['from'], 'to_' + d['to']]
 	const['level'] = int(d['level'])
+	const['author'] = d['author']
 
 	for line in info:       # const tags
 		if len(line) < 5:
 			break
 
-		tag = line[:line.find(',')]
+		tag = line[:line.find('<r>')]
 		read = line[line.find('<r>') + 3: line.find('</r>')]
 		desc = line[line.find('<d>') + 3: line.find('</d>')]
 
@@ -178,7 +179,7 @@ def extract_metadata(filename, delimiters):
 
 		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
 
-	m.close()
+	info.close()
 	return 0
 
 
@@ -316,8 +317,8 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 	if f == 1:
 		return 4
 
-	# if extract_metadata(path_name, dict()) != 0:
-	# 	return 5
+	if extract_metadata(path_name, dict()) != 0:
+	 	return 5
 
 	# --------------------       Grab data     --------------------------#
 
@@ -435,7 +436,10 @@ def test_tags_table():
 	db.set_flag('live_tag_2', 'live')
 	print(db.get_tag("heheszki"))
 
-
+def custom():
+	for r in db.words.find(author='Whitepeaony'):
+		r['author'] = 'Whitepaeony'
+		db.words.upsert(r, ['id'])
 # --------------------------------------------------------------------#
 # ----------------------    Call the functions   ---------------------#
 # --------------------------------------------------------------------#
@@ -455,7 +459,7 @@ def test_tags_table():
 
 # print(extract_metadata('../data/info-test1.txt'))
 
-tags_info = [{'tag_name': 'scriptures', 'flag': 'live', 'readable': 'Księgi', 'description':
-	'Księgi Pisma Świętego'}]
-insert_line_per_record('../data/Księgi.txt', author='Magda', level=3, tags='scriptures,from_en,'
-                                                                           'to_pl')
+# tags_info = [{'tag_name': 'scriptures', 'flag': 'live', 'readable': 'Księgi', 'description':
+# 	'Księgi Pisma Świętego'}]
+
+insert_line_per_record('../data/06-16-Whitepaeony.txt', delimiter='*')

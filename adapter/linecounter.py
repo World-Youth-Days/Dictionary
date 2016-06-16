@@ -13,7 +13,13 @@ def add_tag(path, filename, start, row_delim, col_delim):
 		h += c + str(col_delim)
 	n.write(h + str(row_delim))
 
-	for line in data[1:]:
+    # header of the reading
+	s = '0 ' + data[1][0] + str(col_delim) + '0 ' + data[1][1]
+	for col in data[1][2:]:
+		s += str(col_delim) + col
+	n.write(s + str(row_delim))
+
+	for line in data[2:]:
 		s = str(start) + ' ' + line[0] + str(col_delim) + str(start) + ' ' + line[1]
 		for col in line[2:]:
 			s += str(col_delim) + col
