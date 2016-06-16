@@ -11,6 +11,7 @@ rows = ['base', 'mono', 'trans', 'author', 'level']
 pos = dict()  # dict with positions in file
 const = dict()  # dict with const values
 tags_info = []
+VERSES = True
 
 
 def zero():
@@ -251,6 +252,7 @@ def insert_with_meta_delimiters(path_name, **kwargs):
 	zero()
 
 
+# not ready
 def insert_custom_record_quotes(path_name, col_delim=',', row_begin='', row_end='\n', **kwargs):
 	global db, printable, rows, pos, const
 
