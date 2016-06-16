@@ -200,7 +200,15 @@
                                 <input class="mdl-slider mdl-js-slider" type="range" min="1" max="9" value="9" id="hardness-max">
                             </div>
                             <div class="hardness-val" id="hardness-val-max">9</div>
-                        </div> 
+                        </div>
+                        <div class="hardness-toogle-container">
+                            <?php for($i=1; $i<10; $i++) {?>
+                                <label class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" id="hardness-toggle-label-<?php echo $i ?>" for="hardness-toggle-<?php echo $i ?>">
+                                    <input type="checkbox" id="hardness-toggle-<?php echo $i ?>" class="mdl-icon-toggle__input" checked>
+                                    <i class="mdl-icon-toggle__label"><?php echo $i ?></i>
+                                </label>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
                 <div class="mdl-tooltip mdl-tooltip--large" for="hardness-container-min">
@@ -213,6 +221,9 @@
                         <span class="max-des" id="max-des-<?php echo $i ?>" style="display: none"><?php t($i."-des") ?></span>
                     <?php } ?>
                 </div>
+                <?php for($i=1; $i<10; $i++) {?>
+                    <div class="mdl-tooltip mdl-tooltip--large" for="hardness-toggle-label-<?php echo $i ?>"><?php t($i."-des") ?></div>
+                <?php } ?>
                 <div id="word-container" class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--2dp">
                     <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                     <table class="mdl-data-table mdl-js-data-table" id="words-table" style="display:none;">

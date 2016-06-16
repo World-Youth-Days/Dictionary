@@ -97,6 +97,17 @@ body {
     display: inline-block;
     width: 35px;
 }
+.hardness-toogle-container {
+    text-align: center;
+}
+.hardness-toogle-container label {
+    display: inline-block;
+}
+.hardness-toogle-container label .mdl-icon-toggle__label {
+    line-height: 32px;
+    font-size: 24px;
+    color: rgba(148, 148, 148, 0.62);
+}
 @media screen and (max-width: 992px) {
     #word-container {
         margin-top: 8px !important;
