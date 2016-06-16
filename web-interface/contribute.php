@@ -78,6 +78,8 @@ if (isset($_FILES['file_src']) && $_FILES['file_src']['error'] == UPLOAD_ERR_OK)
             $email->AddAttachment($_FILES['file_src']['tmp_name'], $name);
 
             $inf = "";
+            $inf .= $_POST['row_delimiter']."\n";
+            $inf .= $_POST['separator']."\n";
             $inf .= $_POST['author']."\n";
             $inf .= $_POST['from']."\n";
             $inf .= $_POST['to']."\n";
