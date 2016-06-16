@@ -138,6 +138,10 @@ body {
 #words-table-body tr {
     border: 1px solid rgba(0,0,0,.12);
 }
+#word-container td {
+    max-width: 250px;
+    white-space: normal;
+}
 .base {
     font-weight: bold;
 }
