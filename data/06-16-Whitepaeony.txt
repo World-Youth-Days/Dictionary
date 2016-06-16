@@ -1,0 +1,25 @@
+base*trans
+Środa Popielcowa*Ash Wednesday
+Post*Lent
+Chrzest Pański*Baptism of the Lord
+Święto Trzech Króli*Epiphany
+Niepokalane Poczęcie Maryi*Immaculate Conception of Mary
+Niedziela Palmowa*Palm Sunday
+Wielki Tydzień*Holy Week
+Wniebowstąpienie*The Ascension
+Trójcy Przenajświętszej*Trinity Sunday
+Boże Ciało*Corpus Christi
+Zesłanie Ducha Świętego*Pentecost
+Najświętszego Serca Pana Jezusa*Sacred Heart of Jesus
+Przemienienie Pańskie*The Transfiguration
+Święto Wniebowzięcia NMP*Assumption of Mary
+Podwyższenie Krzyża Świętego*Exultation of the Holy Cross
+Wszystkich Świętych*All Saints
+Zaduszki*All Souls
+Chrystusa Króla*Chrust the King
+Okres zwykły*Ordinary Time
+Okres Wielkanocny*Eastertide
+Okres Bożonarodzeniowy*Christmastide
+Adwent*Advent
+Wielki Czwartek*Maundy Thursday
+Wielki Piątek*Good Friday
