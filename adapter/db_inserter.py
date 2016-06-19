@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import codecs
 import logging
+import sys
 
 from DbAdapter import *
 from display_dict import *
@@ -41,11 +42,13 @@ def examine_sources(header, **kwargs):
 		except ValueError:
 			logging.info("Info: No " + col + " header found")
 
-		if 'tags' in header:
-			pos['tags'] = header.index('tags')
-		if 'tags' in kwargs:
-			const['tags'] = []      # if needed #issue
-			const['tags'] += kwargs['tags'].strip().split(',')
+	if 'tags' in header:
+		pos['tags'] = header.index('tags')
+	if 'tags' in kwargs:
+		# const['tags'] = []      # if needed #issue
+		const['tags'] += kwargs['tags'].strip().split(',')
+		if '' in const['tags']:
+			const['tags'].remove('')
 		# override plain string with table
 
 	return 0
@@ -72,15 +75,81 @@ def check_sources():
 
 
 def human_check(force_yes):
+	global printable, rows
 	display_dict(printable, rows + ['tags'])  # display using new method form display_dict.py
 
 	if force_yes is True:
 		print("Automatic yes chosen...")
+		return 0
 	elif input("Are those OK?[y/n]") not in ['y', 'yes', 'Y', 'Yes']:
-		print("Aborting...")
-		return 1
 
-	return 0
+		print('Ups, what\'s wrong with it?')
+		print('1 - I want to add static tag')
+		print('2 - I want to remove a tag')
+		print('3 - I want to change author')
+		print('4 - I want to change level')
+		print('5 - I want to add second direction in from-to')
+		print('9 - I want to abort and try again')
+		print('0 - Just ask me again')
+		i = int(input("Choose number please: "))
+
+		if i == 0:
+			return 1
+		elif i == 1:
+			tag = input('Please type tag name: ')
+			if tag != '':
+				const['tags'].append(tag)
+				for w in printable:
+					w['tags'].append(tag)
+			else:
+				print('Error, empty string can\'t be a tag!')
+				return 1
+		elif i == 2:
+			tag = input('Please type tag name: ')
+			if tag in const['tags']:
+				const['tags'].remove(tag)
+				for w in printable:
+					w['tags'].remove(tag)
+			else:
+				print('No such tag found!')
+				return 1
+		elif i == 3:
+			author = input('Please type tag name: ')
+			if author != '':
+				const['author'] = author
+				for w in printable:
+					w['author'] = author
+			else:
+				print('Invalid author!')
+				return 1
+		elif i == 4:
+			level = int(input('Please type new level: '))
+			if level in range(10):
+				const['level'] = level
+				for w in printable:
+					w['level'] = level
+			else:
+				print('Invalid level!')
+				return 1
+		elif i == 5:
+			f, t = None, None
+			for tag in const['tags']:
+				if tag[:5] == 'from_':
+					f = tag[5:]
+				elif tag[:3] == 'to_':
+					t = tag[3:]
+
+			const['tags'] += ['from_' + t, 'to_' + f]
+			for w in printable:
+				w['tags'] += ['from_' + t, 'to_' + f]
+
+			print('Added new tags:', ['from_' + t, 'to_' + f])
+		elif i == 9:
+			sys.exit("Aborting...")
+		else:
+			return 1
+	else:
+		return 0
 
 
 def open_file(path_name):
@@ -100,6 +169,8 @@ def add_to_db():
 	# begin a transaction. No data will be written to db until commit()
 
 	for tag in tags_info:
+		if tag['tag_name'] == '':
+			continue
 		db.db.get_table(tag['tag_name'])
 		tag = tag_enhance(tag)
 		if tag['description'] == '':
@@ -114,6 +185,9 @@ def add_to_db():
 	for p in printable:
 		r = dict(p)
 		del r['tags']
+		for key in ['base', 'trans']: # need to try if mono exists at all
+			r[key] = r[key].replace('<br>', '\n').replace('\\n', '\n')
+
 		records.append(r)
 		res = db.add_words(r)
 		stats[0] += res['added']
@@ -165,9 +239,9 @@ def extract_metadata(filename, delimiters):
 		tag = line[:line.find('<r>')]
 		read = line[line.find('<r>') + 3: line.find('</r>')]
 		desc = line[line.find('<d>') + 3: line.find('</d>')]
-
-		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
-		const['tags'].append(tag)
+		if tag != '':
+			tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
+			const['tags'].append(tag)
 
 	for line in info:       # live tag's descriptions
 		if len(line) < 5:
@@ -176,8 +250,8 @@ def extract_metadata(filename, delimiters):
 		tag = line[:line.find(',')]
 		read = line[line.find('<r>') + 3: line.find('</r>')]
 		desc = line[line.find('<d>') + 3: line.find('</d>')]
-
-		tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
+		if tag != 0:
+			tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
 
 	info.close()
 	return 0
@@ -243,8 +317,8 @@ def insert_with_meta_delimiters(path_name, **kwargs):
 
 	# -----------------------    Human check    --------------------------#
 
-	if human_check(kwargs.get('force_yes')) != 0:
-		return 3
+	while human_check(kwargs.get('force_yes')) != 0:
+		pass
 
 	# ----------------------     Add to db       -------------------------#
 
@@ -300,8 +374,8 @@ def insert_custom_record_quotes(path_name, col_delim=',', row_begin='', row_end=
 
 	# -----------------------    Human check    --------------------------#
 
-	if human_check(kwargs.get('force_yes')) != 0:
-		return 3
+	while human_check(kwargs.get('force_yes')) != 0:
+		pass
 
 	# ----------------------     Add to db       -------------------------#
 
@@ -357,8 +431,8 @@ def insert_line_per_record(path_name, delimiter=',', **kwargs):
 
 	# -----------------------    Human check    --------------------------#
 
-	if human_check(kwargs.get('force_yes')) != 0:
-		return 3
+	while human_check(kwargs.get('force_yes')) != 0:
+		pass
 
 	add_to_db()
 
@@ -417,8 +491,8 @@ def import_from_csv(path_name, **kwargs):
 
 	# -----------------------    Human check    --------------------------#
 
-	if human_check(kwargs.get('force_yes')) != 0:
-		return 3
+	while human_check(kwargs.get('force_yes')) != 0:
+		pass
 
 	add_to_db()
 
@@ -462,4 +536,5 @@ def custom():
 # tags_info = [{'tag_name': 'scriptures', 'flag': 'live', 'readable': 'Księgi', 'description':
 # 	'Księgi Pisma Świętego'}]
 
-insert_line_per_record('../data/06-16-Whitepaeony.txt', delimiter='*')
+insert_line_per_record('../data/06-17-21-44-Whitepaeony-pl-en.txt', delimiter='*',
+                       tags='vocabulary')
