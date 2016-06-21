@@ -208,3 +208,82 @@ body {
 .user-input.is-focused textarea {
     min-height: 150px;
 }
+
+
+.print {
+    display: none;
+}
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    .print {
+        display: block;
+    }
+    .print * {
+        display: block;
+    }
+    .print-too {
+        display: block;
+    }
+    .print-too * {
+        display: block;
+    }
+    .print-too a {
+        display: inline;
+    }
+    .print-too i {
+        display: inline;
+    }
+    
+    
+    body * {
+        display: none;
+    }
+    script {
+        display: none;
+    }
+    #content {
+        display: block;
+    }
+    #print-header {
+        margin: 15px;
+        width: 100%;
+    }
+    #print-header img {
+        float: left;
+        width: 30%;
+        max-width: 245px !important;
+    }
+    #print-header p {
+        float: right;
+        width: 60%;
+    }
+    #print-header strong {
+        display: inline;
+    }
+    #word-container {
+        display: block;
+        margin-top: 0;
+        width: 100%;
+    }
+    #word-container * {
+        display: block;
+    }
+    table {
+        display: table !important;
+    }
+    thead {
+        display: table-header-group !important;
+    }
+    tbody {
+        display: table-row-group !important;
+    }
+    tr {
+        display: table-row !important;
+    }
+    td, th {
+        display: table-cell !important;
+        vertical-align: inherit;
+    }
+}

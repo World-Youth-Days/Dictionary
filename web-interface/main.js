@@ -141,6 +141,7 @@ $(document).ready(function() {
         if (mode == "") {
             hideAll();
             $("#words-table").hide();
+            $("#words-table").addClass("no-print");
             $("#tag-container label").hide();
             $("#tags-instruction").show();
             $(".tag-checkbox").each(function() {
@@ -159,6 +160,7 @@ $(document).ready(function() {
         } else if (mode=="tags") {
             hideAll();
             $("#words-table").show();
+            $("#words-table").removeClass("no-print");
             
             tags="";
             $.get("tags-language.php?from="+data[2]+"&to="+data[3], function(tag_data) {
@@ -218,6 +220,7 @@ $(document).ready(function() {
         } else if (mode=="search") {
             hideAll();
             $("#words-table").show();
+            $("#words-table").removeClass("no-print");
             $("#tag-container label").hide();
             $("#tags-instruction").show();
             $(".tag-checkbox").each(function() {
@@ -244,6 +247,7 @@ $(document).ready(function() {
         } else {
             hideAll();
             $("#words-table").hide();
+            $("#words-table").addClass("no-print");
             $("#tag-container label").hide();
             $("#tags-instruction").show();
             $(".tag-checkbox").each(function() {

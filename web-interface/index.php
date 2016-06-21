@@ -203,6 +203,10 @@
                 <?php for($i=1; $i<10; $i++) {?>
                     <div class="mdl-tooltip mdl-tooltip--large" for="hardness-toggle-label-<?php echo $i ?>"><?php t($i."-des") ?></div>
                 <?php } ?>
+                <div id="print-header" class="print">
+                    <img src="img/logo-top.png">
+                    <p><?php t("printHeader") ?></p>
+                </div>
                 <div id="word-container" class="mdl-cell mdl-cell--8-col mdl-card mdl-shadow--2dp">
                     <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                     <table class="mdl-data-table mdl-js-data-table" id="words-table" style="display:none;">
@@ -239,7 +243,7 @@
                 </div>
             </div>
         </div>
-        <div id="footer">
+        <div id="footer" class="print-too">
             Project by Jakub Dranczewski (<a href="https://github.com/z-gora" target=_blank>@ZGora</a>) and Hubert Bereś (<a href="https://github.com/Ddedalus" target=_blank>@Dedalus</a>).<br>
             <a href="https://github.com/World-Youth-Days/Dictionary" target=_blank>We <i class="material-icons">favorite</i> Open Source, so it's all on GitHub!</a><br>
             If you want to use the data, ask us first!
