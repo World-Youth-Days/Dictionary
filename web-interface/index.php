@@ -190,7 +190,7 @@
                         <div class="hardness-toogle-container">
                             <?php for($i=1; $i<10; $i++) {?>
                                 <label class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" id="hardness-toggle-label-<?php echo $i ?>" for="hardness-toggle-<?php echo $i ?>">
-                                    <input type="checkbox" id="hardness-toggle-<?php echo $i ?>" class="mdl-icon-toggle__input hardness-toggle-input" checked>
+                                    <input type="checkbox" id="hardness-toggle-<?php echo $i ?>" class="mdl-icon-toggle__input hardness-toggle-input">
                                     <i class="mdl-icon-toggle__label"><?php echo $i ?></i>
                                 </label>
                             <?php } ?>

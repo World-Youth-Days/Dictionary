@@ -112,6 +112,10 @@ $(document).ready(function() {
         });
         return selected.substr(0,selected.length-1);
     }
+    function formatLevels(selected) {
+        if (selected=="") selected="1,2,3,4,5,6,7,8,9";
+        return(selected);
+    }
     
     //Some misc functions
     function hideAll() {
@@ -204,7 +208,7 @@ $(document).ready(function() {
                 });
 
                 tags = tags.substring(0, tags.length-1);
-                $.get("query.php?tag="+tags+"&levels="+data[1]+"&from="+data[2]+"&to="+data[3], function(data) {
+                $.get("query.php?tag="+tags+"&levels="+formatLevels(data[1])+"&from="+data[2]+"&to="+data[3], function(data) {
                     if (data == "//ABC//") {
                         $("#words-table-body").html("");
                         $("#communication-choose-tags").show();
@@ -234,7 +238,7 @@ $(document).ready(function() {
             $("#language-from .radio-text").text("--");
             $("#language-to .radio-text").text("--");
             
-            $.get("search.php?search="+data[2]+"&levels="+data[1], function(data) {
+            $.get("search.php?search="+data[2]+"&levels="+formatLevels(data[1]), function(data) {
                 if (data == "//ABC//") {
                     $("#words-table-body").html("");
                     $("#communication-nothing-found").show();
