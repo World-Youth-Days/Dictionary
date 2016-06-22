@@ -124,7 +124,7 @@
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu" for="language-from">
                                     <?php
-                                        $sql = "SELECT * FROM tags WHERE flag = 'from'";
+                                        $sql = "SELECT * FROM tags WHERE flag = 'from' ORDER BY tag_name";
                                         $ret = $db->query($sql);
                                         while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                     ?>
@@ -148,7 +148,7 @@
                                 </button>
                                 <ul class="mdl-menu mdl-js-menu" id="language-to-ul" for="language-to">
                                     <?php
-                                        $sql = "SELECT * FROM tags WHERE flag = 'to'";
+                                        $sql = "SELECT * FROM tags WHERE flag = 'to' ORDER BY tag_name";
                                         $ret = $db->query($sql);
                                         while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                     ?>
@@ -167,7 +167,7 @@
                         </div>
                         <div class="card-content" id="tag-container">
                             <?php
-                            $sql = "SELECT * FROM 'tags' WHERE flag = 'live'";
+                            $sql = "SELECT * FROM 'tags' WHERE flag = 'live' ORDER BY readable, tag_name";
                             $ret = $db->query($sql);
                             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                 $tag_name = ($row['readable']!="" ? $row['readable'] : $row['tag_name']);

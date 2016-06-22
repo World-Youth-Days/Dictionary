@@ -15,7 +15,7 @@
        #echo "Opened database successfully\n";
     }
     
-    //error_reporting(0);
+    error_reporting(0);
     register_shutdown_function( "fatal_handler" );
     function fatal_handler() {
         $error = error_get_last();
