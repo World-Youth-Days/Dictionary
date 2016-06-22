@@ -14,7 +14,7 @@
         <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
         <script type="text/javascript" src="main.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-orange.min.css" />
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-orange.min.css" media="screen"/>
         <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
         <link rel="stylesheet" href="main.css" />
         <?php
@@ -96,7 +96,7 @@
         </div>
         <div id="content">
             <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet" id="filters-cell">
                     <div id="filters" class="mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
                             <h2 class="mdl-card__title-text"><?php t("Search") ?></h2>

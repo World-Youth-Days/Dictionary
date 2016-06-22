@@ -214,41 +214,32 @@ body {
     display: none;
 }
 @media print {
-    .no-print {
-        display: none !important;
-    }
     .print {
         display: block;
     }
-    .print * {
-        display: block;
-    }
-    .print-too {
-        display: block;
-    }
-    .print-too * {
-        display: block;
-    }
-    .print-too a {
-        display: inline;
-    }
-    .print-too i {
-        display: inline;
-    }
     
-    
-    body * {
+    body {
+        background-color: white;
+        background-color: transparent;
+        font-family: "Roboto","Helvetica","Arial",sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+    #header {
         display: none;
     }
-    script {
+    #filters-cell {
         display: none;
     }
-    #content {
-        display: block;
+    .mdl-tooltip {
+        display: none;
     }
     #print-header {
         margin: 15px;
         width: 100%;
+        overflow: hidden;
+        clear: both;
     }
     #print-header img {
         float: left;
@@ -259,31 +250,33 @@ body {
         float: right;
         width: 60%;
     }
-    #print-header strong {
-        display: inline;
+    h2 {
+        font-size: 3em;
+        line-height: 1em;
     }
     #word-container {
         display: block;
         margin-top: 0;
         width: 100%;
     }
-    #word-container * {
-        display: block;
+    #words-table {
+        border-spacing: 0;
     }
-    table {
-        display: table !important;
+    #words-table td {
+        border-bottom: 2px solid rgb(213, 213, 213);
+        padding: 5px;
+        text-align: center;
     }
-    thead {
-        display: table-header-group !important;
+    #words-table thead {
+        font-size: 20px;
+        font-weight: bold;
+        color: #626262;
+        background-color: #dadada;
     }
-    tbody {
-        display: table-row-group !important;
+    .mdl-data-table__cell--non-numeric {
+        text-align: left !important;
     }
-    tr {
-        display: table-row !important;
-    }
-    td, th {
-        display: table-cell !important;
-        vertical-align: inherit;
+    #footer i {
+        display: inline;
     }
 }
