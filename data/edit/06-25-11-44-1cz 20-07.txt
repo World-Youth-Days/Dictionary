@@ -1,0 +1,10 @@
+﻿trans*base
+00 The Call of Jeremiah (Jr 1, 1. 4-10)*00 Powołanie proroka Jeremiasza (Jr 1, 1. 4-10)
+01 The words of Jeremiah, the son of Hilkiah, one of the priests who were in Anathoth in the land of Benjamin.*01 Słowa Jeremiasza, syna Chilkiasza, z rodu kapłańskiego, który był w Anatot, w ziemi Beniamina.
+04 Now the word of the Lord came to me, saying,*4 Pan skierował do mnie następujące słowo:
+05 "Before I formed you in the womb I knew you, and before you were born I consecrated you; I appointed you a prophet to the nations."*5 «Zanim ukształtowałem cię w łonie matki, znałem cię, nim przyszedłeś na świat, poświęciłem cię, prorokiem dla narodów ustanowiłem cię».
+06 Then I said, "Ah, Lord God! Behold, I do not know how to speak, for I am only a youth."*6 I rzekłem: «Ach, Panie Boże, przecież nie umiem mówić, bo jestem młodzieńcem!»
+07 But the Lord said to me, "Do not say, 'I am only a youth';for to all to whom I send you, you shall go, and whatever I command you, you shall speak.*7 Pan zaś odpowiedział mi: «Nie mów: „Jestem młodzieńcem", gdyż pójdziesz, do kogokolwiek cię poślę, i będziesz mówił, cokolwiek tobie polecę.
+08 Do not be afraid of them, for I am with you to deliver you, declares the Lord."*8 Nie lękaj się ich, bo jestem z tobą, by cię chronić», mówi Pan.
+09 Then the Lord put out his hand and touched my mouth. And the Lord said to me, "Behold, I have put my words in your mouth.*9 I wyciągnąwszy rękę, dotknął Pan moich ust i rzekł mi «Oto kładę moje słowa w twoje usta.
+10 See, I have set you this day over nations and over kingdoms, to pluck up and to break down, to destroy and to overthrow, to build and to plant."*10 Spójrz, daję ci dzisiaj władzę nad narodami i nad królestwami, byś wyrywał i obalał, byś niszczył i burzył, byś budował i sadził».
