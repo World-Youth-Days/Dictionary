@@ -2,7 +2,7 @@ import codecs
 import os
 
 
-def add_tag(path, filename, start, row_delim, col_delim):
+def numeration(path, filename, start, row_delim, col_delim):
 	f = codecs.open(path + '/' + filename, "r", 'utf-8')
 
 	# os.system('mkdir ' + path + '/edit')
@@ -14,13 +14,14 @@ def add_tag(path, filename, start, row_delim, col_delim):
 	n.write(h + str(row_delim))
 
     # header of the reading
-	s = '0 ' + data[1][0] + str(col_delim) + '0 ' + data[1][1]
+	s = '00 ' + data[1][0] + str(col_delim) + '00 ' + data[1][1]
 	for col in data[1][2:]:
 		s += str(col_delim) + col
 	n.write(s + str(row_delim))
 
 	for line in data[2:]:
-		s = str(start) + ' ' + line[0] + str(col_delim) + str(start) + ' ' + line[1]
+		s = str(start).zfill(2) + ' ' + line[0] + str(col_delim) + str(start).zfill(2) + ' ' + \
+		    line[1]
 		for col in line[2:]:
 			s += str(col_delim) + col
 		n.write(s + str(row_delim))
@@ -29,4 +30,4 @@ def add_tag(path, filename, start, row_delim, col_delim):
 	f.close()
 	n.close()
 
-add_tag('../data', '06-14-Whitepaeony.txt', 10, '\n', ',')
+numeration('../data', '06-25-11-26-Bless the Lord.txt', 1, '\n', '*')
