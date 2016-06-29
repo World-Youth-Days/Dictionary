@@ -536,5 +536,8 @@ def custom():
 # tags_info = [{'tag_name': 'scriptures', 'flag': 'live', 'readable': 'Księgi', 'description':
 # 	'Księgi Pisma Świętego'}]
 
-insert_line_per_record('../data/06-17-21-44-Whitepaeony-pl-en.txt', delimiter='*',
-                       tags='vocabulary')
+# insert_line_per_record('../data/edit/06-25-11-44-1cz 20-07.txt', delimiter='*', tags='verse')
+
+# insert_line_per_record('../data/edit/06-25-11-44-1cz 20-07.txt', delimiter='*', tags='verse')
+
+insert_line_per_record('../data/edit/06-25-11-26-Bless the Lord.txt', delimiter='*')
