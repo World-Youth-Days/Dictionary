@@ -1,0 +1,11 @@
+﻿trans*base
+0 The Parable of the Sower*0 Przypowieść o siewcy
+1 That same day Jesus went out of the house and sat beside the sea. *1 Tego dnia Jezus wyszedł z domu i usiadł nad jeziorem.
+2 And great crowds gathered about him, so that he got into a boat and sat down. And the whole crowd stood on the beach. *2 Wnet zebrały się koło Niego tłumy tak wielkie, że wszedł do łodzi i usiadł, a cały lud stał na brzegu.
+3 And he told them many things in parables, saying: "A sower went out to sow. *3 I mówił im wiele w przypowieściach tymi słowami:
+4 And as he sowed, some seeds fell along the path, and the birds came and devoured them. *4 A gdy siał, niektóre ziarna padły na drogę, nadleciały ptaki i wydziobały je.
+5 Other seeds fell on rocky ground, where they did not have much soil, and immediately they sprang up, since they had no depth of soil, *5 Inne padły na miejsca skaliste gdzie niewiele miały ziemi; i wnet powschodziły, bo gleba była głęboka.
+6 but when the sun rose they were scorched. And since they had no root, they withered away. *6 Lecz gdy słońce wzeszło, przypaliły się i uschły, bo nie miały korzenia.
+7 Other seeds fell among thorns, and the thorns grew up and choked them. *7 Inne znowu padły miedzy ciernie, a ciernie wybujały i zagłuszyły je.
+8 Other seeds fell on good soil and produced grain, some a hundredfold, some sixty, some thirty. *8 Inne w końcu padły na ziemię żyzną i plon wydały, jedno stokrotny, drugie sześćdziesięciokrotny, a inne trzydziestokrotny.
+9 He who has ears,[a] let him hear." *9 Kto ma uszy, niechaj słucha».

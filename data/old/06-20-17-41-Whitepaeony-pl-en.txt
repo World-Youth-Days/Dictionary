@@ -1,0 +1,15 @@
+﻿trans*base*
+0 The Lord's Prayer*0 Chrystus uczy modlitwy
+1 Now Jesus[a] was praying in a certain place, and when he finished, one of his disciples said to him, "Lord, teach us to pray, as John taught his disciples."*1 Gdy Jezus przebywał w jakimś miejscu na modlitwie i skończył ją, rzekł jeden z uczniów do Niego: «Panie, naucz nas się modlić, jak i Jan nauczył swoich uczniów».
+2 And he said to them, "When you pray, say: "Father, hallowed be your name. Your kingdom come.*2 A On rzekł do nich: «Kiedy się modlicie, mówcie: Ojcze, niech się święci Twoje imię; niech przyjdzie Twoje królestwo.
+3 Give us each day our daily bread,*3 Naszego chleba powszedniego dawaj nam na każdy dzień,
+4 and forgive us our sins, for we ourselves forgive everyone who is indebted to us. And lead us not into temptation."*4 i przebacz nam nasze grzechy, bo i my przebaczamy każdemu, kto nam zawini; i nie dopuść, byśmy ulegli pokusie».
+5 And he said to them, "Which of you who has a friend will go to him at midnight and say to him, 'Friend, lend me three loaves,*5 Dalej mówił do nich: «Ktoś z was, mając przyjaciela, pójdzie do niego o północy i powie mu: „Przyjacielu, użycz mi trzech chlebów,
+6 for a friend of mine has arrived on a journey, and I have nothing to set before him';*6 bo mój przyjaciel przybył do mnie z drogi, a nie mam, co mu podać".
+7 and he will answer from within, 'Do not bother me; the door is now shut, and my children are with me in bed. I cannot get up and give you anything'?*7 Lecz tamten odpowie z wewnątrz: „Nie naprzykrzaj mi się! Drzwi są już zamknięte i moje dzieci leżą ze mną w łóżku. Nie mogę wstać i dać tobie".
+8 I tell you, though he will not get up and give him anything because he is his friend, yet because of his impudence[c] he will rise and give him whatever he needs.*8 Mówię wam: Chociażby nie wstał i nie dał z tego powodu, że jest jego przyjacielem, to z powodu jego natręctwa wstanie i da mu, ile potrzebuje.
+9 And I tell you, ask, and it will be given to you; seek, and you will find; knock, and it will be opened to you.*9 I Ja wam powiadam: Proście, a będzie wam dane; szukajcie, a znajdziecie; kołaczcie, a otworzą wam.
+10 For everyone who asks receives, and the one who seeks finds, and to the one who knocks it will be opened.*10 Każdy bowiem, kto prosi, otrzymuje; kto szuka, znajduje; a kołaczącemu otworzą.
+11 What father among you, if his son asks for a fish, will instead of a fish give him a serpent;*11 Jeżeli którego z was ojców syn poprosi o chleb, czy poda mu kamień?
+12 or if he asks for an egg, will give him a scorpion?*12 Lub też gdy prosi o jajko, czy poda mu skorpiona?
+13 If you then, who are evil, know how to give good gifts to your children, how much more will the heavenly Father give the Holy Spirit to those who ask him!"*13 Jeśli więc wy, choć źli jesteście, umiecie dawać dobre dary swoim dzieciom, o ileż bardziej Ojciec z nieba da Ducha Świętego tym, którzy Go proszą».
