@@ -16,7 +16,7 @@ def query_from_dict(dic, table="words", operator="AND"):
 	c = operator.strip() + " "
 	q = "SELECT * FROM " + table + "\nWHERE "
 	for key in dic:
-		q += key + "='" + str(dic[key]).replace('\'', '\'\'') + "'\n" + c
+		q += key + "='" + str(dic[key]) + "'\n" + c
 
 	return q[0:-len(c) - 1] + ";"  # remove last conjuncton
 
