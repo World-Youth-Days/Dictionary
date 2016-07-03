@@ -2,18 +2,18 @@ import codecs
 import os
 
 
-def numeration(path, filename, start, row_delim, col_delim):
-	f = codecs.open(path + '/' + filename, "r", 'utf-8')
+def numeration(filename, start, row_delim, col_delim):
+	f = codecs.open('../' + filename, "r", 'utf-8')
 
-	# os.system('mkdir ' + path + '/edit')
-	n = codecs.open(path + '/edit/' + filename, 'w', 'utf-8')
+	os.system('mkdir data/edit')
+	n = codecs.open('../data/edit/' + filename.replace('data/', ''), 'w', 'utf-8')
 	data = [r.strip().split(col_delim) for r in f.read().split(row_delim)]
 	h = ''
 	for c in data[0]:
 		h += c + str(col_delim)
 	n.write(h + str(row_delim))
 
-    # header of the reading
+	# header of the reading
 	s = '00 ' + data[1][0] + str(col_delim) + '00 ' + data[1][1]
 	for col in data[1][2:]:
 		s += str(col_delim) + col
@@ -30,4 +30,4 @@ def numeration(path, filename, start, row_delim, col_delim):
 	f.close()
 	n.close()
 
-numeration('../data', '06-25-11-26-Bless the Lord.txt', 1, '\n', '*')
+numeration('data/06-30-16-43-1czyt 22-07.txt', 6, '\n', '*')
