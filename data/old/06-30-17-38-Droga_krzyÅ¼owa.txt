@@ -1,0 +1,16 @@
+﻿trans*base*
+00 Stations of the Cross*00 Stacje Drogi Krzyżowej
+01 Jesus is condemned to death*01 Jezus na śmierć skazany
+02 Jesus carries His cross*02 Jezus bierze krzyż na swoje ramiona
+03 Jesus falls the first time*03 Pierwszy upadek pod krzyżem
+04 Jesus meets his mother*04 Pan Jezus spotyka swoją Matkę
+05 Simon of Cyrene helps Jesus to carry his cross*05 Szymon z Cyreny pomaga dźwigać krzyż Jezusowi
+06 Veronica wipes the face of Jesus*06 Weronika ociera twarz Jezusowi
+07 Jesus falls the second time*07 Drugi upadek pod krzyżem
+08 Jesus meets the women of Jerusalem*08 Jezus spotyka płaczące niewiasty
+09 Jesus falls a third time*09 Trzeci upadek pod ciężarem krzyża
+10 Jesus clothes are taken away*10 Jezus z szat obnażony
+11 Jesus is nailed to the cross*11 Jezus przybity do krzyża
+12 Jesus dies on the cross*12 Jezus umiera na krzyżu
+13 The body of Jesus is taken down from the cross*13 Jezus zdjęty z krzyża
+14 Jesus is laid in the tomb*14 Jezus złożony do grobu
