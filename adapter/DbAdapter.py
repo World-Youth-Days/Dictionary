@@ -147,7 +147,7 @@ class DbAdapter:
 					if self.get_dic(word) in [[], dict()]:  # check for existence...
 						print('Warning: no word with such id!!! ' + word)
 						continue
-				if self.db[tag].count(word_id=word) == 0:
+				if self.db[tag.strip()].count(word_id=word) == 0:
 				# check if word is already joined with tag...
 					r = dict(word_id=word, base=self.get_dic(word)['base'])
 					self.get_table(tag).insert(r)
@@ -235,7 +235,7 @@ class DbAdapter:
 		# get complete list of words, then remove every with tag
 		id_list = self.get_id_list()
 		for tag in self.tags:
-			for word in self.db[tag['tag_name']]:
+			for word in self.db[tag['tag_name'].strip()]:
 				try:
 					id_list.remove(word['word_id'])
 				except ValueError:

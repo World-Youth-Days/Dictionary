@@ -171,7 +171,7 @@ def add_to_db():
 	for tag in tags_info:
 		if tag['tag_name'] == '':
 			continue
-		db.db.get_table(tag['tag_name'])
+		db.db.get_table(tag['tag_name'].strip())
 		tag = tag_enhance(tag)
 		if tag['description'] == '':
 			tag['description'] = None
@@ -240,7 +240,8 @@ def extract_metadata(filename, delimiters):
 		read = line[line.find('<r>') + 3: line.find('</r>')]
 		desc = line[line.find('<d>') + 3: line.find('</d>')]
 		if tag != '':
-			tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
+			tags_info.append({'tag_name': tag.strip(), 'readable': read, 'description': desc,
+				'flag': 'live'})
 			const['tags'].append(tag)
 
 	for line in info:       # live tag's descriptions
@@ -540,4 +541,4 @@ def custom():
 
 # insert_line_per_record('../data/edit/06-25-11-44-1cz 20-07.txt', delimiter='*', tags='verse')
 
-insert_line_per_record('../data/edit/06-25-11-26-Bless the Lord.txt', delimiter='*')
+insert_line_per_record('../data/edit/06-30-17-38-Droga_krzyÅ¼owa.txt', delimiter='*')
