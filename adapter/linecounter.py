@@ -5,7 +5,7 @@ import os
 def numeration(filename, start, row_delim, col_delim):
 	f = codecs.open('../' + filename, "r", 'utf-8')
 
-	os.system('mkdir data/edit')
+	os.system('mkdir ../data/edit')
 	n = codecs.open('../data/edit/' + filename.replace('data/', ''), 'w', 'utf-8')
 	data = [r.strip().split(col_delim) for r in f.read().split(row_delim)]
 	h = ''
@@ -30,4 +30,4 @@ def numeration(filename, start, row_delim, col_delim):
 	f.close()
 	n.close()
 
-numeration('data/06-30-16-43-1czyt 22-07.txt', 6, '\n', '*')
+numeration('data/06-30-17-02-1czyt 24-07.txt', 20, '\n', '*')

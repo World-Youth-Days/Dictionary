@@ -251,7 +251,7 @@ def extract_metadata(filename, delimiters):
 		tag = line[:line.find(',')]
 		read = line[line.find('<r>') + 3: line.find('</r>')]
 		desc = line[line.find('<d>') + 3: line.find('</d>')]
-		if tag != 0:
+		if tag != '':
 			tags_info.append({'tag_name': tag, 'readable': read, 'description': desc, 'flag': 'live'})
 
 	info.close()
@@ -541,4 +541,6 @@ def custom():
 
 # insert_line_per_record('../data/edit/06-25-11-44-1cz 20-07.txt', delimiter='*', tags='verse')
 
-insert_line_per_record('../data/edit/06-30-17-38-Droga_krzyÅ¼owa.txt', delimiter='*')
+insert_line_per_record('../' + 'data/06-30-17-02-1czyt 24-07.txt'.replace('data',
+                                                                               'data/edit'),
+                       delimiter='*')
