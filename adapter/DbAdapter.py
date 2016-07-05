@@ -127,6 +127,14 @@ class DbAdapter:
 		for t in self.db['tags'].find():
 			self.tags.upsert(tag_enhance(t), ['tag_name'])
 
+	def update_tag_bases(self):
+		for tag in self.tags:
+			for record in self.db.get_table(tag['tag_name']):
+				word = self.words.find_one(id=record['word_id'])
+				if word != None:
+					record['base'] = word['base']
+					self.db.get_table(tag['tag_name']).upsert(record, ['id'])
+
 	# --------------------------------------------------------------------#
 	# ---------------------------- Manage tags ---------------------------#
 	# --------------------------------------------------------------------#

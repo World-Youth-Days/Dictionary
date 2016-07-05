@@ -541,6 +541,7 @@ def custom():
 
 # insert_line_per_record('../data/edit/06-25-11-44-1cz 20-07.txt', delimiter='*', tags='verse')
 
-insert_line_per_record('../' + 'data/06-30-17-02-1czyt 24-07.txt'.replace('data',
-                                                                               'data/edit'),
-                       delimiter='*')
+# insert_line_per_record('../' + 'data/06-30-17-02-1czyt 24-07.txt'.replace('data',
+#                                                                                'data/edit'),
+#                        delimiter='*')
+# db.update_tag_bases()
