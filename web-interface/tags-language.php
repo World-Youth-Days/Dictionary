@@ -15,7 +15,7 @@
        #echo "Opened database successfully\n";
     }
     
-    error_reporting(0);
+    //error_reporting(0);
     register_shutdown_function( "fatal_handler" );
     function fatal_handler() {
         $error = error_get_last();
@@ -63,7 +63,7 @@
             #Now for every language combination with the specified FROM we check whether there are any words
             $liveIds = array();
             $txtLiveIds = "SELECT * FROM '".$row['tag_name']."'";
-            #echo $txtLiveIds."<br>";
+            //echo $txtLiveIds."<br>";
             $stmtLiveIds = $db->prepare($txtLiveIds);
             $stmtLiveIds->bindValue(':id', 1, SQLITE3_INTEGER);
             $resultLiveIds = $stmtLiveIds->execute();

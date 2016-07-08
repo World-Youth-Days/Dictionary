@@ -167,7 +167,7 @@
                         </div>
                         <div class="card-content" id="tag-container">
                             <?php
-                            $sql = "SELECT * FROM 'tags' WHERE flag = 'live' ORDER BY readable, tag_name";
+                            $sql = "SELECT * FROM 'tags' WHERE flag = 'live' ORDER BY id";
                             $ret = $db->query($sql);
                             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                                 $tag_name = ($row['readable']!="" ? $row['readable'] : $row['tag_name']);

@@ -86,11 +86,13 @@ if (isset($_FILES['file_src']) && $_FILES['file_src']['error'] == UPLOAD_ERR_OK)
             $inf .= $_POST['default_level']."\n";
 
             for ($i = 1; $i <count($_POST["common_tag_name"]); $i++) {
-                $inf .= $_POST["common_tag_name"][$i] . "<r>" . $_POST["common_readable"][$i] . "</r><d>" . $_POST["common_description"][$i] . "</d>\n";
+                if ($_POST["common_tag_name"][$i]!="")
+                    $inf .= $_POST["common_tag_name"][$i] . "<r>" . $_POST["common_readable"][$i] . "</r><d>" . $_POST["common_description"][$i] . "</d>\n";
             }
             $inf .= "\n";
             for ($i = 1; $i < count($_POST["special_tag_name"]); $i++) {
-                $inf .= $_POST["special_tag_name"][$i] . "<r>" . $_POST["special_readable"][$i] . "</r><d>" . $_POST["special_description"][$i] . "</d>\n";
+                if ($_POST["special_tag_name"][$i]!="")
+                    $inf .= $_POST["special_tag_name"][$i] . "<r>" . $_POST["special_readable"][$i] . "</r><d>" . $_POST["special_description"][$i] . "</d>\n";
             }
 
             $email->addStringAttachment($inf, $name.'.inf');
