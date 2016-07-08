@@ -20,8 +20,7 @@ def numeration(filename, start, row_delim, col_delim):
 	n.write(s + str(row_delim))
 
 	for line in data[2:]:
-		s = str(start).zfill(2) + ' ' + line[0] + str(col_delim) + str(start).zfill(2) + ' ' + \
-		    line[1]
+		s = str(start).zfill(2) + ' ' + line[0] + str(col_delim) + str(start).zfill(2) + ' ' + line[1]
 		for col in line[2:]:
 			s += str(col_delim) + col
 		n.write(s + str(row_delim))
@@ -30,4 +29,4 @@ def numeration(filename, start, row_delim, col_delim):
 	f.close()
 	n.close()
 
-numeration('data/06-30-17-02-1czyt 24-07.txt', 20, '\n', '*')
+numeration('data/07-04-23-16-Blest are the merciful.txt', 1, '\n', '*')
