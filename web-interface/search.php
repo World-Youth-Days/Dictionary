@@ -39,7 +39,7 @@
         $strQuery .= "level=".$levelsArray[$i]." OR ";
     }
     $strQuery = substr($strQuery, 0, strlen($strQuery)-4);
-    $strQuery .= ") ORDER BY base";
+    $strQuery .= ") ORDER BY id";
     #echo $strQuery;
     $stmt = $db->prepare($strQuery);
     $stmt->bindValue(':id', 1, SQLITE3_INTEGER);

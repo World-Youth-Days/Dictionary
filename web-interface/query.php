@@ -60,7 +60,7 @@
             $ids .= "level=".$levelsArray[$i]." OR ";
         }
         $ids = substr($ids, 0, strlen($ids)-4);
-        $ids .= ") ORDER BY base";
+        $ids .= ") ORDER BY id";
         #echo $ids;
 
         $result = $db->query($ids);
